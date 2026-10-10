@@ -20,3 +20,26 @@ Size: 4290416
 MD5sum: 885b296d2a2804b750936cfc6eee553e
 SHA1: 7fc96c2de348c376abc8c6b2fcd22239c16cb837
 SHA256: 66392d2de4a84280d7cfc51adcaea0b2343d457a8acc658a217fca292eccbf26
+
+Package: augustus-free-assets
+Version: 1.0.1
+Section: games
+Priority: optional
+Architecture: all
+Depends: augustus-game (>= 4.0) | augustus (>= 4.0)
+Installed-Size: 108112
+Maintainer: jeriksson621 <jeriksson621@gmail.com>
+Homepage: https://github.com/jeriksson621/augustus-free-assets
+Description: free generated game data for Augustus (Caesar III engine)
+ Original, procedurally generated replacement data (graphics, text,
+ messages, scenarios and a campaign) that lets Augustus run without the
+ proprietary Caesar III files. The assets are LLM-generated placeholders
+ made for gameplay testing.
+ .
+ Start the game with the "Augustus (free assets)" menu entry or the
+ augustus-free command.
+Filename: pool/main/a/augustus-free-assets/augustus-free-assets_1.0.1_all.deb
+Size: 4297776
+MD5sum: 9cfee933671f0d41f9c3a6ebd6fd1eb9
+SHA1: cccb083ece0ecdd56ce4ef1bba1890098e5d5d5d
+SHA256: 559cd62d5ade9675b5e08ba1bd5e84f9dd8a42941d64933cd351984e4cdd7a43
