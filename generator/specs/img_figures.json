@@ -1,0 +1,1750 @@
+{
+ "GROUP_FIGURE_LABOR_SEEKER": {
+  "id": 57,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "labor seeker (recruiter, plain tunic, carrying a scroll) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "labor seeker (recruiter, plain tunic, carrying a scroll) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:439 figure_image_update(GROUP_FIGURE_LABOR_SEEKER)",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "src/window/building/utility.c:178 roadblock window draws +4 as icon"
+  ]
+ },
+ "GROUP_FIGURE_BATHHOUSE_WORKER": {
+  "id": 88,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "bathhouse worker (towel over shoulder, light blue tunic) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "bathhouse worker (towel over shoulder, light blue tunic) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:222 culture_action(GROUP_FIGURE_BATHHOUSE_WORKER)",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "assets walkers.xml: <layer group=\"88\" image=\"0..100\"> used as base layer under Barkeep PNGs (incl. 96..100 under barkeep death)",
+   "src/window/building/utility.c roadblock icon +4"
+  ],
+  "notes": "Asset walkers.xml composes 'Barkeep' images by layering a PNG over group 88 images 0..100; so these must be same-sized walker sprites with feet anchor; mild colours are fine since PNG covers them."
+ },
+ "GROUP_FIGURE_PRIEST": {
+  "id": 91,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "priest (white robe, red sash) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "priest (white robe, red sash) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:162,171 figure_image_update / culture_action(GROUP_FIGURE_PRIEST)",
+   "src/figuretype/supplier.c:297 priest supplier",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "utility.c roadblock icon +4"
+  ]
+ },
+ "GROUP_FIGURE_CARTPUSHER_CART": {
+  "id": 97,
+  "count": 704,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 36,
+    "h": 30,
+    "desc": "EMPTY hand cart (wooden two-wheel cart), offset = d(0..7); drawn next to the cart pusher at CART_OFFSETS (cart is in front of pusher, i.e. cart faces same direction d)"
+   },
+   {
+    "from": 8,
+    "to": 127,
+    "kind": "sprite",
+    "w": 36,
+    "h": 30,
+    "desc": "single-load cart, offset = 8*i + d where i = legacy resource index 1..15: 1 wheat(golden sheaves),2 vegetables(green/orange),3 fruit(red/orange),4 olives(dark green/black),5 vines/grapes(purple),6 meat(red carcass),7 wine(amphorae red),8 oil(amphorae yellow),9 iron(grey ore),10 timber(logs brown),11 clay(red-brown lumps),12 marble(white blocks),13 weapons(swords/shields),14 furniture(chairs/table),15 pottery(urns). 8 directions each"
+   },
+   {
+    "from": 128,
+    "to": 695,
+    "kind": "sprite",
+    "w": 1,
+    "h": 1,
+    "desc": "unused by code (gap before fish cart at 696); placeholder 1x1"
+   },
+   {
+    "from": 696,
+    "to": 703,
+    "kind": "sprite",
+    "w": 36,
+    "h": 30,
+    "desc": "single-load FISH cart (silver-blue fish), offset = 696 + d"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:173 single_load = image_group(GROUP_FIGURE_CARTPUSHER_CART) + 8*i (i=1..15 legacy order)",
+   "src/game/resource.c:191 fish single_load = +696",
+   "src/figuretype/cartpusher.c:36 empty cart +0, update_image cart_image_id += dir",
+   "assets Industry.xml layer group=97 image=0..7"
+  ],
+  "notes": "Legacy resource order from resource_mappings[0]: NONE,WHEAT,VEGETABLES,FRUIT,OLIVES,VINES,MEAT,WINE,OIL,IRON,TIMBER,CLAY,MARBLE,WEAPONS,FURNITURE,POTTERY. Fish cart is at the odd offset 696 (in the original file this probably reached into a later area); count must be 704 unless layout tolerates referencing beyond the group. Gold/stone/sand/concrete/bricks carts come from Augustus PNG assets, not here. Also used as empty cart for entertainers (entertainer.c:311 sets it, but draw only uses it for cart types)."
+ },
+ "GROUP_FIGURE_ACTOR": {
+  "id": 98,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "actor (colourful costume, theatre mask) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "actor (colourful costume, theatre mask) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:199 actor update_image: walk d+8*f, attack = +d (0..7), corpse 96+k",
+   "utility.c roadblock icon +4"
+  ]
+ },
+ "GROUP_FIGURE_LION_TAMER": {
+  "id": 101,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "lion tamer (leather outfit, holding leash) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "lion tamer dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:205 lion tamer base; attack frame = +d"
+  ],
+  "notes": "Walks with a lion (GROUP_FIGURE_LION drawn as cart). Alternates with GROUP_FIGURE_LION_TAMER_WHIP when wait_ticks_missile>=96."
+ },
+ "GROUP_FIGURE_EXPLOSION": {
+  "id": 102,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "sprite",
+    "w": 40,
+    "h": 40,
+    "desc": "smoke puffs: fumigation smoke over houses cycled 0..3 (also first frames of explosion cloud); grey-white smoke"
+   },
+   {
+    "from": 4,
+    "to": 7,
+    "kind": "sprite",
+    "w": 48,
+    "h": 48,
+    "desc": "explosion/dust cloud dissipating, frames 4..7 (CLOUD_IMAGE_OFFSETS 0..7 over the cloud lifetime); 7 = faint last puff"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/missile.c:118 explosion cloud: + CLOUD_IMAGE_OFFSETS[progress/2] (0..7), +7",
+   "src/widget/city_without_overlay.c:404 fumigation: + fumigation_frame (0..3); +3 also used as plague icon replacement when fumigating"
+  ]
+ },
+ "GROUP_FIGURE_TAX_COLLECTOR": {
+  "id": 104,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "tax collector (blue toga, money bag) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "tax collector (blue toga, money bag) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:532",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "utility.c roadblock icon +4"
+  ]
+ },
+ "GROUP_FIGURE_SCHOOL_CHILD": {
+  "id": 105,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 20,
+    "h": 32,
+    "desc": "school child (small figure, short tunic, carrying slate) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "school child (small figure, short tunic, carrying slate) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:202",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "assets religion.xml 'Venus Complex Module' animation frames group=105 images 0,1,10,11,19,20,28,29,37,38,46,47,55,64,65"
+  ],
+  "notes": "religion.xml uses these walk frames as an animation (priests blessing) on the Venus temple complex."
+ },
+ "GROUP_FIGURE_MARKET_LADY": {
+  "id": 106,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "market lady / market trader (orange dress, basket on head) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "market lady dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:454",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "src/window/building/distribution.c:724,1017 +4 drawn as UI icon",
+   "assets walkers.xml layer group=106 image=0..103 (marketbuyer PNG overlays)"
+  ]
+ },
+ "GROUP_FIGURE_CARTPUSHER": {
+  "id": 107,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "cart pusher (labourer, brown tunic, leaning forward pushing) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "cart pusher (labourer, brown tunic, leaning forward pushing) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/cartpusher.c:267 base for FIGURE_CART_PUSHER",
+   "src/figuretype/docker.c:578,581",
+   "src/figuretype/trader.c:688,691 native trader walker"
+  ]
+ },
+ "GROUP_FIGURE_MIGRANT": {
+  "id": 108,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "migrant (traveller with bundle; also used for warehouseman/depot workers) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "migrant (traveller with bundle; also used for warehouseman/depot workers) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/migrant.c:61",
+   "src/figuretype/cartpusher.c:267 non-cartpusher types (warehouseman) use GROUP_FIGURE_MIGRANT",
+   "assets walkers.xml layer group=108 image=1..95 (barracks worker overlays)"
+  ]
+ },
+ "GROUP_FIGURE_LION_TAMER_WHIP": {
+  "id": 109,
+  "count": 96,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "lion tamer cracking whip (same outfit as lion tamer, whip raised) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:207 used instead of LION_TAMER when wait_ticks_missile>=96 and not corpse; walk d+8*f, attack +d"
+  ],
+  "notes": "No corpse frames used from this group."
+ },
+ "GROUP_FIGURE_ENGINEER": {
+  "id": 110,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "engineer (yellow tunic, tool bag/ruler) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "engineer (yellow tunic, tool bag/ruler) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/maintenance.c:97",
+   "src/figuretype/workcamp.c:333..378",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "utility.c roadblock icon +4"
+  ]
+ },
+ "GROUP_FIGURE_GLADIATOR": {
+  "id": 111,
+  "count": 160,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "gladiator (bronze helmet, shield and short sword) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "gladiator dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 159,
+    "kind": "sprite",
+    "w": 36,
+    "h": 42,
+    "desc": "gladiator fighting: offset = 104 + d + 8*(image_offset/2), frame 0..6 (image_offset max 12 because increase_offset(12) then (32)/(16) on attack); sword swing"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:215 attack: image_id + 104 + dir + 8*(image_offset/2) with absolute-id correction for 5705/5706",
+   "src/figuretype/enemy.c:629-633 revolting gladiator (FIGURE_ENEMY54_GLADIATOR) uses the same group"
+  ],
+  "notes": "ABSOLUTE ID HACK (entertainer.c:217): if final image_id in [5705,5706] subtract 8, else if >5705 subtract 2. Place this group so start+159 < 5705 (i.e. start <= 5545) so the hack never fires; otherwise fight frames are shifted. Revolt gladiator (enemy.c) has no such hack."
+ },
+ "GROUP_FIGURE_CRIMINAL": {
+  "id": 115,
+  "count": 112,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "criminal/rioter/protester (ragged clothes, dark hood) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "criminal dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 111,
+    "kind": "sprite",
+    "w": 30,
+    "h": 42,
+    "desc": "protest/riot gesture: offset = 104 + CRIMINAL_OFFSETS[...] (0..7, ping-pong sequence) \u2014 direction-independent arm-waving / torch-shaking animation"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/crime.c:297-321 corpse 96+k; 104+CRIMINAL_OFFSETS[] (values 0..7); walk d+8*image_offset (image_offset <=12 -> max 103)"
+  ]
+ },
+ "GROUP_FIGURE_BARBER": {
+  "id": 116,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "barber (white apron, scissors) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "barber (white apron, scissors) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:217 culture_action(GROUP_FIGURE_BARBER)",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]"
+  ]
+ },
+ "GROUP_FIGURE_PREFECT": {
+  "id": 117,
+  "count": 152,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "prefect (red tunic, helmet, short sword) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "prefect dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 151,
+    "kind": "sprite",
+    "w": 34,
+    "h": 42,
+    "desc": "prefect fighting: offset = 104 + d + 8*frame(0..5), frame=(attack_image_offset-12)/2; idle-attack uses frame 0"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/maintenance.c:416-429",
+   "src/figure/combat.c attack_image_offset 0..23"
+  ]
+ },
+ "GROUP_FIGURE_HOMELESS": {
+  "id": 118,
+  "count": 109,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "homeless (ragged grey clothes, bundle) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "homeless (ragged grey clothes, bundle) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 108,
+    "kind": "sprite",
+    "w": 26,
+    "h": 30,
+    "desc": "unemployed people drawn on the senate building: 104 standing idle man, 105 (unused, keep similar), 106 sitting man, 107 group/leaning man, 108 standing woman; direction-less static sprites"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/migrant.c:360",
+   "src/widget/city_without_overlay.c:347-362 senate draws GROUP_FIGURE_HOMELESS + 104,106,107,108 based on unemployment"
+  ]
+ },
+ "GROUP_FIGURE_PREFECT_WITH_BUCKET": {
+  "id": 121,
+  "count": 144,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "prefect carrying water bucket (red tunic, bucket) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 143,
+    "kind": "sprite",
+    "w": 34,
+    "h": 42,
+    "desc": "prefect throwing water at fire: offset = 96 + d + 8*frame(0..5), frame=image_offset/2; splash of blue water"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/maintenance.c:408,412"
+  ]
+ },
+ "GROUP_FIGURE_FORT_FLAGS": {
+  "id": 126,
+  "count": 27,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "legionary legion flag waving (red banner), frames 0..7 (image_offset/2); NOT directional"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "legionary flag, halted/hanging still"
+   },
+   {
+    "from": 9,
+    "to": 16,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "javelin legion flag waving (blue/green banner), frames 0..7"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "javelin flag halted"
+   },
+   {
+    "from": 18,
+    "to": 25,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "mounted legion flag waving (yellow/purple banner), frames 0..7"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "sprite",
+    "w": 22,
+    "h": 30,
+    "desc": "mounted flag halted"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/soldier.c:67-85",
+   "src/window/building/military.c:253 base +9 javelin,+18 mounted,+8 halted"
+  ],
+  "notes": "Drawn as the middle part of the fort standard: above the pole (STANDARD_POLE), below the legion icon (y - flag height)."
+ },
+ "GROUP_FIGURE_FORT_STANDARD_ICONS": {
+  "id": 127,
+  "count": 10,
+  "entries": [
+   {
+    "from": 0,
+    "to": 9,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion emblem on top of the standard, one per legion_id 0..9 (eagle, wreath, etc., gold); also shown in military advisor (44px rows) and sidebar; 3 = also used as fishing-point marker icon and 4 = herd-point marker icon in the editor"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_figure.c:113",
+   "src/window/advisor/military.c:153",
+   "src/window/building/military.c:247",
+   "src/widget/sidebar/military.c:246",
+   "src/figuretype/editor.c:46,49 (+3,+4)",
+   "src/figure/formation.c:78 legion_id capped at 9"
+  ]
+ },
+ "GROUP_FIGURE_TRADE_CARAVAN": {
+  "id": 130,
+  "count": 96,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 40,
+    "h": 36,
+    "desc": "trade caravan donkey with packs (land trader, non-desert climates) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   }
+  ],
+  "evidence": [
+   "src/figuretype/trader.c:465 trader_image_id: image_group(GROUP_FIGURE_TRADE_CARAVAN) unless desert -> absolute IMAGE_CAMEL=4922",
+   "trader.c:600 image = base + d + 8*image_offset",
+   "src/window/building/distribution.c:728,1019 +4 as UI icon"
+  ],
+  "notes": "No corpse frames (corpse state also uses walk formula). Desert climate uses absolute ids 4922..5017 (camels) \u2014 see _absolute_ids."
+ },
+ "GROUP_FIGURE_MIGRANT_CART": {
+  "id": 131,
+  "count": 16,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 34,
+    "h": 28,
+    "desc": "migrant hand cart with household goods (bundles, pots), offset = d"
+   },
+   {
+    "from": 8,
+    "to": 15,
+    "kind": "sprite",
+    "w": 34,
+    "h": 28,
+    "desc": "native trader cart (offset 8 + 8*resource_id + d; resource_id is always 0 for native traders) \u2014 cart with native goods/furs"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/migrant.c:65",
+   "src/figuretype/trader.c:692 MIGRANT_CART + 8 + 8*resource_id + dir"
+  ],
+  "notes": "Native trader resource_id is never set (0); if it ever were, offsets would grow by 8 per resource."
+ },
+ "GROUP_FIGURE_MAP_FLAG_FLAGS": {
+  "id": 139,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 20,
+    "h": 40,
+    "desc": "editor map-flag base: pole with waving flag, animation frames 0..7 (image_offset/2); a number is drawn at (x+6,y+7) on it"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/editor.c:20"
+  ]
+ },
+ "GROUP_FIGURE_MAP_FLAG_ICONS": {
+  "id": 140,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 5,
+    "kind": "sprite",
+    "w": 22,
+    "h": 22,
+    "desc": "editor flag top icons: 0 earthquake, 1 invasion point, 2 land entry, 3 land exit, 4 river entry, 5 river exit"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/editor.c:25-43"
+  ]
+ },
+ "GROUP_FIGURE_FLOTSAM_0": {
+  "id": 153,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "sprite",
+    "w": 22,
+    "h": 14,
+    "desc": "river flotsam type 0 bobbing on water (barrel/planks/debris), frames 0..4 (rising out of water 0->4)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:124-137 FLOTSAM_TYPE_* tables, values 0..4"
+  ]
+ },
+ "GROUP_FIGURE_FLOTSAM_1": {
+  "id": 154,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "sprite",
+    "w": 22,
+    "h": 14,
+    "desc": "river flotsam type 1 bobbing on water (barrel/planks/debris), frames 0..4 (rising out of water 0->4)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:124-137 FLOTSAM_TYPE_* tables, values 0..4"
+  ]
+ },
+ "GROUP_FIGURE_FLOTSAM_2": {
+  "id": 155,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "sprite",
+    "w": 22,
+    "h": 14,
+    "desc": "river flotsam type 2 bobbing on water (barrel/planks/debris), frames 0..4 (rising out of water 0->4)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:124-137 FLOTSAM_TYPE_* tables, values 0..4"
+  ]
+ },
+ "GROUP_FIGURE_FLOTSAM_3": {
+  "id": 156,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "sprite",
+    "w": 22,
+    "h": 14,
+    "desc": "river flotsam type 3 bobbing on water (barrel/planks/debris), frames 0..4 (rising out of water 0->4)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:124-137 FLOTSAM_TYPE_* tables, values 0..4"
+  ]
+ },
+ "GROUP_FIGURE_LION": {
+  "id": 163,
+  "count": 96,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 40,
+    "h": 30,
+    "desc": "lion (tawny, mane) walking beside the lion tamer walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:209,232 cart_image_id = LION + d + 8*image_offset"
+  ],
+  "notes": "Drawn as the 'cart' of the lion tamer using CART_OFFSETS. No corpse."
+ },
+ "GROUP_FIGURE_SHIP": {
+  "id": 165,
+  "count": 24,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 90,
+    "h": 70,
+    "desc": "trade ship (large merchant sailing ship, sail), offset = d; +4 also drawn as UI icon"
+   },
+   {
+    "from": 8,
+    "to": 15,
+    "kind": "sprite",
+    "w": 50,
+    "h": 40,
+    "desc": "fishing boat moving, offset = 8 + d"
+   },
+   {
+    "from": 16,
+    "to": 23,
+    "kind": "sprite",
+    "w": 50,
+    "h": 40,
+    "desc": "fishing boat fishing (net cast), offset = 16 + d"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/trader.c:963",
+   "src/figuretype/water.c:309,311",
+   "src/window/building/distribution.c:730,1021 +4"
+  ]
+ },
+ "GROUP_FIGURE_TOWER_SENTRY": {
+  "id": 194,
+  "count": 144,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "tower sentry / watchman (archer, leather armour, bow) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 135,
+    "kind": "sprite",
+    "w": 32,
+    "h": 42,
+    "desc": "sentry shooting bow: offset = 96 + d + 8*frame(0..4) (TOWER_SENTRY_FIRING_OFFSETS); melee attack reuses 96..127"
+   },
+   {
+    "from": 136,
+    "to": 143,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "tower sentry dying/corpse: offset = 136 + k(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/wall.c:193-215 figure_tower_sentry_set_image (also mess hall supplier)",
+   "src/window/building/distribution.c:726, utility.c roadblock +4"
+  ]
+ },
+ "GROUP_FIGURE_MISSILE": {
+  "id": 198,
+  "count": 48,
+  "entries": [
+   {
+    "from": 0,
+    "to": 15,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "spear / javelin in flight, 16 directions: offset = dir16 (0..15) where dir16=(16+direction-2*orientation)%16, 22.5 deg steps clockwise starting at NE"
+   },
+   {
+    "from": 16,
+    "to": 31,
+    "kind": "sprite",
+    "w": 20,
+    "h": 20,
+    "desc": "arrow in flight, 16 directions"
+   },
+   {
+    "from": 32,
+    "to": 47,
+    "kind": "sprite",
+    "w": 28,
+    "h": 28,
+    "desc": "ballista bolt in flight, 16 directions"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/missile.c:172 arrow +16",
+   "missile.c:191,231 spear/javelin +0",
+   "missile.c:270 bolt +32"
+  ]
+ },
+ "GROUP_FIGURE_BALLISTA": {
+  "id": 200,
+  "count": 56,
+  "entries": [
+   {
+    "from": 0,
+    "to": 55,
+    "kind": "sprite",
+    "w": 50,
+    "h": 45,
+    "desc": "ballista on tower: offset = d + 8*frame(0..6); frame 0 idle/loaded, 1..6 firing recoil (BALLISTA_FIRING_OFFSETS)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/wall.c:106,109"
+  ]
+ },
+ "GROUP_FIGURE_SEAGULLS": {
+  "id": 206,
+  "count": 42,
+  "entries": [
+   {
+    "from": 0,
+    "to": 17,
+    "kind": "sprite",
+    "w": 30,
+    "h": 20,
+    "desc": "seagulls circling, animation A frames 0..17 (image_offset/3, cycle 54); white birds"
+   },
+   {
+    "from": 18,
+    "to": 41,
+    "kind": "sprite",
+    "w": 30,
+    "h": 20,
+    "desc": "seagulls circling, animation B frames 0..23 (18 + image_offset/3, cycle 72)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:127,130",
+   "assets religion.xml 'Neptune Complex Module2' animation frames group=206 image=0..17"
+  ],
+  "notes": "religion.xml reuses frames 0..17 as an overlay animation on the Neptune temple complex (birds over fountain), so keep frames 0..17 as a looping animation."
+ },
+ "GROUP_FIGURE_DELIVERY_BOY": {
+  "id": 209,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 22,
+    "h": 34,
+    "desc": "delivery boy (small boy carrying basket of goods on head) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "delivery boy (small boy carrying basket of goods on head) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/supplier.c:376,379"
+  ]
+ },
+ "GROUP_FIGURE_CHARIOTEER": {
+  "id": 215,
+  "count": 96,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 36,
+    "h": 42,
+    "desc": "charioteer (driver in tunic walking with whip / small chariot) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   }
+  ],
+  "evidence": [
+   "src/figuretype/entertainer.c:190-193; attack/corpse use +d only"
+  ],
+  "notes": "No corpse frames."
+ },
+ "GROUP_FIGURE_HIPPODROME_HORSE_1": {
+  "id": 217,
+  "count": 64,
+  "entries": [
+   {
+    "from": 0,
+    "to": 63,
+    "kind": "sprite",
+    "w": 56,
+    "h": 40,
+    "desc": "race chariot horses team 1 (blue team) galloping: offset = d + 8*frame(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:526-532 image_offset cycles 8"
+  ]
+ },
+ "GROUP_FIGURE_HIPPODROME_HORSE_2": {
+  "id": 218,
+  "count": 64,
+  "entries": [
+   {
+    "from": 0,
+    "to": 63,
+    "kind": "sprite",
+    "w": 56,
+    "h": 40,
+    "desc": "race chariot horses team 2 (red team) galloping: offset = d + 8*frame(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:526-532 image_offset cycles 8"
+  ]
+ },
+ "GROUP_FIGURE_HIPPODROME_CART_1": {
+  "id": 219,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 40,
+    "h": 32,
+    "desc": "racing chariot (cart) team 1 (blue) with driver, offset = d; drawn behind horses with CART_OFFSETS[(d+4)%8]"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:528,532"
+  ]
+ },
+ "GROUP_FIGURE_HIPPODROME_CART_2": {
+  "id": 220,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 40,
+    "h": 32,
+    "desc": "racing chariot (cart) team 2 (red) with driver, offset = d; drawn behind horses with CART_OFFSETS[(d+4)%8]"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:528,532"
+  ]
+ },
+ "GROUP_GOD_BOLT": {
+  "id": 225,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 9,
+    "h": 18,
+    "desc": "small lightning bolt icon (yellow), drawn repeatedly every 10 px in religion advisor and sidebar for god anger"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/religion.c:62",
+   "src/widget/sidebar/extra.c:566"
+  ]
+ },
+ "GROUP_FIGURE_SHIPWRECK": {
+  "id": 226,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "sprite",
+    "w": 60,
+    "h": 40,
+    "desc": "shipwreck (broken hull sinking), frames 0..7 = image_offset/16"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:165"
+  ]
+ },
+ "GROUP_PLAGUE_SKULL": {
+  "id": 227,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 20,
+    "h": 22,
+    "desc": "plague skull icon (white skull), drawn above infected houses/buildings"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:419,472,632"
+  ]
+ },
+ "GROUP_FIGURE_DOCTOR_SURGEON": {
+  "id": 228,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "doctor / surgeon (white robe, medicine bag) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "doctor / surgeon (white robe, medicine bag) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:365 culture_action(GROUP_FIGURE_DOCTOR_SURGEON)",
+   "src/figure/image.c figure_image_update: base + d + 8*image_offset (image_offset 0..11 via figure_image_increase_offset(f,12)); corpse base + 96 + CORPSE_IMAGE_OFFSETS[wait_ticks/2]",
+   "utility.c roadblock +4"
+  ]
+ },
+ "GROUP_FIGURE_PATRICIAN": {
+  "id": 229,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "patrician (purple-trimmed white toga; also tourists) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "patrician (purple-trimmed white toga; also tourists) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:425",
+   "src/figuretype/workcamp.c:202",
+   "src/figuretype/entertainer.c:203 tourist (attack frame +d)"
+  ]
+ },
+ "GROUP_FIGURE_MISSIONARY": {
+  "id": 230,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "missionary (brown robe, staff) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "missionary (brown robe, staff) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:412",
+   "utility.c roadblock +4"
+  ]
+ },
+ "GROUP_FIGURE_TEACHER_LIBRARIAN": {
+  "id": 231,
+  "count": 104,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "teacher / librarian (grey toga, scroll under arm) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "teacher / librarian (grey toga, scroll under arm) dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/service.c:207,212",
+   "utility.c roadblock +4"
+  ]
+ },
+ "GROUP_FIGURE_FORT_MOUNTED": {
+  "id": 232,
+  "count": 152,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 44,
+    "h": 46,
+    "desc": "mounted auxiliary (cavalryman on horse, spear) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 143,
+    "kind": "sprite",
+    "w": 46,
+    "h": 46,
+    "desc": "mounted soldier fighting: offset = 96 + d + 8*frame(0..5), frame=(attack_image_offset-12)/2"
+   },
+   {
+    "from": 144,
+    "to": 151,
+    "kind": "sprite",
+    "w": 48,
+    "h": 30,
+    "desc": "mounted soldier dying/corpse (horse and rider fallen), 144 + k(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/soldier.c:174-186"
+  ]
+ },
+ "GROUP_FIGURE_SHEEP": {
+  "id": 233,
+  "count": 112,
+  "entries": [
+   {
+    "from": 0,
+    "to": 47,
+    "kind": "sprite",
+    "w": 30,
+    "h": 24,
+    "desc": "sheep walking: offset = d + 8*frame(0..5) (image_offset cycles 6); white woolly sheep"
+   },
+   {
+    "from": 48,
+    "to": 95,
+    "kind": "sprite",
+    "w": 30,
+    "h": 24,
+    "desc": "sheep grazing at rest: offset = 48 + d + 8*k, k = SHEEP_IMAGE_OFFSETS (-1..5; -1 reuses walk frame 5 at 40..47)"
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 30,
+    "h": 24,
+    "desc": "sheep standing still at rest (every 4th sheep), offset 96 + d"
+   },
+   {
+    "from": 104,
+    "to": 111,
+    "kind": "sprite",
+    "w": 30,
+    "h": 20,
+    "desc": "sheep dying/corpse 104 + k(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:183-193"
+  ]
+ },
+ "GROUP_FIGURE_WOLF": {
+  "id": 234,
+  "count": 160,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 34,
+    "h": 26,
+    "desc": "wolf (grey) running walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 34,
+    "h": 20,
+    "desc": "wolf dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 151,
+    "kind": "sprite",
+    "w": 36,
+    "h": 28,
+    "desc": "wolf attacking/biting: offset = 104 + d + 8*(attack_image_offset/4) frame 0..5"
+   },
+   {
+    "from": 152,
+    "to": 159,
+    "kind": "sprite",
+    "w": 34,
+    "h": 26,
+    "desc": "wolf standing at rest, offset 152 + d"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:260-267"
+  ]
+ },
+ "GROUP_FIGURE_ZEBRA": {
+  "id": 235,
+  "count": 144,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 40,
+    "h": 36,
+    "desc": "zebra galloping (black/white stripes) walking figure sprite: offset = 0 + d + 8*frame(0..11); direction d: 0=NE(up-right),1=E,2=SE,3=S(down),4=SW,5=W,6=NW,7=N(up) on screen (after view rotation)."
+   },
+   {
+    "from": 96,
+    "to": 103,
+    "kind": "sprite",
+    "w": 40,
+    "h": 24,
+    "desc": "zebra dying/corpse: offset = 96 + k(0..7), k from CORPSE_IMAGE_OFFSETS (0..3 falling, 4..6 lying, 7 final corpse); direction-independent"
+   },
+   {
+    "from": 104,
+    "to": 143,
+    "kind": "sprite",
+    "w": 40,
+    "h": 36,
+    "desc": "zebra grazing at rest: offset = 104 + d + 8*k, k = ZEBRA_IMAGE_OFFSETS (0..4; -13 maps back to walk frame 0)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/animal.c:339-348"
+  ]
+ },
+ "GROUP_FIGURE_CAESAR_LEGIONARY": {
+  "id": 236,
+  "count": 160,
+  "entries": [
+   {
+    "from": 0,
+    "to": 47,
+    "kind": "sprite",
+    "w": 34,
+    "h": 42,
+    "desc": "Caesar's (imperial) legionary fighting: offset = d + 8*frame(0..5), frame=(attack_image_offset-12)/2 or image_offset/2; red cloak, rectangular shield, gold eagle"
+   },
+   {
+    "from": 48,
+    "to": 143,
+    "kind": "sprite",
+    "w": 30,
+    "h": 42,
+    "desc": "imperial legionary marching: offset = 48 + d + 8*frame(0..11)"
+   },
+   {
+    "from": 144,
+    "to": 151,
+    "kind": "sprite",
+    "w": 1,
+    "h": 1,
+    "desc": "unused by code (gap); placeholder or copy of marching frame"
+   },
+   {
+    "from": 152,
+    "to": 159,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "imperial legionary dying/corpse: 152 + k(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/enemy.c:641-673",
+   "at-standard frames come from GROUP_BUILDING_FORT_LEGIONARY (+d, +144+d) \u2014 not this group"
+  ]
+ },
+ "GROUP_FIGURE_CARTPUSHER_CART_MULTIPLE_FOOD": {
+  "id": 237,
+  "count": 80,
+  "entries": [
+   {
+    "from": 0,
+    "to": 31,
+    "kind": "sprite",
+    "w": 38,
+    "h": 34,
+    "desc": "cart with several (2..7) loads of food: offset = 8*food_index + d; food_index 0 wheat,1 vegetables,2 fruit,3 meat"
+   },
+   {
+    "from": 32,
+    "to": 39,
+    "kind": "sprite",
+    "w": 38,
+    "h": 34,
+    "desc": "cart with several loads of FISH, 32 + d"
+   },
+   {
+    "from": 40,
+    "to": 71,
+    "kind": "sprite",
+    "w": 44,
+    "h": 74,
+    "desc": "cart heaped with 8+ loads (very tall pile ~40 px higher; code raises the cart by 40 px): offset = 40 + 8*food_index + d; food_index 0 wheat,1 vegetables,2 fruit,3 meat"
+   },
+   {
+    "from": 72,
+    "to": 79,
+    "kind": "sprite",
+    "w": 44,
+    "h": 74,
+    "desc": "cart heaped with 8+ loads of FISH, 72 + d"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:175,176 multiple = +8*fi, eight = +32+8*(fi+1)",
+   "resource.c:192,193 fish +32, +72",
+   "src/figuretype/cartpusher.c:279 y_offset_cart -= 40 for >=8 food loads",
+   "src/figuretype/depot.c uses same images (ox cart)"
+  ]
+ },
+ "GROUP_FIGURE_FORT_STANDARD_POLE": {
+  "id": 241,
+  "count": 21,
+  "entries": [
+   {
+    "from": 0,
+    "to": 20,
+    "kind": "sprite",
+    "w": 14,
+    "h": 64,
+    "desc": "legion standard pole with morale ball/indicator: offset = 20 - morale/5 (0 = full morale ball at top, 20 = lowest morale); base of the standard drawn on the map and in the fort window"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/soldier.c:63-67",
+   "src/window/building/military.c:271"
+  ]
+ },
+ "GROUP_FIGURE_FLOTSAM_SHEEP": {
+  "id": 242,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "sprite",
+    "w": 22,
+    "h": 16,
+    "desc": "drowned sheep flotsam floating (Neptune shipwreck flotsam), frames 0..4 bobbing"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/water.c:122 FLOTSAM_TYPE_0 values 0..4"
+  ]
+ },
+ "GROUP_FIGURE_CARTPUSHER_CART_MULTIPLE_RESOURCE": {
+  "id": 250,
+  "count": 88,
+  "entries": [
+   {
+    "from": 0,
+    "to": 87,
+    "kind": "sprite",
+    "w": 38,
+    "h": 34,
+    "desc": "cart with several loads of a non-food good: offset = 8*good_index + d; good_index 0 olives,1 vines,2 wine,3 oil,4 iron,5 timber,6 clay,7 marble,8 weapons,9 furniture,10 pottery (legacy order minus food)"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:179,180 (eight_loads == multiple_loads for goods)"
+  ]
+ },
+ "_ENEMY_FILE": {
+  "count": 801,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 1,
+    "h": 1,
+    "desc": "entry 0: skipped by loader (crop_and_pack_images starts at 1); image_draw_enemy rejects id<=0"
+   },
+   {
+    "from": 1,
+    "to": 200,
+    "kind": "sprite",
+    "w": 1,
+    "h": 1,
+    "desc": "unused by Augustus code in every enemy file"
+   },
+   {
+    "from": 201,
+    "to": 296,
+    "kind": "sprite",
+    "w": 26,
+    "h": 42,
+    "desc": "NATIVE (indigenous) peaceful walk: 201 + d + 8*frame(0..11). Present in EVERY enemy file (natives appear on any map, drawn with the loaded enemy file)"
+   },
+   {
+    "from": 297,
+    "to": 392,
+    "kind": "sprite",
+    "w": 28,
+    "h": 42,
+    "desc": "native warrior attacking walk (FIGURE_ACTION_159) AND barbarian fast swordsman walk (ENEMY_0, goths file): 297 + d + 8*frame(0..11); must exist in every file for natives"
+   },
+   {
+    "from": 393,
+    "to": 440,
+    "kind": "sprite",
+    "w": 32,
+    "h": 42,
+    "desc": "native / barbarian melee attack: 393 + d + 8*frame(0..5)"
+   },
+   {
+    "from": 441,
+    "to": 448,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "native / barbarian dying/corpse: 441 + k(0..7)"
+   },
+   {
+    "from": 449,
+    "to": 544,
+    "kind": "sprite",
+    "w": 28,
+    "h": 42,
+    "desc": "primary infantry walk: 449 + d + 8*frame(0..11). goths: Goth fast swordsman (ENEMY49); Etruscan/Greek/carthage: swordsman ENEMY45; Persians/Phoenician/egyptians: swordsman ENEMY44; celts/Gaul: swordsman ENEMY50 (CELTS ONLY: image index k depicts direction (k+1)%8 because code uses dir-1); North African: Numidian fast swordsman ENEMY49 AND Numidian spearman ENEMY51 share this walk"
+   },
+   {
+    "from": 545,
+    "to": 592,
+    "kind": "sprite",
+    "w": 32,
+    "h": 42,
+    "desc": "primary infantry melee attack: 545 + d + 8*frame(0..5) (frame=(attack_image_offset-12)/2 or image_offset/2). North African file instead: Numidian spearman throwing (missile launcher) 545 + d + 8*MISSILE_LAUNCHER_OFFSETS(0..5)"
+   },
+   {
+    "from": 593,
+    "to": 600,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "primary infantry corpse 593 + k(0..7). North African file instead: 593..600 are the first frame row of Numidian melee attack (593..640)"
+   },
+   {
+    "from": 601,
+    "to": 696,
+    "kind": "sprite",
+    "w": 40,
+    "h": 46,
+    "desc": "secondary unit walk: 601 + d + 8*frame(0..11). goths: Goth mounted archer (ENEMY52; also its melee: dir+8*image_offset / +d); Etruscan/Greek/Persians/Phoenician: spearman/javelin thrower ENEMY43; egyptians: camel rider archer ENEMY46; carthage: war elephant ENEMY47 (also used for its attack); celts: war chariot ENEMY48; Gaul: axeman ENEMY53. North African: 601..640 = Numidian melee attack rows 1..5 (593..640), 641..648 Numidian corpse, 649..696 unused"
+   },
+   {
+    "from": 697,
+    "to": 744,
+    "kind": "sprite",
+    "w": 40,
+    "h": 46,
+    "desc": "secondary unit action: 697 + d + 8*frame(0..5). Spear43/camel/mounted archer: missile throw/shoot (MISSILE_LAUNCHER_OFFSETS); chariot & axeman: melee attack (image_offset/2 or (attack_image_offset-12)/2). carthage: 697..704 unused, 705..712 ELEPHANT corpse (705 + k)"
+   },
+   {
+    "from": 745,
+    "to": 792,
+    "kind": "sprite",
+    "w": 40,
+    "h": 46,
+    "desc": "Spear43 files (Etruscan, Greek, Persians, Phoenician): spearman melee attack 745 + d + 8*frame(0..5). Camel/mounted archer/chariot/axeman files (egyptians, goths, celts, Gaul): 745..752 corpse (745 + k), 753..792 unused"
+   },
+   {
+    "from": 793,
+    "to": 800,
+    "kind": "sprite",
+    "w": 40,
+    "h": 26,
+    "desc": "Spear43 files: spearman corpse 793 + k(0..7); unused elsewhere"
+   }
+  ],
+  "evidence": [
+   "src/core/image.c:18 ENEMY_ENTRIES 801, :33 ENEMY_DATA_SIZE 2400000 (max .555 bytes), :125-166 ENEMY_GRAPHICS_SG2/555 tables, :1066 image_load_enemy(scenario_property_enemy()), :347 entry 0 skipped",
+   "src/graphics/image.c:21 image_draw_enemy rejects id<=0 or >=801",
+   "src/figuretype/enemy.c:233-566 all is_enemy_image formulas (offsets 297/393/441, 449/545/593, 593/641, 601/697/705/745/793)",
+   "src/figuretype/native.c:93-107 natives 201/297/393/441",
+   "src/scenario/invasion.c:31 ENEMY_ID_TO_ENEMY_TYPE, :64 ENEMY_PROPERTIES (figure types per enemy type)",
+   "src/game/game.c:88 image_load_enemy(ENEMY_0_BARBARIAN) at startup (goths.sg2 must exist)"
+  ],
+  "files": {
+   "goths.sg2/.555": {
+    "scenario_enemy_ids": [
+     0,
+     14,
+     15,
+     16
+    ],
+    "enemy_types": [
+     "ENEMY_0_BARBARIAN (fast sword 297..448)",
+     "ENEMY_4_GOTH (fast sword 449..600, mounted archer 601..752)"
+    ],
+    "note": "barbarian swordsmen share ids with native warriors (297..448)"
+   },
+   "Etruscan.sg2/.555": {
+    "scenario_enemy_ids": [
+     1,
+     2
+    ],
+    "enemy_types": [
+     "ENEMY_7_ETRUSCAN: sword45 449..600, spear43 601..800"
+    ]
+   },
+   "carthage.sg2/.555": {
+    "scenario_enemy_ids": [
+     3
+    ],
+    "enemy_types": [
+     "ENEMY_10_CARTHAGINIAN: sword45 449..600, elephant walk/attack 601..696, elephant corpse 705..712"
+    ]
+   },
+   "Greek.sg2/.555": {
+    "scenario_enemy_ids": [
+     4,
+     5
+    ],
+    "enemy_types": [
+     "ENEMY_8_GREEK: sword45 449..600, spear43 601..800"
+    ]
+   },
+   "egyptians.sg2/.555": {
+    "scenario_enemy_ids": [
+     6
+    ],
+    "enemy_types": [
+     "ENEMY_9_EGYPTIAN: sword44 449..600, camel archer 601..752 (walk/attack 601..696, shoot 697..744, corpse 745..752)"
+    ]
+   },
+   "Persians.sg2/.555": {
+    "scenario_enemy_ids": [
+     7
+    ],
+    "enemy_types": [
+     "ENEMY_5_PERGAMUM: sword44 449..600, spear43 601..800"
+    ]
+   },
+   "Phoenician.sg2/.555": {
+    "scenario_enemy_ids": [
+     8,
+     17,
+     19
+    ],
+    "enemy_types": [
+     "ENEMY_6_SELEUCID: sword44 449..600, spear43 601..800"
+    ]
+   },
+   "celts.sg2/.555": {
+    "scenario_enemy_ids": [
+     9,
+     10,
+     11
+    ],
+    "enemy_types": [
+     "ENEMY_3_CELT: sword50 449..600 (walk sprites rotated: index k shows dir k+1), chariot 601..752 (walk 601..696, attack 697..744, corpse 745..752)"
+    ]
+   },
+   "Gaul.sg2/.555": {
+    "scenario_enemy_ids": [
+     12,
+     13
+    ],
+    "enemy_types": [
+     "ENEMY_2_GAUL: sword50 449..600, axeman 601..752 (walk 601..696, attack 697..744, corpse 745..752)"
+    ]
+   },
+   "North African.sg2/.555": {
+    "scenario_enemy_ids": [
+     18
+    ],
+    "enemy_types": [
+     "ENEMY_1_NUMIDIAN: fast sword49 + spear51 share walk 449..544; spear throw 545..592; melee attack 593..640; corpse 641..648"
+    ]
+   }
+  },
+  "notes": "Separate 801-entry index file per enemy nation (same index entry format as c3.sg2, read from offset HEADER_SIZE=20680, no group table used). Direction d as for main-file walkers (0=NE..7=N). All 10 files must also contain native ids 201..448 (natives drawn with whatever enemy file is loaded; natives/barbarian art identical ids). Unused ids may be 1x1 transparent. Enemy pixel data (.555) must stay <= 2,400,000 bytes. NOT in enemy file: Caesar's legions (ENEMY_11_CAESAR -> FIGURE_ENEMY_CAESAR_LEGIONARY uses main GROUP_FIGURE_CAESAR_LEGIONARY + GROUP_BUILDING_FORT_LEGIONARY), revolting gladiators (FIGURE_ENEMY54_GLADIATOR uses GROUP_FIGURE_GLADIATOR). Enemy missiles (arrows/spears) use main GROUP_FIGURE_MISSILE. Enemy portraits in the figure info window use main GROUP_BIG_PEOPLE (window/building/figures.c:287). If an enemy figure type is spawned with a mismatched enemy_type, its image_id is simply not updated (functions return early)."
+ },
+ "_absolute_ids": [
+  "src/figuretype/trader.h:42 IMAGE_CAMEL 4922: desert-climate trade caravans use ABSOLUTE main ids 4922 + d + 8*frame(0..11) = 4922..5017 (camel with packs, 12 walk frames x 8 dirs, ~44x40). Some group in the layout must place camel walker sprites exactly at absolute ids 4922..5017.",
+  "src/figuretype/entertainer.c:215-221 gladiator attack frames: after computing image_group(GROUP_FIGURE_GLADIATOR)+104+d+8*(image_offset/2): if id in [5705,5706] id -= 8; else if id > 5705 id -= 2. Keep GROUP_FIGURE_GLADIATOR start <= 5545 so its ids (max start+159) stay below 5705, or the hack corrupts fight frames.",
+  "src/widget/city_figure.c:234 figure image_id >= 10000 treated as Augustus asset (pixel offset hack): all main-file figure sprites must have ids < 10000 (automatically true).",
+  "src/game/resource.c:191 fish cart at image_group(GROUP_FIGURE_CARTPUSHER_CART)+696 (far beyond the 128 resource cart images) \u2014 count of group 97 is 704 as a result.",
+  "src/figuretype/enemy.c, native.c: enemy-file ids are absolute indices (201..800) into the 801-entry enemy file \u2014 see _ENEMY_FILE.",
+  "src/figuretype/enemy.c:660-662 and soldier.c:204-218: Caesar legionary and own legionaries also use GROUP_BUILDING_FORT_LEGIONARY (+d, +96+d+8*f fight, +144+d, +152+k corpse, walk d+8*f) and javelin uses GROUP_BUILDING_FORT_JAVELIN (+96+d+8*launcher) \u2014 those groups are outside this spec's scope but hold figure sprites."
+ ]
+}

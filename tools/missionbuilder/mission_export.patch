@@ -1,0 +1,55 @@
+--- src/src/game/file.c	2026-10-10 21:50:29.089616197 +0200
++++ src_mission/src/game/file.c	2026-10-10 22:43:09.853364223 +0200
+@@ -76,6 +76,7 @@
+ #include "sound/city.h"
+ #include "sound/music.h"
+ 
++#include <stdlib.h>
+ #include <string.h>
+ 
+ static const char MISSION_PACK_FILE[] = "mission1.pak";
+@@ -371,6 +372,21 @@
+     if (scenario_intro_message()) {
+         city_message_post(1, MESSAGE_CUSTOM_MESSAGE, scenario_intro_message(), 0);
+     }
++    {
++        /* tooling hook: export the freshly started scenario as a campaign mission save */
++        const char *mission_out = getenv("AUG_MISSION_OUT");
++        if (mission_out) {
++            int mission_id = atoi(getenv("AUG_MISSION_ID") ? getenv("AUG_MISSION_ID") : "0");
++            int mission_rank = mission_id <= 1 ? mission_id : mission_id / 2 + 1;
++            scenario_set_custom(0);
++            scenario_set_campaign_mission(mission_id);
++            scenario_set_campaign_rank(mission_rank);
++            if (!game_file_write_saved_game(mission_out)) {
++                exit(3);
++            }
++            exit(0);
++        }
++    }
+     return 1;
+ }
+ 
+--- src/src/game/game.c	2026-10-10 21:50:29.090207045 +0200
++++ src_mission/src/game/game.c	2026-10-10 22:43:09.853484308 +0200
+@@ -1,5 +1,7 @@
+ #include "game.h"
+ 
++#include <stdlib.h>
++
+ #include "assets/assets.h"
+ #include "building/model.h"
+ #include "building/properties.h"
+@@ -111,6 +113,12 @@
+     resource_init();
+     int missing_assets = !assets_get_image_id("Logistics", "roadblock"); // If can't find roadblocks asset, extra assets not installed properly
+     window_logo_show(missing_fonts ? MESSAGE_MISSING_FONTS : (is_unpatched() ? MESSAGE_MISSING_PATCH : (missing_assets ? MESSAGE_MISSING_EXTRA_ASSETS : MESSAGE_NONE)));
++    if (getenv("AUG_MISSION_MAP")) {
++        /* tooling hook used by the mission builder */
++        if (!game_file_start_scenario(getenv("AUG_MISSION_MAP"))) {
++            exit(4);
++        }
++    }
+     return 1;
+ }
+ 

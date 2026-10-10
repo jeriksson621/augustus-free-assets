@@ -1,0 +1,6736 @@
+{
+ "GROUP_TOP_MENU": {
+  "id": 11,
+  "count": 15,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "top menu bar background tiles, drawn side by side at y=0 repeating i%8 across the whole screen width (8 variants of a carved stone/marble bar, dark-beige with subtle relief; must tile seamlessly left-right; menu text 'File Options Help Advisors' drawn on top in FONT_NORMAL_GREEN)"
+   },
+   {
+    "from": 8,
+    "to": 13,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "unused by code (filler): extra top bar pieces, paint like 0..7"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 120,
+    "h": 24,
+    "desc": "black/dark inset counter panel for Funds/Population/Date in the top bar. 120x24: Augustus' ui.xml slices it into six 20x24 columns (x=0,-20,...,-100): column 0 = left end cap, columns 1-4 = repeatable middle, column 5 = right end cap. Dark (near black) recessed field with thin gold/bronze rim; white/yellow text drawn on it"
+   }
+  ],
+  "evidence": [
+   "src/widget/top_menu.c:220-225 image_base + i % 8, block_width 24",
+   "src/widget/top_menu.c:235 image_group(GROUP_TOP_MENU)+14, BLACK_PANEL_BLOCK_WIDTH 20, TOTAL_BLOCKS 6",
+   "src/widget/top_menu_editor.c:124",
+   "assets ui.xml: Top_UI_Panel layers group=11 image=14 at x=0..-100, 20x24 each",
+   "src/graphics/menu.h TOP_MENU_HEIGHT 24"
+  ]
+ },
+ "GROUP_SIDE_PANEL": {
+  "id": 12,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 42,
+    "h": 450,
+    "desc": "COLLAPSED sidebar background, drawn at (screen_w-42, 24). Stone panel 42 wide; 12 build buttons (39x26) are drawn on it at x=2, y=24+32+35*i, plus expand button (31x20) at (6,28). Keep button slots as darker recesses"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 162,
+    "h": 450,
+    "desc": "EXPANDED sidebar background, drawn at (screen_w-162, 24). Layout (relative to image top-left): overlay-select button slot 117x31 at (4,3); collapse button slot 31x20 at (127,5); minimap frame: map area 146x111 at (8,35) (dark recessed frame around it); advisors/empire buttons 71x23 at (7,155),(84,155); grid/rotate buttons 33x22 at (7,184),(46,184),(84,184),(123,184); build-menu picture window 150x60 at (6,215); build buttons 39x26 in a 3x5 grid at x=13/63/113, y=277/313/349/385/421. Carved marble/stone look. Also used as military sidebar background"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 162,
+    "h": 120,
+    "desc": "relief filler below the expanded sidebar, SHORT version (used when <=120px of screen remain): decorative stone relief"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 42,
+    "h": 120,
+    "desc": "relief filler below the collapsed sidebar, SHORT version"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 162,
+    "h": 285,
+    "desc": "relief filler below the expanded sidebar, LONG version (repeats vertically every 285px on tall screens; top and bottom edges should tile)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 42,
+    "h": 285,
+    "desc": "relief filler below the collapsed sidebar, LONG version (tiles vertically every 285px)"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:163,170 image_group(GROUP_SIDE_PANEL)(+1) at y=24",
+   "src/widget/sidebar/common.c:23-38 relief: offset 2+collapsed (<=120 left, step 120) else 4+collapsed (step 285)",
+   "src/widget/sidebar/common.h SIDEBAR_COLLAPSED_WIDTH 42, SIDEBAR_EXPANDED_WIDTH 162, MAIN_SECTION_HEIGHT 450, MINIMAP 146x111",
+   "src/widget/sidebar/military.c:348,360"
+  ],
+  "notes": "Sidebar extra info panel (game speed etc.) is drawn with inner panels between y=474 and the relief; relief starts right after it."
+ },
+ "GROUP_SIDEBAR_ADVISORS_EMPIRE": {
+  "id": 13,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Advisors' (bust/scroll icon) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Advisors' (bust/scroll icon) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Advisors' (bust/scroll icon) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Empire map' (globe/map icon) button - normal state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Empire map' (globe/map icon) button - hover/focused state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "sidebar 'Empire map' (globe/map icon) button - pressed state"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:94-95 {7,155,71,23,IB_NORMAL,GROUP_SIDEBAR_ADVISORS_EMPIRE,0/3}",
+   "src/graphics/image_button.c:45-56 +0 normal, +1 focused, +2 pressed, +3 disabled"
+  ],
+  "notes": "Buttons are always enabled, so only 3 states each are needed; offset 3 doubles as 'advisors disabled' which never happens."
+ },
+ "GROUP_MAIN_MENU_BACKGROUND": {
+  "id": 14,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "full-screen background for the 'new career' (enter your name) screen: Roman landscape/city vista, scaled to fit screen and framed by empire panel borders"
+   }
+  ],
+  "evidence": [
+   "src/window/new_career.c:48 image_draw_fullscreen_background(image_group(GROUP_MAIN_MENU_BACKGROUND))",
+   "src/graphics/image.c draw_fullscreen_background scales to cover the screen"
+  ]
+ },
+ "GROUP_PANEL_BUTTON": {
+  "id": 15,
+  "count": 49,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, normal: left end piece (bevelled stone button, 25px tall)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, normal: middle piece (repeated horizontally, must tile)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, normal: right end piece"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, focused/highlighted: left end piece (bevelled stone button, 25px tall)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, focused/highlighted: middle piece (repeated horizontally, must tile)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, focused/highlighted: right end piece"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, alternative (dimmed/inactive): left end piece (bevelled stone button, 25px tall)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, alternative (dimmed/inactive): middle piece (repeated horizontally, must tile)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 16,
+    "h": 25,
+    "desc": "LARGE label/button, alternative (dimmed/inactive): right end piece"
+   },
+   {
+    "from": 9,
+    "to": 36,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "unused by code (filler) - paint as plain stone button pieces"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "sprite",
+    "w": 20,
+    "h": 20,
+    "desc": "config window numeric slider knob (small round/rect bronze knob) drawn on a 1-block inner panel; NUMERICAL_DOT_SIZE 20"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "unused by code (filler)"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "sprite",
+    "w": 25,
+    "h": 25,
+    "desc": "scrollbar thumb/dot (round bronze knob), SCROLL_DOT_SIZE 25, drawn centred in the 39px wide scroll column between the up/down buttons"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, normal: left end piece (used for overlay/military menus 24px apart, warning messages, mission goals)"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, normal: middle piece (tiles horizontally)"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, normal: right end piece"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, focused/highlighted: left end piece (used for overlay/military menus 24px apart, warning messages, mission goals)"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, focused/highlighted: middle piece (tiles horizontally)"
+   },
+   {
+    "from": 45,
+    "to": 45,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, focused/highlighted: right end piece"
+   },
+   {
+    "from": 46,
+    "to": 46,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, alternative (dimmed): left end piece (used for overlay/military menus 24px apart, warning messages, mission goals)"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, alternative (dimmed): middle piece (tiles horizontally)"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "opaque",
+    "w": 16,
+    "h": 20,
+    "desc": "SMALL label, alternative (dimmed): right end piece"
+   }
+  ],
+  "evidence": [
+   "src/graphics/panel.c:122-152 label_draw 40+3*type(+0/1/2), large_label_draw 3*type(+0/1/2), BLOCK_SIZE 16; types 0,1,2 used (overlay_menu.c:103 '?1:2')",
+   "src/graphics/scrollbar.c:85 +39 dot, SCROLL_DOT_SIZE 25",
+   "src/window/config.c:596 +37 slider knob, NUMERICAL_DOT_SIZE 20",
+   "src/window/main_menu.c:36 large-label buttons 256x25",
+   "src/window/city.c:180 large_label_draw(0, s_height-25, ...)"
+  ],
+  "notes": "Small label text is FONT_NORMAL_WHITE/RED drawn at y+4; large label text at y+6 in FONT_NORMAL_GREEN/LARGE. Exact heights (25/20) inferred from layout spacing."
+ },
+ "GROUP_FONT": {
+  "id": 16,
+  "count": 1340,
+  "entries": [
+   {
+    "from": 0,
+    "to": 133,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_PLAIN",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_PLAIN glyphs; glyph = offset 0 + glyph_index (see _fonts.glyph_index_table / mapping). plain: any single opaque colour (engine recolours every non-transparent pixel to white and tints at draw time; default tint COLOR_FONT_PLAIN 0x180800). No shadow, no anti-aliasing. Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   },
+   {
+    "from": 134,
+    "to": 267,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_BLACK",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_BLACK glyphs; glyph = offset 134 + glyph_index (see _fonts.glyph_index_table / mapping). black glyph (0x000000) with a 1px light drop shadow at +1,+1 (0xCEAD9C). Image includes the shadow column/row. Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   },
+   {
+    "from": 268,
+    "to": 401,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_WHITE",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_WHITE glyphs; glyph = offset 268 + glyph_index (see _fonts.glyph_index_table / mapping). white glyph (0xFFFFFF) with 1px dark-brown drop shadow at +1,+1 (0x311C10). Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   },
+   {
+    "from": 402,
+    "to": 535,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_RED",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_RED glyphs; glyph = offset 402 + glyph_index (see _fonts.glyph_index_table / mapping). dark red glyph (0x731408) with 1px light beige drop shadow at +1,+1 (0xE7CFAD). Used for hover/focus text. Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   },
+   {
+    "from": 536,
+    "to": 669,
+    "kind": "sprite",
+    "font": "FONT_LARGE_PLAIN",
+    "h": 28,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_LARGE_PLAIN glyphs; glyph = offset 536 + glyph_index (see _fonts.glyph_index_table / mapping). plain large: single opaque colour, recoloured to white by engine and tinted at draw time. Baseline at row 22, cap height ~17, descenders 5 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~5 rows with accent above. Widths: lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px, punctuation 4-7 px."
+   },
+   {
+    "from": 670,
+    "to": 803,
+    "kind": "sprite",
+    "font": "FONT_LARGE_BLACK",
+    "h": 28,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_LARGE_BLACK glyphs; glyph = offset 670 + glyph_index (see _fonts.glyph_index_table / mapping). large black glyph with 1px light drop shadow +1,+1 (0xCEAD9C). Used for window titles. Baseline at row 22, cap height ~17, descenders 5 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~5 rows with accent above. Widths: lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px, punctuation 4-7 px."
+   },
+   {
+    "from": 804,
+    "to": 937,
+    "kind": "sprite",
+    "font": "FONT_LARGE_BROWN",
+    "h": 29,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_LARGE_BROWN glyphs; glyph = offset 804 + glyph_index (see _fonts.glyph_index_table / mapping). large very dark brown glyph (0x180800), no shadow. Used for figure names. Baseline at row 23, cap height ~17, descenders 5 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~5 rows with accent above. Widths: lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px."
+   },
+   {
+    "from": 938,
+    "to": 1071,
+    "kind": "sprite",
+    "font": "FONT_SMALL_PLAIN",
+    "h": 11,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_SMALL_PLAIN glyphs; glyph = offset 938 + glyph_index (see _fonts.glyph_index_table / mapping). plain small: single opaque colour, recoloured white by engine and tinted at draw time. Baseline at row 8, cap height ~7, descenders 2 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~2 rows with accent above. Widths: lowercase 3-5 px, uppercase 4-6 px, digits 4-5 px."
+   },
+   {
+    "from": 1072,
+    "to": 1205,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_GREEN",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_GREEN glyphs; glyph = offset 1072 + glyph_index (see _fonts.glyph_index_table / mapping). dark (near-black 0x180800 per multibyte fallback; original look: dark green) glyph with 1px light beige drop shadow +1,+1 (0xE7CFAD). Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   },
+   {
+    "from": 1206,
+    "to": 1339,
+    "kind": "sprite",
+    "font": "FONT_NORMAL_BROWN",
+    "h": 14,
+    "w": "variable (= advance - letter_spacing)",
+    "desc": "FONT_NORMAL_BROWN glyphs; glyph = offset 1206 + glyph_index (see _fonts.glyph_index_table / mapping). very dark brown glyph (0x180800), no shadow. Baseline at row 10, cap height ~9, descenders 3 rows below baseline; accented capitals (glyphs 104-109, 111-125, 130, 131; NOT 100 which is shared by c-cedilla and is never shifted for byte 0xE7) taller by ~3 rows with accent above. Widths: lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px."
+   }
+  ],
+  "evidence": [
+   "src/graphics/font.c DEFINITIONS_DEFAULT (offsets 0..1206 step 134), CHAR_TO_FONT_IMAGE_DEFAULT (max value 0x86 => 134 glyphs)",
+   "src/graphics/font.c:599 font_letter_id = mapping[c] + image_offset - 1",
+   "src/core/image.c:1331 image_letter -> data.main[group_image_ids[GROUP_FONT] + letter_id]",
+   "src/core/image.c:579 make_plain_fonts_white",
+   "src/graphics/text.c:330-350 draw/advance rules"
+  ],
+  "notes": "See top-level _fonts for complete per-font metrics and byte->glyph mapping."
+ },
+ "GROUP_EMPIRE_MAP": {
+  "id": 47,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 2000,
+    "h": 1000,
+    "external": true,
+    "desc": "the Roman empire world map (Mediterranean, Europe, North Africa, Near East; sea blue, land green/ochre, mountains), drawn 1:1 and scrolled; Rome roughly centre. Also used blurred as full-screen background for mission selection/empire window margins. City coordinates in empire data are pixel positions on this image"
+   }
+  ],
+  "evidence": [
+   "src/empire/empire.c:20 EMPIRE_WIDTH 2000, EMPIRE_HEIGHT 1000",
+   "src/window/empire.c:561 image_draw(image_group(GROUP_EMPIRE_MAP)...)",
+   "src/window/empire.c:357 blurred fullscreen",
+   "src/window/mission_selection.c:62"
+  ],
+  "notes": "Editor file (c3map.sg2) uses its own GROUP_EDITOR_EMPIRE_MAP = 47 with the same size."
+ },
+ "GROUP_SIDEBAR_BRIEFING_ROTATE_BUTTONS": {
+  "id": 89,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "mission briefing (scroll/parchment icon); also drawn standalone in the custom-scenario selection window as minimap toggle button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "mission briefing (scroll/parchment icon); also drawn standalone in the custom-scenario selection window as minimap toggle button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "mission briefing (scroll/parchment icon); also drawn standalone in the custom-scenario selection window as minimap toggle button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map to north (compass 'N' icon) button - normal state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map to north (compass 'N' icon) button - hover/focused state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map to north (compass 'N' icon) button - pressed state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map counter-clockwise (curved arrow left) button - normal state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map counter-clockwise (curved arrow left) button - hover/focused state"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map counter-clockwise (curved arrow left) button - pressed state"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map clockwise (curved arrow right) button - normal state"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map clockwise (curved arrow right) button - hover/focused state"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 33,
+    "h": 22,
+    "desc": "rotate map clockwise (curved arrow right) button - pressed state"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:97-99 offsets 3,6,9 33x22",
+   "src/window/message_list.c:42 offset 0 33x22",
+   "src/widget/city.c:209,217 +6/+9 drawn clipped 37x24 in touch construction buttons",
+   "src/window/cck_selection.c:128 +0"
+  ],
+  "notes": "Always enabled; no disabled (+3) image needed. count 12."
+ },
+ "GROUP_MESSAGE_ICON": {
+  "id": 90,
+  "count": 26,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "collapse sidebar (arrow pointing right); offset 0 also drawn as 'paused' indicator on touch devices inside a 48x32 inset at (+10,+6) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "collapse sidebar (arrow pointing right); offset 0 also drawn as 'paused' indicator on touch devices inside a 48x32 inset at (+10,+6) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "collapse sidebar (arrow pointing right); offset 0 also drawn as 'paused' indicator on touch devices inside a 48x32 inset at (+10,+6) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "collapse sidebar (arrow pointing right); offset 0 also drawn as 'paused' indicator on touch devices inside a 48x32 inset at (+10,+6) button - disabled state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "expand sidebar (arrow pointing left), shown on the collapsed sidebar at (6,4) button - normal state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "expand sidebar (arrow pointing left), shown on the collapsed sidebar at (6,4) button - hover/focused state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "expand sidebar (arrow pointing left), shown on the collapsed sidebar at (6,4) button - pressed state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "expand sidebar (arrow pointing left), shown on the collapsed sidebar at (6,4) button - disabled state"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "back/return (curved arrow) used in message dialog, mission briefing, new career, console button - normal state"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "back/return (curved arrow) used in message dialog, mission briefing, new career, console button - hover/focused state"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "back/return (curved arrow) used in message dialog, mission briefing, new career, console button - pressed state"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "back/return (curved arrow) used in message dialog, mission briefing, new career, console button - disabled state"
+   },
+   {
+    "from": 12,
+    "to": 13,
+    "kind": "opaque",
+    "w": 31,
+    "h": 20,
+    "desc": "unused by code (filler)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "sprite",
+    "w": 24,
+    "h": 14,
+    "desc": "message list icon: UNREAD normal message (closed sealed scroll/letter)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "sprite",
+    "w": 24,
+    "h": 14,
+    "desc": "message list icon: READ normal message (open scroll)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "sprite",
+    "w": 24,
+    "h": 14,
+    "desc": "message list icon: UNREAD disaster message (red sealed scroll)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "sprite",
+    "w": 24,
+    "h": 14,
+    "desc": "message list icon: READ disaster message (red open scroll)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'messages' (scroll with number - message count is drawn on top in FONT_SMALL_PLAIN at x+74..106,y=452) button - normal state"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'messages' (scroll with number - message count is drawn on top in FONT_SMALL_PLAIN at x+74..106,y=452) button - hover/focused state"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'messages' (scroll with number - message count is drawn on top in FONT_SMALL_PLAIN at x+74..106,y=452) button - pressed state"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'messages' (scroll with number - message count is drawn on top in FONT_SMALL_PLAIN at x+74..106,y=452) button - disabled state"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'go to problem' (eye/exclamation icon) button - normal state"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'go to problem' (eye/exclamation icon) button - hover/focused state"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'go to problem' (eye/exclamation icon) button - pressed state"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar 'go to problem' (eye/exclamation icon) button - disabled state"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:52,57 raw group 90 offsets 0/4 31x20",
+   "src/window/message_dialog.c:46 offset 8 31x20",
+   "src/window/message_list.c:145-148 +14/+15 (+2 disaster)",
+   "src/widget/sidebar/city.c:89-90 offsets 18/22 39x26, enabled toggled (138-139) -> disabled +3 used",
+   "src/widget/city.c:169"
+  ]
+ },
+ "GROUP_93_SIDEBAR_OVERLAY_BUTTON": {
+  "id": 93,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 117,
+    "h": 31,
+    "desc": "sidebar top 'overlay selection' / military 'legion menu' wide button (carved plaque; overlay name drawn on it in FONT_NORMAL_GREEN, centred, at y=32) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 117,
+    "h": 31,
+    "desc": "sidebar top 'overlay selection' / military 'legion menu' wide button (carved plaque; overlay name drawn on it in FONT_NORMAL_GREEN, centred, at y=32) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 117,
+    "h": 31,
+    "desc": "sidebar top 'overlay selection' / military 'legion menu' wide button (carved plaque; overlay name drawn on it in FONT_NORMAL_GREEN, centred, at y=32) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 117,
+    "h": 31,
+    "desc": "sidebar top 'overlay selection' / military 'legion menu' wide button (carved plaque; overlay name drawn on it in FONT_NORMAL_GREEN, centred, at y=32) button - disabled state"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:53 {4,3,117,31,IB_NORMAL,93,0,...} (raw group number, not in image_group.h enum)",
+   "src/widget/sidebar/military.c:101 same"
+  ],
+  "notes": "Group id 93 is not named in image_group.h but is used by number. Always enabled -> offset 3 never used; included for safety."
+ },
+ "GROUP_SIDEBAR_BUTTONS": {
+  "id": 92,
+  "count": 60,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build housing (small house) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build housing (small house) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build housing (small house) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build housing (small house) button - disabled state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build water (aqueduct/fountain) button - normal state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build water (aqueduct/fountain) button - hover/focused state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build water (aqueduct/fountain) button - pressed state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build water (aqueduct/fountain) button - disabled state"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: clear land (shovel) button - normal state"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: clear land (shovel) button - hover/focused state"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: clear land (shovel) button - pressed state"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: clear land (shovel) button - disabled state"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build roads button - normal state"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build roads button - hover/focused state"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build roads button - pressed state"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: build roads button - disabled state"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: administration/government (forum/coins) button - normal state"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: administration/government (forum/coins) button - hover/focused state"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: administration/government (forum/coins) button - pressed state"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: administration/government (forum/coins) button - disabled state"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: entertainment (theatre mask) button - normal state"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: entertainment (theatre mask) button - hover/focused state"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: entertainment (theatre mask) button - pressed state"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: entertainment (theatre mask) button - disabled state"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: education (scroll/book) button - normal state"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: education (scroll/book) button - hover/focused state"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: education (scroll/book) button - pressed state"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: education (scroll/book) button - disabled state"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: religion/temples (temple) button - normal state"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: religion/temples (temple) button - hover/focused state"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: religion/temples (temple) button - pressed state"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: religion/temples (temple) button - disabled state"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: industry/commerce (amphora/hammer) button - normal state"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: industry/commerce (amphora/hammer) button - hover/focused state"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: industry/commerce (amphora/hammer) button - pressed state"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: industry/commerce (amphora/hammer) button - disabled state"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: security (sword/shield) button - normal state"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: security (sword/shield) button - hover/focused state"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: security (sword/shield) button - pressed state"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: security (sword/shield) button - disabled state"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: health (snake staff / bath) button - normal state"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: health (snake staff / bath) button - hover/focused state"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: health (snake staff / bath) button - pressed state"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: health (snake staff / bath) button - disabled state"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: engineering (crane) button - normal state"
+   },
+   {
+    "from": 45,
+    "to": 45,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: engineering (crane) button - hover/focused state"
+   },
+   {
+    "from": 46,
+    "to": 46,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: engineering (crane) button - pressed state"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: engineering (crane) button - disabled state"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: undo (curved arrow) button - normal state"
+   },
+   {
+    "from": 49,
+    "to": 49,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: undo (curved arrow) button - hover/focused state"
+   },
+   {
+    "from": 50,
+    "to": 50,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: undo (curved arrow) button - pressed state"
+   },
+   {
+    "from": 51,
+    "to": 51,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "sidebar build menu button: undo (curved arrow) button - disabled state"
+   },
+   {
+    "from": 52,
+    "to": 52,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'go to location/problem' button (eye) used in message dialogs button - normal state"
+   },
+   {
+    "from": 53,
+    "to": 53,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'go to location/problem' button (eye) used in message dialogs button - hover/focused state"
+   },
+   {
+    "from": 54,
+    "to": 54,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'go to location/problem' button (eye) used in message dialogs button - pressed state"
+   },
+   {
+    "from": 55,
+    "to": 55,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'go to location/problem' button (eye) used in message dialogs button - disabled state"
+   },
+   {
+    "from": 56,
+    "to": 56,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'start/proceed' button (green check / forward arrow) used for start mission, new career OK, console send button - normal state"
+   },
+   {
+    "from": 57,
+    "to": 57,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'start/proceed' button (green check / forward arrow) used for start mission, new career OK, console send button - hover/focused state"
+   },
+   {
+    "from": 58,
+    "to": 58,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'start/proceed' button (green check / forward arrow) used for start mission, new career OK, console send button - pressed state"
+   },
+   {
+    "from": 59,
+    "to": 59,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small square 'start/proceed' button (green check / forward arrow) used for start mission, new career OK, console send button - disabled state"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/city.c:61-88 offsets 0..48 step 4 39x26, IB_BUILD, disabled (+3) when no buildings available (city.c:193-200) and undo (city.c:154)",
+   "src/window/message_dialog.c:52 offset 52 27x27",
+   "src/window/mission_selection.c:46, new_career.c:28, cck_selection.c:41, console.c:22, mission_briefing.c:34 offset 56 27x27"
+  ],
+  "notes": "Order of the 4 states: normal, hover, pressed, disabled (greyed)."
+ },
+ "GROUP_LABOR_PRIORITY_LOCK": {
+  "id": 94,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "small padlock icon (bronze) shown before a labour category priority number in the labor advisor rows (22px tall rows)"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/labor.c:87 image_draw(image_group(GROUP_LABOR_PRIORITY_LOCK), 70, y_offset-2)"
+  ]
+ },
+ "GROUP_PANEL_WINDOWS": {
+  "id": 95,
+  "count": 26,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: housing (houses). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: temples. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: administration/forum. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: water (aqueduct, fountain) - temperate. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: entertainment (theatre). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: health (doctor/bath). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: education (school). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: engineering (engineer post/crane). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: security (prefecture/fort) - temperate. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: industry (farms/workshops). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: roads - temperate. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: clear land - temperate. Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "sidebar build-menu picture window: no building selected (idle picture: landscape). Drawn at sidebar (x+6, y=239) above the build buttons"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 640,
+    "h": 48,
+    "desc": "advisor window bottom bar: drawn at (0,432) of the 640x480 advisor dialog; 14 advisor buttons (40x40) are drawn on it at x=8+45*i, y=441. Dark carved wood/stone strip"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 416,
+    "h": 210,
+    "desc": "population advisor big graph backdrop (parchment/grid), drawn at (62,60); graph bars occupy (70..470, 64..264), y-axis labels left of x=70"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 120,
+    "h": 88,
+    "desc": "religion advisor festival picture (festival / crowd at a temple), drawn at (460,305) inside an inner panel"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, small/unselected: Ceres (harvest, wheat); hold-festival dialog at (70+100*god, 96)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, small/unselected: Neptune (sea, trident); hold-festival dialog at (70+100*god, 96)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, small/unselected: Mercury (commerce, winged helmet); hold-festival dialog at (70+100*god, 96)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, small/unselected: Mars (war, armour); hold-festival dialog at (70+100*god, 96)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, small/unselected: Venus (love, roses); hold-festival dialog at (70+100*god, 96)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, selected/highlighted: Ceres (harvest, wheat); also shown in temple building info window at (+180,+45) or (+16,+45)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, selected/highlighted: Neptune (sea, trident); also shown in temple building info window at (+180,+45) or (+16,+45)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, selected/highlighted: Mercury (commerce, winged helmet); also shown in temple building info window at (+180,+45) or (+16,+45)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, selected/highlighted: Mars (war, armour); also shown in temple building info window at (+180,+45) or (+16,+45)"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 82,
+    "h": 92,
+    "desc": "god portrait, selected/highlighted: Venus (love, roses); also shown in temple building info window at (+180,+45) or (+16,+45)"
+   }
+  ],
+  "evidence": [
+   "src/window/build_menu.c:107-162 image_base+0..12",
+   "src/widget/sidebar/city.c:174 image_draw(window_build_menu_image(), x_offset + 6, 239)",
+   "src/window/advisors.c:188 +13 at (0,432)",
+   "src/window/advisor/population.c:393 +14 at (62,60)",
+   "src/window/advisor/religion.c:109 +15 at (460,305)",
+   "src/window/hold_festival.c:99-101 +16+god/+21+god, border 90x100 at (66+100*god,92)",
+   "src/window/building/culture.c:299-350, 360-400 draw_temple_info(c, 21..25)"
+  ],
+  "notes": "Desert climate replaces 11,10,3,8 with GROUP_PANEL_WINDOWS_DESERT 0..3."
+ },
+ "GROUP_OK_CANCEL_SCROLL_BUTTONS": {
+  "id": 96,
+  "count": 16,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "OK (green check mark) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "OK (green check mark) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "OK (green check mark) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "OK (green check mark) button - disabled state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "cancel/close (red X) button - normal state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "cancel/close (red X) button - hover/focused state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "cancel/close (red X) button - pressed state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "cancel/close (red X) button - disabled state"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll up (arrow up) button - normal state"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll up (arrow up) button - hover/focused state"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll up (arrow up) button - pressed state"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll up (arrow up) button - disabled state"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll down (arrow down) button - normal state"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll down (arrow down) button - hover/focused state"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll down (arrow down) button - pressed state"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "scroll down (arrow down) button - disabled state"
+   }
+  ],
+  "evidence": [
+   "src/window/popup_dialog.c:29-30, file_dialog.c:61-62 offsets 0/4 39x26",
+   "src/graphics/scrollbar.c:23-29 offsets 8/12, SCROLL_BUTTON 39x26",
+   "src/widget/city.c:194 +4 clipped to 37x24",
+   "src/window/editor/map.c:38 +4"
+  ],
+  "notes": "All uses are enabled; disabled (+3) variants never drawn but filled for completeness."
+ },
+ "GROUP_ADVISOR_ICONS": {
+  "id": 128,
+  "count": 26,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: labor (workers/hammer). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: military (helmet/sword). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: imperial (eagle/laurel). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: ratings (column/laurel). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: trade (ship/amphora). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: population (people). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: health (snake staff). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: education (scroll). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: entertainment (mask). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: religion (temple). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: financial (coins). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: chief advisor (bust). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, normal: return to city (arrow/exit). Also drawn at (10,10) as the title icon of the advisor window"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: labor (workers/hammer)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: military (helmet/sword)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: imperial (eagle/laurel)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: ratings (column/laurel)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: trade (ship/amphora)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: population (people)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: health (snake staff)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: education (scroll)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: entertainment (mask)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: religion (temple)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: financial (coins)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: chief advisor (bust)"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "advisor selector button, selected/pressed: return to city (arrow/exit)"
+   }
+  ],
+  "evidence": [
+   "src/window/advisors.c:166-181 offsets i (skip housing) and +13 selected, buttons 40x40 at 45*i+8, 441",
+   "src/window/advisor/*.c +0..+11 at (10,10)",
+   "assets ui.xml: Adv_B_Blank_UH = group 128 image 9 (40x40), Adv_B_Blank_H = image 22; Housing Advisor Button layered on 128/9 and 128/22"
+  ],
+  "notes": "Housing advisor button comes from Augustus assets, built on top of images 9 and 22 (religion) - so those must be clean 40x40 buttons whose icon area will be overpainted."
+ },
+ "GROUP_RESOURCE_ICONS": {
+  "id": 129,
+  "count": 18,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: none (unused)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: wheat"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: vegetables"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: fruit"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: olives"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: vines (grapes)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: meat"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: wine (amphora)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: oil (jar)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: iron (ore)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: timber (logs)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: clay"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: marble (block)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: weapons (sword/shield)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: furniture (chair)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: pottery (vase)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: denarii (gold coins)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "resource icon: fish"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:170-184 image_group(GROUP_RESOURCE_ICONS)+i for legacy index i=1..15 (mapping: resource_mappings[0])",
+   "src/game/resource.c:195 fish +17, :251 denarii +16",
+   "assets ui.xml: 'Grand Festival Wine Disabled' = group 129 image 7 greyscale (7 = wine)"
+  ],
+  "notes": "Legacy order (index): 1 wheat,2 vegetables,3 fruit,4 olives,5 vines,6 meat,7 wine,8 oil,9 iron,10 timber,11 clay,12 marble,13 weapons,14 furniture,15 pottery,16 denarii,17 fish. Offset 0 is never drawn."
+ },
+ "GROUP_DIALOG_BACKGROUND": {
+  "id": 132,
+  "count": 144,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer (raised) panel: top-left corner"
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: top edge, 10 variants used cyclically left->right (index 1+x%10); must tile horizontally"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: top-right corner"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 0 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 13,
+    "to": 22,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 0, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 0"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 1 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 25,
+    "to": 34,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 1, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 1"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 2 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 37,
+    "to": 46,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 2, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 2"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 3 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 49,
+    "to": 58,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 3, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 59,
+    "to": 59,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 3"
+   },
+   {
+    "from": 60,
+    "to": 60,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 4 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 61,
+    "to": 70,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 4, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 71,
+    "to": 71,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 4"
+   },
+   {
+    "from": 72,
+    "to": 72,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 5 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 73,
+    "to": 82,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 5, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 83,
+    "to": 83,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 5"
+   },
+   {
+    "from": 84,
+    "to": 84,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 6 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 85,
+    "to": 94,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 6, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 95,
+    "to": 95,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 6"
+   },
+   {
+    "from": 96,
+    "to": 96,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 7 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 97,
+    "to": 106,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 7, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 107,
+    "to": 107,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 7"
+   },
+   {
+    "from": 108,
+    "to": 108,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 8 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 109,
+    "to": 118,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 8, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 119,
+    "to": 119,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 8"
+   },
+   {
+    "from": 120,
+    "to": 120,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: left edge, row variant 9 (rows cycle every 10 blocks)"
+   },
+   {
+    "from": 121,
+    "to": 130,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: interior fill row 9, 10 columns (fill index 13+12*row+col, row=y%10, col=x%10): a seamless 160x160 parchment/stone texture cut into 16x16 tiles"
+   },
+   {
+    "from": 131,
+    "to": 131,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: right edge, row variant 9"
+   },
+   {
+    "from": 132,
+    "to": 132,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: bottom-left corner"
+   },
+   {
+    "from": 133,
+    "to": 142,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: bottom edge, 10 variants cycling"
+   },
+   {
+    "from": 143,
+    "to": 143,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "outer panel: bottom-right corner"
+   }
+  ],
+  "evidence": [
+   "src/graphics/panel.c:5-51 outer_panel_draw: top 0,1+x,11; middle 12+y, 13+y+x, 23+y (y += 12, wraps at 120 => 10 rows); bottom 132,133+x,143; x wraps at 10",
+   "src/graphics/panel.c:54-73 unbordered_panel_draw uses fill 13+y+x"
+  ],
+  "notes": "The main window background of every dialog (light beige parchment/marble with a carved border). Interior tiles must form a seamless 160x160 texture; edges seamless along their run."
+ },
+ "GROUP_SUNKEN_TEXTBOX_BACKGROUND": {
+  "id": 133,
+  "count": 49,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner (sunken) panel: top-left corner (dark shadow top/left)"
+   },
+   {
+    "from": 1,
+    "to": 5,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: top edge, 5 variants cycling (1+x%5)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: top-right corner"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: left edge row variant 0"
+   },
+   {
+    "from": 8,
+    "to": 12,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: interior fill row 0, 5 columns (seamless 80x80 dark texture, e.g. dark brown/grey stone) - white/green text is drawn on it"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: right edge row variant 0"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: left edge row variant 1"
+   },
+   {
+    "from": 15,
+    "to": 19,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: interior fill row 1, 5 columns (seamless 80x80 dark texture, e.g. dark brown/grey stone) - white/green text is drawn on it"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: right edge row variant 1"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: left edge row variant 2"
+   },
+   {
+    "from": 22,
+    "to": 26,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: interior fill row 2, 5 columns (seamless 80x80 dark texture, e.g. dark brown/grey stone) - white/green text is drawn on it"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: right edge row variant 2"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: left edge row variant 3"
+   },
+   {
+    "from": 29,
+    "to": 33,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: interior fill row 3, 5 columns (seamless 80x80 dark texture, e.g. dark brown/grey stone) - white/green text is drawn on it"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: right edge row variant 3"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: left edge row variant 4"
+   },
+   {
+    "from": 36,
+    "to": 40,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: interior fill row 4, 5 columns (seamless 80x80 dark texture, e.g. dark brown/grey stone) - white/green text is drawn on it"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: right edge row variant 4"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: bottom-left corner"
+   },
+   {
+    "from": 43,
+    "to": 47,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: bottom edge, 5 variants cycling"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "inner panel: bottom-right corner (light highlight bottom/right)"
+   }
+  ],
+  "evidence": [
+   "src/graphics/panel.c:74-119 inner_panel_draw: top 0,1+x,6; middle 7+y,8+y+x,13+y (y += 7, wraps at 35 => 5 rows); bottom 42,43+x,48; x wraps at 5"
+  ]
+ },
+ "GROUP_CONTEXT_ICONS": {
+  "id": 134,
+  "count": 16,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "help (question mark '?') button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "help (question mark '?') button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "help (question mark '?') button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "help (question mark '?') button - disabled state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "close/exit (X) small square button - normal state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "close/exit (X) small square button - hover/focused state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "close/exit (X) small square button - pressed state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "close/exit (X) small square button - disabled state"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "unused by code (filler) small icons"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "sprite",
+    "w": 20,
+    "h": 16,
+    "desc": "'getting goods' icon (arrow into storage/cart) shown left of text in warehouse/granary info; its width+15 is used for centring"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "house population icon for large houses (villa/palace: patrician figure)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "people/worker icon (plebeian figure) used for employment line and small-house population"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "sprite",
+    "w": 26,
+    "h": 16,
+    "desc": "small ornament shown at both ends of city warning labels (laurel/scroll end), drawn at label x+2 and x+w-30"
+   }
+  ],
+  "evidence": [
+   "src/window/building_info.c:58-59 help 27x27 offset 0, close 24x24 offset 4",
+   "src/window/message_dialog.c:49,55",
+   "src/window/empire.c:62,65",
+   "src/window/building/distribution.c:782-792 +12",
+   "src/window/building/house.c:46-51 +13/+14",
+   "src/window/building/common.c:120 +14",
+   "src/graphics/warning.c:48-50 +15",
+   "src/window/asset_previewer.c:403-405 +15"
+  ]
+ },
+ "GROUP_ADVISOR_BACKGROUND": {
+  "id": 136,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "full-screen backdrop behind the 640x480 advisor dialogs (Roman office/senate interior), scaled to cover the screen"
+   }
+  ],
+  "evidence": [
+   "src/window/advisors.c:186 image_draw_fullscreen_background(image_group(GROUP_ADVISOR_BACKGROUND))"
+  ]
+ },
+ "GROUP_EDITOR_SIDEBAR_BUTTONS": {
+  "id": 137,
+  "count": 54,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'grass' - normal"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'grass' - hover"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'grass' - pressed"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'trees' - normal"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'trees' - hover"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'trees' - pressed"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'water' - normal"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'water' - hover"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'water' - pressed"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'earthquake point' - normal"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'earthquake point' - hover"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'earthquake point' - pressed"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'shrub' - normal"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'shrub' - hover"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'shrub' - pressed"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'rocks' - normal"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'rocks' - hover"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'rocks' - pressed"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'meadow' - normal"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'meadow' - hover"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'meadow' - pressed"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'elevation (menu)' - normal"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'elevation (menu)' - hover"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'elevation (menu)' - pressed"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'brush size (menu)' - normal"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'brush size (menu)' - hover"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'brush size (menu)' - pressed"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'native buildings (menu)' - normal"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'native buildings (menu)' - hover"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'native buildings (menu)' - pressed"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'road' - normal"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'road' - hover"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'road' - pressed"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'river entry/exit points (menu)' - normal"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'river entry/exit points (menu)' - hover"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'river entry/exit points (menu)' - pressed"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'unused tool slot' - normal"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'unused tool slot' - hover"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'unused tool slot' - pressed"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'invasion points (menu)' - normal"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'invasion points (menu)' - hover"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'invasion points (menu)' - pressed"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'people entry/exit points (menu)' - normal"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'people entry/exit points (menu)' - hover"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'people entry/exit points (menu)' - pressed"
+   },
+   {
+    "from": 45,
+    "to": 45,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'scenario attributes' wide button - normal"
+   },
+   {
+    "from": 46,
+    "to": 46,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'scenario attributes' wide button - hover"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'scenario attributes' wide button - pressed"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'requests/events' (second attributes) wide button - normal"
+   },
+   {
+    "from": 49,
+    "to": 49,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'requests/events' (second attributes) wide button - hover"
+   },
+   {
+    "from": 50,
+    "to": 50,
+    "kind": "opaque",
+    "w": 71,
+    "h": 23,
+    "desc": "editor sidebar 'requests/events' (second attributes) wide button - pressed"
+   },
+   {
+    "from": 51,
+    "to": 51,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'animal/herd points (menu)' - normal"
+   },
+   {
+    "from": 52,
+    "to": 52,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'animal/herd points (menu)' - hover"
+   },
+   {
+    "from": 53,
+    "to": 53,
+    "kind": "opaque",
+    "w": 39,
+    "h": 26,
+    "desc": "editor sidebar tool button 'animal/herd points (menu)' - pressed"
+   }
+  ],
+  "evidence": [
+   "src/widget/sidebar/editor.c:32-48 offsets 0..51 step 3 (3 states, never disabled), 45/48 are 71x23"
+  ],
+  "notes": "IMPORTANT: used only while the map editor is running, i.e. this group lives in the EDITOR graphics file (c3map.sg2 / c3map_north / c3map_south), not in c3.sg2. Editor buttons have 3 images each (IB_BUILD state 'disabled' never set)."
+ },
+ "GROUP_POPULATION_GRAPH_BAR": {
+  "id": 157,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 18,
+    "h": 200,
+    "desc": "population graph bar for 20 columns (drawn every 20px, top at value, clipped at graph bottom): vertical bar, red/orange with darker edge"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 9,
+    "h": 200,
+    "desc": "population graph bar for 40 columns (every 10px)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 3,
+    "h": 200,
+    "desc": "population graph bar for 100 columns (every 4px); also used by small census/society graphs"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 2,
+    "h": 200,
+    "desc": "population graph bar for 200 columns (every 2px)"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/population.c:134-146, 202, 248 x + 20/10/4/2*m, y + 200 - val, clipped to y+200"
+  ],
+  "notes": "Bars are drawn with top at (y+200-val) and rely on clipping at y+200, so height must be >= 200."
+ },
+ "GROUP_BULLET": {
+  "id": 158,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 10,
+    "h": 10,
+    "desc": "small bullet point (bronze dot/diamond) used in chief/military/population advisors and overlay menu"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/chief.c:29,104",
+   "src/window/advisor/military.c:120-138",
+   "src/window/advisor/population.c:472",
+   "src/window/overlay_menu.c:113"
+  ]
+ },
+ "GROUP_MESSAGE_IMAGES": {
+  "id": 159,
+  "count": 50,
+  "entries": [
+   {
+    "from": 0,
+    "to": 46,
+    "kind": "opaque",
+    "w": 160,
+    "h": 120,
+    "desc": "message dialog illustrations; image for message = group + lang_message.image.id - 1 (ids come from the message text file c3_mm.*) and rich-text '@G<n>' tags. Varied scenes: fire, collapse, riot, emperor, ships, farms, gods, invaders, festival..."
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "opaque",
+    "w": 160,
+    "h": 120,
+    "desc": "message illustration #48: games/chariot race scene; Augustus' ui.xml crops 126x88 out of it at offset (11,9) for the 'Hold Games' banner in the entertainment advisor"
+   },
+   {
+    "from": 48,
+    "to": 49,
+    "kind": "opaque",
+    "w": 160,
+    "h": 120,
+    "desc": "spare message illustrations"
+   }
+  ],
+  "evidence": [
+   "src/window/message_dialog.c:388 image_group(GROUP_MESSAGE_IMAGES) + msg->image.id - 1",
+   "src/graphics/rich_text.c:331",
+   "assets ui.xml 'HoldGames Banner' group=159 image=47 x=-11 y=-9 (126x88)"
+  ],
+  "notes": "Count depends on the image ids referenced by the message file (c3_mm.eng) we generate; 50 is a guess - raise if the message file references higher ids. image.id 0 means no image."
+ },
+ "GROUP_WIN_GAME_BACKGROUND": {
+  "id": 160,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 64,
+    "h": 48,
+    "desc": "unused by Augustus code (placeholder): victory background"
+   }
+  ],
+  "evidence": [
+   "defined in src/core/image_group.h only"
+  ]
+ },
+ "GROUP_CONFIG": {
+  "id": 161,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 32,
+    "h": 32,
+    "desc": "unused by Augustus code (placeholder)"
+   }
+  ],
+  "evidence": [
+   "defined in src/core/image_group.h only"
+  ]
+ },
+ "GROUP_LOGO": {
+  "id": 162,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 640,
+    "h": 480,
+    "external": true,
+    "desc": "startup logo/splash screen (game title art) drawn at (0,0) of the 640x480 dialog; a 'click to continue' line is drawn at y=462 in white"
+   }
+  ],
+  "evidence": [
+   "src/window/logo.c:23 image_draw(image_group(GROUP_LOGO), 0, 0) inside graphics_in_dialog (640x480)"
+  ]
+ },
+ "GROUP_EMPIRE_PANELS": {
+  "id": 172,
+  "count": 9,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 16,
+    "h": 86,
+    "desc": "empire window/fullscreen frame: VERTICAL border bar segment (repeated every 86px down the left and right edges)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 86,
+    "h": 16,
+    "desc": "empire window/fullscreen frame: HORIZONTAL border bar segment (repeated every 86px along top, bottom and above the info panel)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "frame crossing/corner piece (bronze rivet square)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 70,
+    "h": 40,
+    "desc": "empire window bottom info panel background tile (stone/wood), repeated every 70px horizontally in 3 rows (y_max-120, -80, -40)"
+   },
+   {
+    "from": 4,
+    "to": 5,
+    "kind": "opaque",
+    "w": 16,
+    "h": 16,
+    "desc": "unused by code (filler)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "sprite",
+    "w": 82,
+    "h": 100,
+    "desc": "decorative ornament at the left above the bottom panel (e.g. eagle/standard), drawn at (x_min+2, y_max-199)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 82,
+    "h": 100,
+    "desc": "decorative ornament at the right (mirror of 6), drawn at (x_max-84, y_max-199)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "sprite",
+    "w": 332,
+    "h": 90,
+    "desc": "city-name banner/plaque centred above the bottom panel, drawn at ((x_min+x_max-332)/2, y_max-181); selected city name drawn on it at x+64..x+332, y_max-118 in FONT_LARGE_BLACK"
+   }
+  ],
+  "evidence": [
+   "src/window/empire.c:104-136 draw_paneling (+0 vertical step 86, +1 horizontal step 86, +2 crossbars, +3 bg step 70 x 40)",
+   "src/window/empire.c:570-575 draw_city_name +6,+7,+8",
+   "src/graphics/image.c:124-147 draw_fullscreen_borders +0,+1,+2"
+  ],
+  "notes": "Frame pieces are also drawn around every full-screen background (main menu, advisors, intermezzo...)."
+ },
+ "GROUP_EMPIRE_RESOURCES": {
+  "id": 173,
+  "count": 18,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: none (unused) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: wheat (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: vegetables (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: fruit (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: olives (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: vines (grapes) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: meat (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: wine (amphora) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: oil (jar) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: iron (ore) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: timber (logs) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: clay (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: marble (block) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: weapons (sword/shield) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: furniture (chair) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: pottery (vase) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: denarii (gold coins) (drawn inside a 26x26 inset at +1,+1)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 24,
+    "h": 24,
+    "desc": "empire trade resource icon: fish (drawn inside a 26x26 inset at +1,+1)"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:183 image_group(GROUP_EMPIRE_RESOURCES)+i (legacy order), :196 fish +17",
+   "src/window/empire.c:140-144 inset 26x26, image at +1,+1"
+  ],
+  "notes": "Same legacy order as GROUP_RESOURCE_ICONS. Offset 0 and 16 never drawn."
+ },
+ "GROUP_EMPIRE_CITY": {
+  "id": 174,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "empire map icon: OUR (player's) city - small walled town with red roof and Roman flag; objects are centred by width/height and trade routes attach at +25,+25"
+   }
+  ],
+  "evidence": [
+   "src/empire/xml.c:303",
+   "src/empire/object.c:24-48 fix_image_ids uses image_group(GROUP_EMPIRE_CITY) as anchor for ALL empire object image ids"
+  ],
+  "notes": "Anchor group for empire map object ids - see _absolute_ids."
+ },
+ "GROUP_EMPIRE_CITY_TRADE": {
+  "id": 175,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "empire map icon: Roman TRADE city (town with trade flag, e.g. gold/blue banner)"
+   }
+  ],
+  "evidence": [
+   "src/window/empire.c:502",
+   "src/empire/object.c:487",
+   "src/empire/xml.c:284,317"
+  ]
+ },
+ "GROUP_EMPIRE_CITY_DISTANT_ROMAN": {
+  "id": 176,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "empire map icon: distant Roman city (non-trading, red/purple Roman flag)"
+   }
+  ],
+  "evidence": [
+   "src/empire/object.c:489",
+   "src/empire/xml.c:307,313"
+  ]
+ },
+ "GROUP_EMPIRE_BATTLE": {
+  "id": 177,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 30,
+    "h": 30,
+    "desc": "empire map icon: battle / invasion marker (crossed swords, red)"
+   }
+  ],
+  "evidence": [
+   "src/empire/xml.c:476",
+   "src/scenario/invasion.c:132 (invasion warnings copy the image id)"
+  ]
+ },
+ "GROUP_EMPIRE_ROMAN_ARMY": {
+  "id": 178,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 30,
+    "h": 30,
+    "desc": "empire map icon: marching Roman legion (red standard/soldiers) for distant battles"
+   }
+  ],
+  "evidence": [
+   "src/empire/xml.c:586,611 image_group(GROUP_EMPIRE_ROMAN_ARMY)"
+  ],
+  "notes": "Optional: may carry animation metadata (window/empire.c:531-537 animates any empire object image with animation->speed_id; frames would follow at +1..+n)."
+ },
+ "GROUP_EMPIRE_TRADE_ROUTE_TYPE": {
+  "id": 179,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 32,
+    "h": 22,
+    "desc": "SEA trade route symbol (small ship), used in empire city info, trade advisor sea-policy button (drawn at 99,394 inside a 40x30 border) and trade prices list. Augustus ui.xml makes a greyscale copy"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 28,
+    "h": 22,
+    "desc": "LAND trade route symbol (camel/donkey caravan), drawn at (51,394) inside a 40x30 border in the trade advisor. Augustus ui.xml makes a greyscale copy"
+   }
+  ],
+  "evidence": [
+   "src/window/empire.c:258 +1 - is_sea_trade",
+   "src/window/advisor/trade.c:208,217",
+   "src/window/trade_prices.c:165,170",
+   "src/empire/xml.c:345,347",
+   "assets ui.xml group=179 image=0/1 mask=grayscale"
+  ]
+ },
+ "GROUP_EMPIRE_TRADE_LAND": {
+  "id": 181,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 6,
+    "kind": "sprite",
+    "w": 5,
+    "h": 5,
+    "desc": "land trade route dot/segment marks (brown/red dots) - only referenced by original empire data; paint small dots"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 5,
+    "h": 5,
+    "desc": "land trade route dot: Augustus ui.xml 'LandRouteDot' copies a 5x5 area from (0,0) of this image; used to draw open land routes every 10px. Small round dark-red/brown dot"
+   }
+  ],
+  "evidence": [
+   "assets ui.xml LandRouteDot (5x5) layer group=181 image=7",
+   "src/window/empire.c:394-396 assets_get_image_id(\"UI\",\"LandRouteDot\")"
+  ],
+  "notes": "Not referenced by C code directly; count 8 so that offset 7 exists."
+ },
+ "GROUP_EMPIRE_TRADE_SEA": {
+  "id": 182,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 6,
+    "kind": "sprite",
+    "w": 5,
+    "h": 5,
+    "desc": "sea trade route dot marks (blue/white dots) - only referenced by original empire data"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 5,
+    "h": 5,
+    "desc": "sea trade route dot: Augustus ui.xml 'SeaRouteDot' copies 5x5 from (0,0) of this image. Small round dark-blue/white dot"
+   }
+  ],
+  "evidence": [
+   "assets ui.xml SeaRouteDot (5x5) layer group=182 image=7"
+  ],
+  "notes": "Not referenced by C code directly; count 8 so that offset 7 exists."
+ },
+ "GROUP_EMPIRE_FOREIGN_CITY": {
+  "id": 223,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "empire map icon: foreign / barbarian / future-Roman city (huts or tents, no Roman flag)"
+   }
+  ],
+  "evidence": [
+   "src/window/empire.c:498",
+   "src/empire/xml.c:310",
+   "src/window/editor/empire.c:559"
+  ]
+ },
+ "GROUP_EMPIRE_ENEMY_ARMY": {
+  "id": 224,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 30,
+    "h": 30,
+    "desc": "empire map icon: marching enemy army (dark/black banner) for distant battles"
+   }
+  ],
+  "evidence": [
+   "src/empire/xml.c:589,611"
+  ],
+  "notes": "Optional animation as for GROUP_EMPIRE_ROMAN_ARMY."
+ },
+ "GROUP_RATINGS_COLUMN": {
+  "id": 189,
+  "count": 3,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 54,
+    "h": 20,
+    "desc": "ratings advisor column BASE/pedestal (drawn with its bottom at y=274; its height is read via image_get()->height)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 32,
+    "h": 1,
+    "desc": "column SHAFT slice, 1px tall, drawn 2*value times stacked upward at base_x+11 (white marble with fluting shading)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 66,
+    "h": 26,
+    "desc": "column CAPITAL / laurel crown, drawn at base_x-6 on top of the shaft when the goal is reached"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/ratings.c:29-45 draw_rating_column"
+  ],
+  "notes": "Widths must satisfy: shaft centred on base (base_w = shaft_w + 22) and capital centred (capital_w = base_w + 12)."
+ },
+ "GROUP_BIG_PEOPLE": {
+  "id": 190,
+  "count": 63,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 55,
+    "h": 79,
+    "desc": "portrait #1 (FIGURE_TYPE_TO_BIG_FIGURE_IMAGE value 1); also used as the 'About' message image"
+   },
+   {
+    "from": 1,
+    "to": 57,
+    "kind": "opaque",
+    "w": 55,
+    "h": 79,
+    "desc": "figure portraits #2..#58 shown in the building/figure info window at (+28,+112): one per walker type (prefect, engineer, priest, market lady, actors, gladiator, lion tamer, charioteer, legionaries, enemies of each nation, traders, ships, animals...). index = value-1 where value comes from FIGURE_TYPE_TO_BIG_FIGURE_IMAGE / enemy table. #19 (offset 18) = prefect fighting fire. Augustus assets overlay offsets 2,3,7,11,14 (e.g. barkeep, barracks worker, ox, market buyer, mess hall/slave)"
+   },
+   {
+    "from": 58,
+    "to": 58,
+    "kind": "opaque",
+    "w": 55,
+    "h": 79,
+    "desc": "portrait #59: camel (desert trade caravan)"
+   },
+   {
+    "from": 59,
+    "to": 62,
+    "kind": "opaque",
+    "w": 55,
+    "h": 79,
+    "desc": "portraits #60..#63"
+   }
+  ],
+  "evidence": [
+   "src/window/building/figures.c:37-49 table max 63, :92 CAMEL_PORTRAIT 59, :105, :304 enemy portraits 20..47, :500 +18",
+   "src/window/message_dialog.c:386",
+   "assets walkers.xml group=190 image=2,3,7,11,14 (55x79 overlays)"
+  ],
+  "notes": "Portrait size taken from Augustus overlay PNGs (55x79). Table value 0 (types 74,77,83,84,88,90+) yields image_group(GROUP_BIG_PEOPLE)-1 = last image of the preceding group (see _absolute_ids)."
+ },
+ "GROUP_RATINGS_BACKGROUND": {
+  "id": 195,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 520,
+    "h": 235,
+    "desc": "ratings advisor backdrop (landscape with temple/forum silhouette, sky) drawn at (60,48); 4 rating columns stand on it at x=110,230,350,470 with bases at y=274. Augustus ui.xml slices strips x=0..9, 64..154, 510..519 for the tourism pillar banner"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/ratings.c:60",
+   "assets ui.xml 'T Pillar BG R' (10x235 at x=-510), 'T Pillar BG L' (9x235), 'Tourism Pillar BG' (x=-64)"
+  ]
+ },
+ "GROUP_FORT_FORMATIONS": {
+  "id": 197,
+  "count": 7,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "legion formation icon: column (top-down dots in a column)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: tortoise (testudo block) - referenced via IMAGE_OFFSETS_TO_FORMATION"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: double line, horizontal"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: double line, vertical (rotated 90 deg version of 2)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: mop up (scattered dots)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: single line, horizontal (auxiliaries)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 40,
+    "h": 40,
+    "desc": "formation icon: single line, vertical"
+   }
+  ],
+  "evidence": [
+   "src/window/building/military.c:343-361 OFFSETS 0..6 at (21+85*i, 181)",
+   "src/widget/sidebar/military.c:38-54,184 (drawn at scale 2.0 => shown at half size in sidebar), border 46x46 around +3"
+  ]
+ },
+ "GROUP_MESSAGE_ADVISOR_BUTTONS": {
+  "id": 199,
+  "count": 36,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to labor advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to labor advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to labor advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to military advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to military advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to military advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to imperial advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to imperial advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to imperial advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to ratings advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to ratings advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to ratings advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to trade advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to trade advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to trade advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to population advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to population advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to population advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to health advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to health advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to health advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to education advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to education advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to education advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to entertainment advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to entertainment advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to entertainment advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to religion advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to religion advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to religion advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to financial / show trade prices advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to financial / show trade prices advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to financial / show trade prices advisor' button (advisor emblem on a square plaque) button - pressed state"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to chief advisor' button (advisor emblem on a square plaque) button - normal state"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to chief advisor' button (advisor emblem on a square plaque) button - hover/focused state"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 27,
+    "h": 27,
+    "desc": "small 'go to chief advisor' button (advisor emblem on a square plaque) button - pressed state"
+   }
+  ],
+  "evidence": [
+   "src/window/message_dialog.c:58-85 offsets 0..33 step 3 27x27",
+   "src/window/empire.c:68,71 +12/+30 (24x24 hit)",
+   "src/window/trade_opened.c:18, building_info.c:63 (28x28 hit)"
+  ],
+  "notes": "3 states each (normal/hover/pressed); never disabled. Offset 21 (education) is not referenced but filled."
+ },
+ "GROUP_BORDERED_BUTTON": {
+  "id": 208,
+  "count": 16,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): top-left corner; interior must be TRANSPARENT (border drawn around text/images)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): top edge piece"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): top-right corner"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): right edge piece"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): bottom-right corner"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): bottom edge piece"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): bottom-left corner"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (normal): left edge piece"
+   },
+   {
+    "from": 8,
+    "to": 15,
+    "kind": "sprite",
+    "w": 16,
+    "h": 16,
+    "desc": "button border (FOCUSED/highlighted, e.g. brighter gold/red), same order as 0..7: TL, top, TR, right, BR, bottom, BL, left"
+   }
+  ],
+  "evidence": [
+   "src/graphics/button.c:10-62 button_border_draw (+8 when focused), last row/column pieces are shifted to fit arbitrary pixel sizes"
+  ],
+  "notes": "Lines should be 1-2 px thick along the outer edge of each 16x16 tile (corners: L-shapes; edges: straight line along the outer side); everything else transparent."
+ },
+ "GROUP_FORT_ICONS": {
+  "id": 222,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion command icon: go to legion (standard with arrow)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion command icon: return to fort (fort with arrow)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion command icon: at fort (fort, greyed/checked)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion command icon: empire service ON (eagle/globe)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 24,
+    "h": 24,
+    "desc": "legion command icon: empire service OFF (eagle crossed out)"
+   }
+  ],
+  "evidence": [
+   "src/window/advisor/military.c:174-189 inside 30x30 borders at +3",
+   "src/widget/sidebar/military.c:298-311"
+  ]
+ },
+ "GROUP_TRADE_AMOUNT": {
+  "id": 243,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 7,
+    "h": 7,
+    "desc": "tiny bronze shield marking trade volume tiers (up to 5 drawn in a cluster on the resource icon); counterpart of Augustus' 7x7 gold shield"
+   }
+  ],
+  "evidence": [
+   "src/window/empire.c:153-185 window_empire_draw_resource_shields, offsets {2,0},{5,2},{8,4},{0,3},{4,6}",
+   "assets UI/empire_gold_shield.png is 7x7"
+  ]
+ },
+ "GROUP_SELECT_MISSION_BACKGROUND": {
+  "id": 244,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "campaign mission selection window backdrop (stylised map table), centred on screen; the 640x480 mission map (GROUP_SELECT_MISSION) is drawn in the centre over it"
+   }
+  ],
+  "evidence": [
+   "src/window/mission_selection.c:16-17 BACKGROUND 1024x768, :63-68"
+  ]
+ },
+ "GROUP_SELECT_MISSION": {
+  "id": 245,
+  "count": 9,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 1-3/11 (BACKGROUND_IMAGE_OFFSET[rank]=0): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 4 (BACKGROUND_IMAGE_OFFSET[rank]=1): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 5 (BACKGROUND_IMAGE_OFFSET[rank]=2): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 6 (BACKGROUND_IMAGE_OFFSET[rank]=3): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 7 (BACKGROUND_IMAGE_OFFSET[rank]=4): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 8 (BACKGROUND_IMAGE_OFFSET[rank]=5): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 9 (BACKGROUND_IMAGE_OFFSET[rank]=6): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 10 (BACKGROUND_IMAGE_OFFSET[rank]=7): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 640,
+    "h": 400,
+    "external": true,
+    "desc": "campaign region map for rank 11 (BACKGROUND_IMAGE_OFFSET[rank]=8): parchment map of the province with two candidate city locations (peaceful and military; marker positions from CAMPAIGN_SELECTION table); drawn at (0,0) of the 640x480 dialog, mission title text drawn below at y=410"
+   }
+  ],
+  "evidence": [
+   "src/window/mission_selection.c:20-22 BACKGROUND_IMAGE_OFFSET {0,0,0,1..8,0}",
+   "src/window/mission_selection.c:79"
+  ]
+ },
+ "GROUP_CCK_BACKGROUND": {
+  "id": 246,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "custom scenario ('City Construction Kit') selection backdrop, drawn centred on the 640x480 window (only the central 640x480 visible): left list area (24..264, y 220+), scenario picture slot at (78,36), info area x 335..615"
+   }
+  ],
+  "evidence": [
+   "src/window/cck_selection.c:29-32,226"
+  ]
+ },
+ "GROUP_SCENARIO_IMAGE": {
+  "id": 247,
+  "count": 16,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #0 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #1 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #2 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #3 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #4 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #5 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #6 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #7 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #8 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #9 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #10 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #11 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #12 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #13 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #14 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 180,
+    "h": 150,
+    "desc": "scenario thumbnail picture #15 (map/landscape vignette) selectable in the editor (0..15), shown at (78,36) in the custom scenario window"
+   }
+  ],
+  "evidence": [
+   "src/window/cck_selection.c:117 image_group(GROUP_SCENARIO_IMAGE) + data.info.image_id",
+   "src/scenario/editor.c:313-325 image_id cycles 0..15"
+  ],
+  "notes": "Editor attributes window uses the editor file's GROUP_EDITOR_SCENARIO_IMAGE (22) for the same 16 pictures."
+ },
+ "GROUP_LOADING_SCREEN": {
+  "id": 251,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 64,
+    "h": 48,
+    "desc": "unused by Augustus code (placeholder loading screen)"
+   }
+  ],
+  "evidence": [
+   "defined in src/core/image_group.h only"
+  ]
+ },
+ "GROUP_INTERMEZZO_BACKGROUND": {
+  "id": 252,
+  "count": 45,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "main menu backdrop AND campaign mission 0 base image (custom scenarios use mission 0): Roman city panorama. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #1: mission 0 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #2: mission 1 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #3: mission 1 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #4: mission 2 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #5 (mission 2 base / mission 1 won); ALSO the background of the Augustus configuration window. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #6: mission 3 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #7: mission 3 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #8: mission 4 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #9: mission 4 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #10: mission 5 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #11: mission 5 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #12: mission 6 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #13: mission 6 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #14: mission 7 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #15: mission 7 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #16: mission 8 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #17: mission 8 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #18: mission 9 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #19: mission 9 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #20: mission 10 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #21: mission 10 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #22: mission 11 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #23: mission 11 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #24: mission 12 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #25 (mission 12 base / mission 11 won); ALSO the backdrop of the custom scenario selection window. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #26: mission 13 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #27: mission 13 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #28: mission 14 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #29: mission 14 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #30: mission 15 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #31: mission 15 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #32: mission 16 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #33: mission 16 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #34: mission 17 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #35: mission 17 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #36: mission 18 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #37: mission 18 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #38: mission 19 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #39: mission 19 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #40: mission 20 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #41: mission 20 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #42: mission 21 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #43: mission 21 briefing scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "opaque",
+    "w": 1024,
+    "h": 768,
+    "external": true,
+    "desc": "intermezzo image #44: mission 22 base/previous mission won scene. Formula: base = 2*mission, briefing = 2*mission+1, won = 2*mission+2 (mission 0..21)"
+   }
+  ],
+  "evidence": [
+   "src/window/intermezzo.c:97-104 image_group(GROUP_INTERMEZZO_BACKGROUND)+2*mission (+1 briefing, +2 won); 22 missions (SOUND_FILES_BRIEFING)",
+   "src/window/main_menu.c:63 +0",
+   "src/window/config.c:790 +5",
+   "src/window/cck_selection.c:221 +25"
+  ],
+  "notes": "All drawn via image_draw_fullscreen_background (scaled to cover screen) so any 4:3 size works; 640x480 would also be acceptable to save space."
+ },
+ "GROUP_PANEL_WINDOWS_DESERT": {
+  "id": 253,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "desert-climate build-menu picture: clear land"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "desert-climate build-menu picture: roads"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "desert-climate build-menu picture: water (aqueduct/well in sand)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "opaque",
+    "w": 150,
+    "h": 60,
+    "desc": "desert-climate build-menu picture: security"
+   }
+  ],
+  "evidence": [
+   "src/window/build_menu.c:118-153"
+  ]
+ },
+ "GROUP_SELECT_MISSION_BUTTON": {
+  "id": 254,
+  "count": 3,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 44,
+    "h": 44,
+    "desc": "mission location marker on the campaign map: normal (round bronze/red seal); drawn at marker x-4,y-4, hit box 44x44"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 44,
+    "h": 44,
+    "desc": "mission location marker: hovered (glowing)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 44,
+    "h": 44,
+    "desc": "mission location marker: chosen/selected (with check or laurel)"
+   }
+  ],
+  "evidence": [
+   "src/window/mission_selection.c:107-127, 137 is_mouse_hit(..., 44)"
+  ]
+ },
+ "_fonts": {
+  "_how_drawing_works": [
+   "glyph image id = image_group(GROUP_FONT) + font.image_offset + mapping[byte]   (mapping below = CHAR_TO_FONT_IMAGE_DEFAULT[byte]-1; byte absent from mapping => no glyph, drawn as a space of space_width)",
+   "Strings are in the internal single-byte encoding (Windows-1252 for English/western). ' ' and '_' always advance space_width (no image drawn); '@' has no glyph and therefore also advances space_width (used as a number prefix placeholder).",
+   "advance per glyph = letter_spacing + image.original.width  -> the glyph image width IS the advance (minus letter_spacing). Keep transparent padding inside the image to control spacing; images are auto-cropped but original width is kept for the advance.",
+   "glyph is drawn with its image TOP at the text y (top-aligned). For bytes < 0x80 (and 0xE7 'ç') there is no vertical shift. For bytes >= 0x80 the glyph is shifted up by max(0, H_eff - line_height) where H_eff = index of last opaque row + 1. So: ASCII glyphs share a cell whose baseline is row (line_height-1); descenders hang below line_height; accented CAPITALS must be painted taller with the accent above row 0 of the normal cell so that after the shift their baseline lands on row line_height-1 (i.e. image height = line_height + extra rows, baseline on the last row, no descender). Lowercase accented letters fit their accent inside the normal cell (H_eff <= line_height => no shift).",
+   "Multiline text advances line_height + 5 px per line (min line_height 11). Rich text (message dialogs) uses FONT_NORMAL_* with letter spacing 1.",
+   "All glyphs must be 'sprite' (RLE / transparent key) images.",
+   "make_plain_fonts_white (src/core/image.c) recolours to white every non-transparent pixel of glyph offsets [0,134) (NORMAL_PLAIN), [536,670) (LARGE_PLAIN), [938,1072) (SMALL_PLAIN). Those are the only fonts tinted at draw time; all other fonts are drawn with their native colours."
+  ],
+  "glyphs_per_font": 134,
+  "total_font_images": 1340,
+  "encoding": "default western (CHAR_TO_FONT_IMAGE_DEFAULT, used for English and western languages). Czech/Eastern/Cyrillic/Greek/CJK use other tables/external font files and are out of scope.",
+  "mapping_byte_to_glyph_index": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0,
+   "4": 0,
+   "5": 0,
+   "6": 0,
+   "7": 0,
+   "8": 0,
+   "9": 0,
+   "10": 0,
+   "11": 0,
+   "12": 0,
+   "13": 0,
+   "15": 0,
+   "16": 0,
+   "17": 0,
+   "33": 62,
+   "34": 63,
+   "37": 64,
+   "39": 73,
+   "40": 66,
+   "41": 67,
+   "42": 65,
+   "43": 69,
+   "44": 77,
+   "45": 68,
+   "46": 78,
+   "47": 76,
+   "48": 61,
+   "49": 52,
+   "50": 53,
+   "51": 54,
+   "52": 55,
+   "53": 56,
+   "54": 57,
+   "55": 58,
+   "56": 59,
+   "57": 60,
+   "58": 71,
+   "59": 72,
+   "61": 70,
+   "63": 74,
+   "65": 26,
+   "66": 27,
+   "67": 28,
+   "68": 29,
+   "69": 30,
+   "70": 31,
+   "71": 32,
+   "72": 33,
+   "73": 34,
+   "74": 35,
+   "75": 36,
+   "76": 37,
+   "77": 38,
+   "78": 39,
+   "79": 40,
+   "80": 41,
+   "81": 42,
+   "82": 43,
+   "83": 44,
+   "84": 45,
+   "85": 46,
+   "86": 47,
+   "87": 48,
+   "88": 49,
+   "89": 50,
+   "90": 51,
+   "95": 79,
+   "97": 0,
+   "98": 1,
+   "99": 2,
+   "100": 3,
+   "101": 4,
+   "102": 5,
+   "103": 6,
+   "104": 7,
+   "105": 8,
+   "106": 9,
+   "107": 10,
+   "108": 11,
+   "109": 12,
+   "110": 13,
+   "111": 14,
+   "112": 15,
+   "113": 16,
+   "114": 17,
+   "115": 18,
+   "116": 19,
+   "117": 20,
+   "118": 21,
+   "119": 22,
+   "120": 23,
+   "121": 24,
+   "122": 25,
+   "136": 128,
+   "140": 109,
+   "156": 110,
+   "161": 126,
+   "176": 129,
+   "191": 127,
+   "192": 113,
+   "193": 111,
+   "194": 112,
+   "195": 112,
+   "196": 104,
+   "197": 130,
+   "198": 108,
+   "199": 100,
+   "200": 115,
+   "201": 105,
+   "202": 114,
+   "203": 114,
+   "204": 118,
+   "205": 116,
+   "206": 117,
+   "207": 117,
+   "209": 107,
+   "210": 121,
+   "211": 119,
+   "212": 120,
+   "213": 120,
+   "214": 122,
+   "216": 131,
+   "217": 125,
+   "218": 123,
+   "219": 124,
+   "220": 106,
+   "221": 50,
+   "223": 103,
+   "224": 82,
+   "225": 81,
+   "226": 83,
+   "227": 80,
+   "228": 80,
+   "229": 132,
+   "230": 102,
+   "231": 100,
+   "232": 86,
+   "233": 85,
+   "234": 87,
+   "235": 84,
+   "236": 90,
+   "237": 89,
+   "238": 91,
+   "239": 88,
+   "241": 101,
+   "242": 94,
+   "243": 93,
+   "244": 95,
+   "245": 95,
+   "246": 92,
+   "248": 133,
+   "249": 98,
+   "250": 97,
+   "251": 99,
+   "252": 96,
+   "253": 24,
+   "255": 24
+  },
+  "glyph_index_table": [
+   {
+    "index": 0,
+    "chars": "a",
+    "bytes_cp1252": [
+     97
+    ],
+    "design_as": "a",
+    "note": "'a'. Control bytes 0x00-0x11 (except 0x0E) also map here but text code never draws bytes < 0x20"
+   },
+   {
+    "index": 1,
+    "chars": "b",
+    "bytes_cp1252": [
+     98
+    ],
+    "design_as": "b"
+   },
+   {
+    "index": 2,
+    "chars": "c",
+    "bytes_cp1252": [
+     99
+    ],
+    "design_as": "c"
+   },
+   {
+    "index": 3,
+    "chars": "d",
+    "bytes_cp1252": [
+     100
+    ],
+    "design_as": "d"
+   },
+   {
+    "index": 4,
+    "chars": "e",
+    "bytes_cp1252": [
+     101
+    ],
+    "design_as": "e"
+   },
+   {
+    "index": 5,
+    "chars": "f",
+    "bytes_cp1252": [
+     102
+    ],
+    "design_as": "f"
+   },
+   {
+    "index": 6,
+    "chars": "g",
+    "bytes_cp1252": [
+     103
+    ],
+    "design_as": "g"
+   },
+   {
+    "index": 7,
+    "chars": "h",
+    "bytes_cp1252": [
+     104
+    ],
+    "design_as": "h"
+   },
+   {
+    "index": 8,
+    "chars": "i",
+    "bytes_cp1252": [
+     105
+    ],
+    "design_as": "i"
+   },
+   {
+    "index": 9,
+    "chars": "j",
+    "bytes_cp1252": [
+     106
+    ],
+    "design_as": "j"
+   },
+   {
+    "index": 10,
+    "chars": "k",
+    "bytes_cp1252": [
+     107
+    ],
+    "design_as": "k"
+   },
+   {
+    "index": 11,
+    "chars": "l",
+    "bytes_cp1252": [
+     108
+    ],
+    "design_as": "l"
+   },
+   {
+    "index": 12,
+    "chars": "m",
+    "bytes_cp1252": [
+     109
+    ],
+    "design_as": "m"
+   },
+   {
+    "index": 13,
+    "chars": "n",
+    "bytes_cp1252": [
+     110
+    ],
+    "design_as": "n"
+   },
+   {
+    "index": 14,
+    "chars": "o",
+    "bytes_cp1252": [
+     111
+    ],
+    "design_as": "o"
+   },
+   {
+    "index": 15,
+    "chars": "p",
+    "bytes_cp1252": [
+     112
+    ],
+    "design_as": "p"
+   },
+   {
+    "index": 16,
+    "chars": "q",
+    "bytes_cp1252": [
+     113
+    ],
+    "design_as": "q"
+   },
+   {
+    "index": 17,
+    "chars": "r",
+    "bytes_cp1252": [
+     114
+    ],
+    "design_as": "r"
+   },
+   {
+    "index": 18,
+    "chars": "s",
+    "bytes_cp1252": [
+     115
+    ],
+    "design_as": "s"
+   },
+   {
+    "index": 19,
+    "chars": "t",
+    "bytes_cp1252": [
+     116
+    ],
+    "design_as": "t"
+   },
+   {
+    "index": 20,
+    "chars": "u",
+    "bytes_cp1252": [
+     117
+    ],
+    "design_as": "u"
+   },
+   {
+    "index": 21,
+    "chars": "v",
+    "bytes_cp1252": [
+     118
+    ],
+    "design_as": "v"
+   },
+   {
+    "index": 22,
+    "chars": "w",
+    "bytes_cp1252": [
+     119
+    ],
+    "design_as": "w"
+   },
+   {
+    "index": 23,
+    "chars": "x",
+    "bytes_cp1252": [
+     120
+    ],
+    "design_as": "x"
+   },
+   {
+    "index": 24,
+    "chars": "yýÿ",
+    "bytes_cp1252": [
+     121,
+     253,
+     255
+    ],
+    "design_as": "y"
+   },
+   {
+    "index": 25,
+    "chars": "z",
+    "bytes_cp1252": [
+     122
+    ],
+    "design_as": "z"
+   },
+   {
+    "index": 26,
+    "chars": "A",
+    "bytes_cp1252": [
+     65
+    ],
+    "design_as": "A"
+   },
+   {
+    "index": 27,
+    "chars": "B",
+    "bytes_cp1252": [
+     66
+    ],
+    "design_as": "B"
+   },
+   {
+    "index": 28,
+    "chars": "C",
+    "bytes_cp1252": [
+     67
+    ],
+    "design_as": "C"
+   },
+   {
+    "index": 29,
+    "chars": "D",
+    "bytes_cp1252": [
+     68
+    ],
+    "design_as": "D"
+   },
+   {
+    "index": 30,
+    "chars": "E",
+    "bytes_cp1252": [
+     69
+    ],
+    "design_as": "E"
+   },
+   {
+    "index": 31,
+    "chars": "F",
+    "bytes_cp1252": [
+     70
+    ],
+    "design_as": "F"
+   },
+   {
+    "index": 32,
+    "chars": "G",
+    "bytes_cp1252": [
+     71
+    ],
+    "design_as": "G"
+   },
+   {
+    "index": 33,
+    "chars": "H",
+    "bytes_cp1252": [
+     72
+    ],
+    "design_as": "H"
+   },
+   {
+    "index": 34,
+    "chars": "I",
+    "bytes_cp1252": [
+     73
+    ],
+    "design_as": "I"
+   },
+   {
+    "index": 35,
+    "chars": "J",
+    "bytes_cp1252": [
+     74
+    ],
+    "design_as": "J"
+   },
+   {
+    "index": 36,
+    "chars": "K",
+    "bytes_cp1252": [
+     75
+    ],
+    "design_as": "K"
+   },
+   {
+    "index": 37,
+    "chars": "L",
+    "bytes_cp1252": [
+     76
+    ],
+    "design_as": "L"
+   },
+   {
+    "index": 38,
+    "chars": "M",
+    "bytes_cp1252": [
+     77
+    ],
+    "design_as": "M"
+   },
+   {
+    "index": 39,
+    "chars": "N",
+    "bytes_cp1252": [
+     78
+    ],
+    "design_as": "N"
+   },
+   {
+    "index": 40,
+    "chars": "O",
+    "bytes_cp1252": [
+     79
+    ],
+    "design_as": "O"
+   },
+   {
+    "index": 41,
+    "chars": "P",
+    "bytes_cp1252": [
+     80
+    ],
+    "design_as": "P"
+   },
+   {
+    "index": 42,
+    "chars": "Q",
+    "bytes_cp1252": [
+     81
+    ],
+    "design_as": "Q"
+   },
+   {
+    "index": 43,
+    "chars": "R",
+    "bytes_cp1252": [
+     82
+    ],
+    "design_as": "R"
+   },
+   {
+    "index": 44,
+    "chars": "S",
+    "bytes_cp1252": [
+     83
+    ],
+    "design_as": "S"
+   },
+   {
+    "index": 45,
+    "chars": "T",
+    "bytes_cp1252": [
+     84
+    ],
+    "design_as": "T"
+   },
+   {
+    "index": 46,
+    "chars": "U",
+    "bytes_cp1252": [
+     85
+    ],
+    "design_as": "U"
+   },
+   {
+    "index": 47,
+    "chars": "V",
+    "bytes_cp1252": [
+     86
+    ],
+    "design_as": "V"
+   },
+   {
+    "index": 48,
+    "chars": "W",
+    "bytes_cp1252": [
+     87
+    ],
+    "design_as": "W"
+   },
+   {
+    "index": 49,
+    "chars": "X",
+    "bytes_cp1252": [
+     88
+    ],
+    "design_as": "X"
+   },
+   {
+    "index": 50,
+    "chars": "YÝ",
+    "bytes_cp1252": [
+     89,
+     221
+    ],
+    "design_as": "Y"
+   },
+   {
+    "index": 51,
+    "chars": "Z",
+    "bytes_cp1252": [
+     90
+    ],
+    "design_as": "Z"
+   },
+   {
+    "index": 52,
+    "chars": "1",
+    "bytes_cp1252": [
+     49
+    ],
+    "design_as": "1"
+   },
+   {
+    "index": 53,
+    "chars": "2",
+    "bytes_cp1252": [
+     50
+    ],
+    "design_as": "2"
+   },
+   {
+    "index": 54,
+    "chars": "3",
+    "bytes_cp1252": [
+     51
+    ],
+    "design_as": "3"
+   },
+   {
+    "index": 55,
+    "chars": "4",
+    "bytes_cp1252": [
+     52
+    ],
+    "design_as": "4"
+   },
+   {
+    "index": 56,
+    "chars": "5",
+    "bytes_cp1252": [
+     53
+    ],
+    "design_as": "5"
+   },
+   {
+    "index": 57,
+    "chars": "6",
+    "bytes_cp1252": [
+     54
+    ],
+    "design_as": "6"
+   },
+   {
+    "index": 58,
+    "chars": "7",
+    "bytes_cp1252": [
+     55
+    ],
+    "design_as": "7"
+   },
+   {
+    "index": 59,
+    "chars": "8",
+    "bytes_cp1252": [
+     56
+    ],
+    "design_as": "8"
+   },
+   {
+    "index": 60,
+    "chars": "9",
+    "bytes_cp1252": [
+     57
+    ],
+    "design_as": "9"
+   },
+   {
+    "index": 61,
+    "chars": "0",
+    "bytes_cp1252": [
+     48
+    ],
+    "design_as": "0"
+   },
+   {
+    "index": 62,
+    "chars": "!",
+    "bytes_cp1252": [
+     33
+    ],
+    "design_as": "!"
+   },
+   {
+    "index": 63,
+    "chars": "\"",
+    "bytes_cp1252": [
+     34
+    ],
+    "design_as": "\""
+   },
+   {
+    "index": 64,
+    "chars": "%",
+    "bytes_cp1252": [
+     37
+    ],
+    "design_as": "%"
+   },
+   {
+    "index": 65,
+    "chars": "*",
+    "bytes_cp1252": [
+     42
+    ],
+    "design_as": "*"
+   },
+   {
+    "index": 66,
+    "chars": "(",
+    "bytes_cp1252": [
+     40
+    ],
+    "design_as": "("
+   },
+   {
+    "index": 67,
+    "chars": ")",
+    "bytes_cp1252": [
+     41
+    ],
+    "design_as": ")"
+   },
+   {
+    "index": 68,
+    "chars": "-",
+    "bytes_cp1252": [
+     45
+    ],
+    "design_as": "-"
+   },
+   {
+    "index": 69,
+    "chars": "+",
+    "bytes_cp1252": [
+     43
+    ],
+    "design_as": "+"
+   },
+   {
+    "index": 70,
+    "chars": "=",
+    "bytes_cp1252": [
+     61
+    ],
+    "design_as": "="
+   },
+   {
+    "index": 71,
+    "chars": ":",
+    "bytes_cp1252": [
+     58
+    ],
+    "design_as": ":"
+   },
+   {
+    "index": 72,
+    "chars": ";",
+    "bytes_cp1252": [
+     59
+    ],
+    "design_as": ";"
+   },
+   {
+    "index": 73,
+    "chars": "'",
+    "bytes_cp1252": [
+     39
+    ],
+    "design_as": "'"
+   },
+   {
+    "index": 74,
+    "chars": "?",
+    "bytes_cp1252": [
+     63
+    ],
+    "design_as": "?"
+   },
+   {
+    "index": 75,
+    "chars": "",
+    "design_as": null,
+    "note": "not reachable by any character in the default (western) encoding; paint a blank/placeholder glyph of normal width"
+   },
+   {
+    "index": 76,
+    "chars": "/",
+    "bytes_cp1252": [
+     47
+    ],
+    "design_as": "/"
+   },
+   {
+    "index": 77,
+    "chars": ",",
+    "bytes_cp1252": [
+     44
+    ],
+    "design_as": ","
+   },
+   {
+    "index": 78,
+    "chars": ".",
+    "bytes_cp1252": [
+     46
+    ],
+    "design_as": "."
+   },
+   {
+    "index": 79,
+    "chars": "_",
+    "bytes_cp1252": [
+     95
+    ],
+    "design_as": "_",
+    "note": "'_' glyph: text_draw/text_draw_number render '_' as a space, but text_get_width still measures this image's width, so keep it about space_width wide"
+   },
+   {
+    "index": 80,
+    "chars": "ãä",
+    "bytes_cp1252": [
+     227,
+     228
+    ],
+    "design_as": "ã"
+   },
+   {
+    "index": 81,
+    "chars": "á",
+    "bytes_cp1252": [
+     225
+    ],
+    "design_as": "á"
+   },
+   {
+    "index": 82,
+    "chars": "à",
+    "bytes_cp1252": [
+     224
+    ],
+    "design_as": "à"
+   },
+   {
+    "index": 83,
+    "chars": "â",
+    "bytes_cp1252": [
+     226
+    ],
+    "design_as": "â"
+   },
+   {
+    "index": 84,
+    "chars": "ë",
+    "bytes_cp1252": [
+     235
+    ],
+    "design_as": "ë"
+   },
+   {
+    "index": 85,
+    "chars": "é",
+    "bytes_cp1252": [
+     233
+    ],
+    "design_as": "é"
+   },
+   {
+    "index": 86,
+    "chars": "è",
+    "bytes_cp1252": [
+     232
+    ],
+    "design_as": "è"
+   },
+   {
+    "index": 87,
+    "chars": "ê",
+    "bytes_cp1252": [
+     234
+    ],
+    "design_as": "ê"
+   },
+   {
+    "index": 88,
+    "chars": "ï",
+    "bytes_cp1252": [
+     239
+    ],
+    "design_as": "ï"
+   },
+   {
+    "index": 89,
+    "chars": "í",
+    "bytes_cp1252": [
+     237
+    ],
+    "design_as": "í"
+   },
+   {
+    "index": 90,
+    "chars": "ì",
+    "bytes_cp1252": [
+     236
+    ],
+    "design_as": "ì"
+   },
+   {
+    "index": 91,
+    "chars": "î",
+    "bytes_cp1252": [
+     238
+    ],
+    "design_as": "î"
+   },
+   {
+    "index": 92,
+    "chars": "ö",
+    "bytes_cp1252": [
+     246
+    ],
+    "design_as": "ö"
+   },
+   {
+    "index": 93,
+    "chars": "ó",
+    "bytes_cp1252": [
+     243
+    ],
+    "design_as": "ó"
+   },
+   {
+    "index": 94,
+    "chars": "ò",
+    "bytes_cp1252": [
+     242
+    ],
+    "design_as": "ò"
+   },
+   {
+    "index": 95,
+    "chars": "ôõ",
+    "bytes_cp1252": [
+     244,
+     245
+    ],
+    "design_as": "ô"
+   },
+   {
+    "index": 96,
+    "chars": "ü",
+    "bytes_cp1252": [
+     252
+    ],
+    "design_as": "ü"
+   },
+   {
+    "index": 97,
+    "chars": "ú",
+    "bytes_cp1252": [
+     250
+    ],
+    "design_as": "ú"
+   },
+   {
+    "index": 98,
+    "chars": "ù",
+    "bytes_cp1252": [
+     249
+    ],
+    "design_as": "ù"
+   },
+   {
+    "index": 99,
+    "chars": "û",
+    "bytes_cp1252": [
+     251
+    ],
+    "design_as": "û"
+   },
+   {
+    "index": 100,
+    "chars": "Çç",
+    "bytes_cp1252": [
+     199,
+     231
+    ],
+    "design_as": "Ç"
+   },
+   {
+    "index": 101,
+    "chars": "ñ",
+    "bytes_cp1252": [
+     241
+    ],
+    "design_as": "ñ"
+   },
+   {
+    "index": 102,
+    "chars": "æ",
+    "bytes_cp1252": [
+     230
+    ],
+    "design_as": "æ"
+   },
+   {
+    "index": 103,
+    "chars": "ß",
+    "bytes_cp1252": [
+     223
+    ],
+    "design_as": "ß"
+   },
+   {
+    "index": 104,
+    "chars": "Ä",
+    "bytes_cp1252": [
+     196
+    ],
+    "design_as": "Ä"
+   },
+   {
+    "index": 105,
+    "chars": "É",
+    "bytes_cp1252": [
+     201
+    ],
+    "design_as": "É"
+   },
+   {
+    "index": 106,
+    "chars": "Ü",
+    "bytes_cp1252": [
+     220
+    ],
+    "design_as": "Ü"
+   },
+   {
+    "index": 107,
+    "chars": "Ñ",
+    "bytes_cp1252": [
+     209
+    ],
+    "design_as": "Ñ"
+   },
+   {
+    "index": 108,
+    "chars": "Æ",
+    "bytes_cp1252": [
+     198
+    ],
+    "design_as": "Æ"
+   },
+   {
+    "index": 109,
+    "chars": "Œ",
+    "bytes_cp1252": [
+     140
+    ],
+    "design_as": "Œ"
+   },
+   {
+    "index": 110,
+    "chars": "œ",
+    "bytes_cp1252": [
+     156
+    ],
+    "design_as": "œ"
+   },
+   {
+    "index": 111,
+    "chars": "Á",
+    "bytes_cp1252": [
+     193
+    ],
+    "design_as": "Á"
+   },
+   {
+    "index": 112,
+    "chars": "ÂÃ",
+    "bytes_cp1252": [
+     194,
+     195
+    ],
+    "design_as": "Â"
+   },
+   {
+    "index": 113,
+    "chars": "À",
+    "bytes_cp1252": [
+     192
+    ],
+    "design_as": "À"
+   },
+   {
+    "index": 114,
+    "chars": "ÊË",
+    "bytes_cp1252": [
+     202,
+     203
+    ],
+    "design_as": "Ê"
+   },
+   {
+    "index": 115,
+    "chars": "È",
+    "bytes_cp1252": [
+     200
+    ],
+    "design_as": "È"
+   },
+   {
+    "index": 116,
+    "chars": "Í",
+    "bytes_cp1252": [
+     205
+    ],
+    "design_as": "Í"
+   },
+   {
+    "index": 117,
+    "chars": "ÎÏ",
+    "bytes_cp1252": [
+     206,
+     207
+    ],
+    "design_as": "Î"
+   },
+   {
+    "index": 118,
+    "chars": "Ì",
+    "bytes_cp1252": [
+     204
+    ],
+    "design_as": "Ì"
+   },
+   {
+    "index": 119,
+    "chars": "Ó",
+    "bytes_cp1252": [
+     211
+    ],
+    "design_as": "Ó"
+   },
+   {
+    "index": 120,
+    "chars": "ÔÕ",
+    "bytes_cp1252": [
+     212,
+     213
+    ],
+    "design_as": "Ô"
+   },
+   {
+    "index": 121,
+    "chars": "Ò",
+    "bytes_cp1252": [
+     210
+    ],
+    "design_as": "Ò"
+   },
+   {
+    "index": 122,
+    "chars": "Ö",
+    "bytes_cp1252": [
+     214
+    ],
+    "design_as": "Ö"
+   },
+   {
+    "index": 123,
+    "chars": "Ú",
+    "bytes_cp1252": [
+     218
+    ],
+    "design_as": "Ú"
+   },
+   {
+    "index": 124,
+    "chars": "Û",
+    "bytes_cp1252": [
+     219
+    ],
+    "design_as": "Û"
+   },
+   {
+    "index": 125,
+    "chars": "Ù",
+    "bytes_cp1252": [
+     217
+    ],
+    "design_as": "Ù"
+   },
+   {
+    "index": 126,
+    "chars": "¡",
+    "bytes_cp1252": [
+     161
+    ],
+    "design_as": "¡"
+   },
+   {
+    "index": 127,
+    "chars": "¿",
+    "bytes_cp1252": [
+     191
+    ],
+    "design_as": "¿"
+   },
+   {
+    "index": 128,
+    "chars": "ˆ",
+    "bytes_cp1252": [
+     136
+    ],
+    "design_as": "ˆ"
+   },
+   {
+    "index": 129,
+    "chars": "°",
+    "bytes_cp1252": [
+     176
+    ],
+    "design_as": "°"
+   },
+   {
+    "index": 130,
+    "chars": "Å",
+    "bytes_cp1252": [
+     197
+    ],
+    "design_as": "Å"
+   },
+   {
+    "index": 131,
+    "chars": "Ø",
+    "bytes_cp1252": [
+     216
+    ],
+    "design_as": "Ø"
+   },
+   {
+    "index": 132,
+    "chars": "å",
+    "bytes_cp1252": [
+     229
+    ],
+    "design_as": "å"
+   },
+   {
+    "index": 133,
+    "chars": "ø",
+    "bytes_cp1252": [
+     248
+    ],
+    "design_as": "ø"
+   }
+  ],
+  "fonts": {
+   "FONT_NORMAL_PLAIN": {
+    "image_offset": 0,
+    "glyph_range_in_group": [
+     0,
+     133
+    ],
+    "space_width": 6,
+    "letter_spacing": 1,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": true,
+    "colour": "plain: any single opaque colour (engine recolours every non-transparent pixel to white and tints at draw time; default tint COLOR_FONT_PLAIN 0x180800). No shadow, no anti-aliasing.",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_NORMAL_BLACK": {
+    "image_offset": 134,
+    "glyph_range_in_group": [
+     134,
+     267
+    ],
+    "space_width": 6,
+    "letter_spacing": 0,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": false,
+    "colour": "black glyph (0x000000) with a 1px light drop shadow at +1,+1 (0xCEAD9C). Image includes the shadow column/row.",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_NORMAL_WHITE": {
+    "image_offset": 268,
+    "glyph_range_in_group": [
+     268,
+     401
+    ],
+    "space_width": 6,
+    "letter_spacing": 0,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": false,
+    "colour": "white glyph (0xFFFFFF) with 1px dark-brown drop shadow at +1,+1 (0x311C10).",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_NORMAL_RED": {
+    "image_offset": 402,
+    "glyph_range_in_group": [
+     402,
+     535
+    ],
+    "space_width": 6,
+    "letter_spacing": 0,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": false,
+    "colour": "dark red glyph (0x731408) with 1px light beige drop shadow at +1,+1 (0xE7CFAD). Used for hover/focus text.",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_LARGE_PLAIN": {
+    "image_offset": 536,
+    "glyph_range_in_group": [
+     536,
+     669
+    ],
+    "space_width": 8,
+    "letter_spacing": 1,
+    "line_height": 23,
+    "multiline_line_advance": 28,
+    "recoloured_white_plain": true,
+    "colour": "plain large: single opaque colour, recoloured to white by engine and tinted at draw time.",
+    "metrics_recommendation": {
+     "baseline_row": 22,
+     "cap_height": 17,
+     "x_height": 11,
+     "descender_rows": 5,
+     "ascii_image_height": 28,
+     "accented_capital_extra_rows": 5,
+     "widths": "lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px, punctuation 4-7 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_LARGE_BLACK": {
+    "image_offset": 670,
+    "glyph_range_in_group": [
+     670,
+     803
+    ],
+    "space_width": 8,
+    "letter_spacing": 0,
+    "line_height": 23,
+    "multiline_line_advance": 28,
+    "recoloured_white_plain": false,
+    "colour": "large black glyph with 1px light drop shadow +1,+1 (0xCEAD9C). Used for window titles.",
+    "metrics_recommendation": {
+     "baseline_row": 22,
+     "cap_height": 17,
+     "x_height": 11,
+     "descender_rows": 5,
+     "ascii_image_height": 28,
+     "accented_capital_extra_rows": 5,
+     "widths": "lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px, punctuation 4-7 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_LARGE_BROWN": {
+    "image_offset": 804,
+    "glyph_range_in_group": [
+     804,
+     937
+    ],
+    "space_width": 8,
+    "letter_spacing": 0,
+    "line_height": 24,
+    "multiline_line_advance": 29,
+    "recoloured_white_plain": false,
+    "colour": "large very dark brown glyph (0x180800), no shadow. Used for figure names.",
+    "metrics_recommendation": {
+     "baseline_row": 23,
+     "cap_height": 17,
+     "x_height": 11,
+     "descender_rows": 5,
+     "ascii_image_height": 29,
+     "accented_capital_extra_rows": 5,
+     "widths": "lowercase 8-14 px, uppercase 11-18 px, digits 10-12 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_SMALL_PLAIN": {
+    "image_offset": 938,
+    "glyph_range_in_group": [
+     938,
+     1071
+    ],
+    "space_width": 4,
+    "letter_spacing": 1,
+    "line_height": 9,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": true,
+    "colour": "plain small: single opaque colour, recoloured white by engine and tinted at draw time.",
+    "metrics_recommendation": {
+     "baseline_row": 8,
+     "cap_height": 7,
+     "x_height": 5,
+     "descender_rows": 2,
+     "ascii_image_height": 11,
+     "accented_capital_extra_rows": 2,
+     "widths": "lowercase 3-5 px, uppercase 4-6 px, digits 4-5 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_NORMAL_GREEN": {
+    "image_offset": 1072,
+    "glyph_range_in_group": [
+     1072,
+     1205
+    ],
+    "space_width": 6,
+    "letter_spacing": 0,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": false,
+    "colour": "dark (near-black 0x180800 per multibyte fallback; original look: dark green) glyph with 1px light beige drop shadow +1,+1 (0xE7CFAD).",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   },
+   "FONT_NORMAL_BROWN": {
+    "image_offset": 1206,
+    "glyph_range_in_group": [
+     1206,
+     1339
+    ],
+    "space_width": 6,
+    "letter_spacing": 0,
+    "line_height": 11,
+    "multiline_line_advance": 16,
+    "recoloured_white_plain": false,
+    "colour": "very dark brown glyph (0x180800), no shadow.",
+    "metrics_recommendation": {
+     "baseline_row": 10,
+     "cap_height": 9,
+     "x_height": 6,
+     "descender_rows": 3,
+     "ascii_image_height": 14,
+     "accented_capital_extra_rows": 3,
+     "widths": "lowercase 4-7 px (i,l,j ~2-3; m,w ~8), uppercase 6-10 px, digits 6 px, punctuation 2-4 px"
+    },
+    "y_offset_function": "image_y_offset_default: shift = (byte<0x80 || byte==0xE7) ? 0 : max(0, H_eff - line_height)"
+   }
+  }
+ },
+ "_absolute_ids": [
+  {
+   "what": "Arrow (spinner) buttons use ABSOLUTE image ids, not groups",
+   "ids": "15..22",
+   "detail": "arrow_button.image_id is drawn as-is (+1 when pressed). 15 = up/increase arrow, 16 = up pressed, 17 = down/decrease arrow, 18 = down pressed, 19 = left/previous arrow, 20 = left pressed, 21 = right/next arrow, 22 = right pressed. Hit box 24x24 => paint ~24x24 sprites (bronze arrow on round button).",
+   "evidence": [
+    "src/graphics/arrow_button.c:17-21",
+    "src/window/advisor/financial.c:20-21 {..,17,24..},{..,15,24..}",
+    "src/widget/sidebar/military.c:105-106 19/21",
+    "src/window/editor/attributes.c:73-74 19/21",
+    "src/widget/sidebar/extra.c:60-61, labor.c:33-34, donate_to_city.c:33-34, race_bet.c:31-32, resource_settings.c:38-44, editor/empire.c:41-42"
+   ],
+   "action": "The global layout must put these 8 arrow sprites at absolute slots 15..22 of BOTH the main (c3*.sg2) and editor (c3map*.sg2) graphics files (whatever group owns that range). Suggest reserving 0..~30 for misc UI before the first group."
+  },
+  {
+   "what": "Absolute range 6145..6192 is never loaded",
+   "ids": "6145..6192",
+   "detail": "core/image.c skips pixel loading for main-atlas images 6145..6192 ('original placeholder images'); anything placed there renders empty.",
+   "evidence": [
+    "src/core/image.c:365 and :535"
+   ],
+   "action": "Do not place needed images at absolute ids 6145..6192 in the main file."
+  },
+  {
+   "what": "Empire map objects: ids are relative to GROUP_EMPIRE_CITY",
+   "ids": "border flag 3323, ornaments 3356..3375 (editor-file ids), Hagia Sophia ornament 3372 (editor) / 8122 (main)",
+   "detail": "empire objects (from c3.emp, saved games and custom XML empires) store absolute image ids. object.c fix_image_ids() shifts every stored id by (image_group(GROUP_EMPIRE_CITY) - stored id of our city). The XML empire loader hard-codes BASE_BORDER_FLAG_IMAGE_ID 3323 and BASE_ORNAMENT_IMAGE_ID 3356 (+0..19: Stonehenge, Gallic wheat, Pyrenees, Iberian aqueduct, triumphal arch, west desert wheat, Lighthouse of Alexandria, west desert palms, trade ship, waterside palms, Colosseum, Alps, Roman tree, Greek mountains, Parthenon, Pyramids, Hagia Sophia, east desert palms, east desert wheat, trade camel); ornaments 20/21 are Augustus assets (negative ids). The border flag and ornaments may carry animation metadata (frames follow). window/empire.c:540 checks obj->image_id == 8122 and window/editor/empire.c:230 checks 3372 (Hagia Sophia overlay fix).",
+   "evidence": [
+    "src/empire/object.c:24-48",
+    "src/empire/xml.c:24-27,186-197,260,303",
+    "src/window/empire.c:426-466,526-543",
+    "src/window/editor/empire.c:230"
+   ],
+   "action": "In the EDITOR file place the border flag at absolute 3323 and the 20 ornaments at 3356..3375 (ids relative to editor GROUP_EMPIRE_CITY start E). In the MAIN file place the same images at (main GROUP_EMPIRE_CITY start M) + (id - E). For the Hagia fix to work, M - E should equal 4750 (8122-3372); otherwise only that cosmetic overlay is lost. Any generated c3.emp must use ids consistent with the editor layout (its 'our city' object id anchors the shift). These images belong to no named group in my scope (original groups unknown, possibly unnamed group 180)."
+  },
+  {
+   "what": "Saved games store absolute empire / invasion-warning image ids",
+   "ids": "n/a",
+   "detail": "empire objects are re-anchored via fix_image_ids, but scenario invasion warnings (scenario/invasion.c:558/582) save raw image ids. Changing the layout between versions of our generated data breaks warnings in old saves.",
+   "evidence": [
+    "src/scenario/invasion.c:132,558,582"
+   ],
+   "action": "Freeze the layout once released."
+  },
+  {
+   "what": "GROUP_BIG_PEOPLE - 1",
+   "ids": "image_group(190) - 1",
+   "detail": "FIGURE_TYPE_TO_BIG_FIGURE_IMAGE contains 0 for some figure types (74, 77, 83, 84, 88, 90-99) so big_people_image() returns image_group(GROUP_BIG_PEOPLE) - 1, i.e. the last image of whatever group precedes 190 in the absolute layout (most of these types are overridden by Augustus assets).",
+   "evidence": [
+    "src/window/building/figures.c:37-49,105"
+   ],
+   "action": "Prefer that the image just before GROUP_BIG_PEOPLE is a harmless 55x79-ish picture (or a generic portrait)."
+  },
+  {
+   "what": "Raw numeric group ids in code",
+   "ids": "groups 90, 93",
+   "detail": "sidebar image buttons use image_collection 90 (GROUP_MESSAGE_ICON) and 93 (not named in image_group.h) directly.",
+   "evidence": [
+    "src/widget/sidebar/city.c:52-57",
+    "src/widget/sidebar/military.c:101"
+   ],
+   "action": "Group 93 must exist (included here as GROUP_93_SIDEBAR_OVERLAY_BUTTON)."
+  },
+  {
+   "what": "Editor graphics file needs all UI groups too",
+   "ids": "all UI groups",
+   "detail": "image_load_climate(..., is_editor=1) replaces the main image table with c3map*.sg2. All UI drawing (fonts GROUP_FONT 16, panels 132/133, buttons 15/96/134/208, top menu 11, side panel, arrow absolute ids 15..22, empire panels 172...) then uses the editor file's group table. Editor-specific groups: GROUP_EDITOR_SCENARIO_IMAGE 22, BUILDING_CROPS 23, EMPIRE_MAP 47, SIDE_PANEL 80, RESOURCE_ICONS 129, EMPIRE_PANELS 172, EMPIRE_RESOURCES 173, BUILDING_NATIVE 183, EMPIRE_FOREIGN_CITY 223, TRADE_AMOUNT 243, plus GROUP_EDITOR_SIDEBAR_BUTTONS 137 and empire groups 174-178/224.",
+   "evidence": [
+    "src/core/image.c:616-705",
+    "src/core/image_group_editor.h",
+    "src/widget/sidebar/editor.c:139-145 (GROUP_EDITOR_SIDE_PANEL 80 + relief offsets 1/2 since image_id != GROUP_SIDE_PANEL)"
+   ],
+   "action": "Generate the editor sg2 with the UI groups of this spec plus editor groups (GROUP_EDITOR_SIDE_PANEL 80: 0 = 162x450 panel, 1 = relief short 162x120, 2 = relief long 162x285 per sidebar/common.c)."
+  },
+  {
+   "what": "Augustus asset XML layers referencing original images in this scope",
+   "ids": "11/14, 128/9, 128/22, 129/7, 159/47, 179/0, 179/1, 181/7, 182/7, 190/2,3,7,11,14, 195/0",
+   "detail": "assets are composited at startup from these images; sizes must be at least the cropped regions (11/14 >= 120x24, 128/* = 40x40, 159/47 >= 137x97, 181/7 & 182/7 >= 5x5, 190/* = 55x79, 195/0 >= 520x235).",
+   "evidence": [
+    "/usr/share/augustus-game/assets/Graphics/ui.xml",
+    "/usr/share/augustus-game/assets/Graphics/walkers.xml"
+   ],
+   "action": "Respect minimum sizes."
+  },
+  {
+   "what": "Message images addressed via lang file ids",
+   "ids": "image_group(159) + id - 1",
+   "detail": "lang_message.image.id from the message text file selects GROUP_MESSAGE_IMAGES entries.",
+   "evidence": [
+    "src/window/message_dialog.c:388",
+    "src/graphics/rich_text.c:331"
+   ],
+   "action": "Keep GROUP_MESSAGE_IMAGES count >= max image id referenced by the generated c3_mm file."
+  }
+ ],
+ "_meta": {
+  "scope": "UI image groups and fonts",
+  "author_note": "Derived from Augustus 4.0.0 sources only. Sizes marked by layout code are exact (buttons, panels, sidebar, labels, font offsets); picture sizes (backgrounds, portraits, message images) are recommendations.",
+  "total_images": 2193
+ }
+}

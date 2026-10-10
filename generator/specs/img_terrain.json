@@ -1,0 +1,3689 @@
+{
+ "GROUP_TERRAIN_BLACK": {
+  "id": 1,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "solid black flat tile (58x30 diamond). Map-edge placeholder: map_image_init_edges writes ABSOLUTE image ids 1..5 into the image grid for border tiles; they are never drawn (view treats ids < 6 as off-map)"
+   }
+  ],
+  "evidence": [
+   "src/map/image.c:46-58 map_image_init_edges sets absolute ids 1,2,3,4,5",
+   "src/city/view.c:155 map_image_at(grid_offset) < 6 => tile not visible",
+   "src/city/view.c:803 map_image_at >= 6"
+  ],
+  "notes": "Not referenced via image_group() anywhere. Place this group at absolute image id 1 so ids 1..5 are these black tiles; id 0 must be an empty/dummy image (map_image_at()==0 means \"no image yet\" in tiles.c). No real terrain image may have absolute id < 6."
+ },
+ "GROUP_TERRAIN_SHRUB": {
+  "id": 2,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 14,
+    "desc": "shrub / low bush on grass, 8 random variants (small green bushes, some with flowers); may rise slightly above the diamond"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:199 image_group(GROUP_TERRAIN_SHRUB) + (map_random_get(grid_offset) & 7)",
+   "src/map/tiles.c:1253 same"
+  ],
+  "notes": ""
+ },
+ "GROUP_TERRAIN_UGLY_GRASS": {
+  "id": 3,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "trampled / bare patchy grass (brownish dirt with sparse grass) left on tiles after a building is removed; 8 random variants, flat"
+   }
+  ],
+  "evidence": [
+   "src/map/building_tiles.c:194 image_group(GROUP_TERRAIN_UGLY_GRASS) + (map_random_get(grid_offset) & 7)"
+  ],
+  "notes": ""
+ },
+ "GROUP_TERRAIN_TREE": {
+  "id": 4,
+  "count": 32,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 40,
+    "desc": "tree tile at forest edge (has non-tree neighbours within ring 1): 1-2 trees on grass, 8 random variants"
+   },
+   {
+    "from": 8,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 45,
+    "desc": "tree tile with only trees/rocks in ring 1: denser trees, 8 random variants"
+   },
+   {
+    "from": 16,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 48,
+    "desc": "tree tile with only trees/rocks up to ring 2: dense forest, 8 random variants"
+   },
+   {
+    "from": 24,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 50,
+    "desc": "tree tile with only trees/rocks up to ring 3: deepest forest (darkest, fullest canopy), 8 random variants"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:166-176 base=(random&7); +24 ring3, +16 ring2, +8 ring1, else +0",
+   "src/map/terrain.c:445-452 determine_original_trees compares saved image ids with image_group(GROUP_TERRAIN_TREE)+8/16/24/32"
+  ],
+  "notes": "All 1x1 tiles with tree canopy rising above the diamond (draw_top). Keep canopy within ~58px width so neighbouring tiles overlap naturally."
+ },
+ "GROUP_TERRAIN_WATER": {
+  "id": 5,
+  "count": 80,
+  "entries": [
+   {
+    "from": 0,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "open deep water, 6 ANIMATION FRAMES (not variants): the city renderer cycles any tile with id in [water+0, water+5] to the next id each water tick (wraps 5->0). Frames must loop seamlessly (gentle ripples, blue)"
+   },
+   {
+    "from": 6,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused by code; spare open-water tiles (paint same as frame 0)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge; water at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge; water at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge; water at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge; water at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-left edge; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-left edge; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-left edge; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-left edge; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge; water at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge; water at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge; water at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge; water at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge; water at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge; water at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge; water at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge; water at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge, upper-left edge; water at: upper-right edge, right corner, lower-right edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge, upper-left edge; water at: upper-right edge, right corner, lower-right edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge, upper-left edge; water at: upper-right edge, right corner, lower-right edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge, upper-left edge; water at: upper-right edge, right corner, lower-right edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, upper-left edge; water at: lower-right edge, bottom corner, lower-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, upper-left edge; water at: lower-right edge, bottom corner, lower-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, upper-left edge; water at: lower-right edge, bottom corner, lower-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, upper-left edge; water at: lower-right edge, bottom corner, lower-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge; water at: lower-left edge, left corner, upper-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge; water at: lower-left edge, left corner, upper-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge; water at: lower-left edge, left corner, upper-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge; water at: lower-left edge, left corner, upper-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge; water at: upper-right edge, upper-left edge, top corner; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge; water at: upper-right edge, upper-left edge, top corner; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge; water at: upper-right edge, upper-left edge, top corner; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge; water at: upper-right edge, upper-left edge, top corner; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-left edge; water at: lower-right edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-left edge; water at: lower-right edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, upper-left edge; water at: upper-right edge, lower-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, upper-left edge; water at: upper-right edge, lower-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge, upper-left edge; water at: upper-right edge"
+   },
+   {
+    "from": 45,
+    "to": 45,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-left edge, upper-left edge; water at: lower-right edge"
+   },
+   {
+    "from": 46,
+    "to": 46,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge, upper-left edge; water at: lower-left edge"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge, lower-left edge; water at: upper-left edge"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, left corner; water at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 49,
+    "to": 49,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: bottom corner, top corner; water at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 50,
+    "to": 50,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: left corner; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 51,
+    "to": 51,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: top corner; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 52,
+    "to": 52,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner; water at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner"
+   },
+   {
+    "from": 53,
+    "to": 53,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: bottom corner; water at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge, top corner"
+   },
+   {
+    "from": 54,
+    "to": 54,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: left corner, top corner; water at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 55,
+    "to": 55,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, top corner; water at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 56,
+    "to": 56,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, bottom corner; water at: upper-right edge, lower-right edge, lower-left edge, left corner, upper-left edge, top corner"
+   },
+   {
+    "from": 57,
+    "to": 57,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: bottom corner, left corner; water at: upper-right edge, right corner, lower-right edge, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 58,
+    "to": 58,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, left corner, top corner; water at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 59,
+    "to": 59,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, bottom corner, top corner; water at: upper-right edge, lower-right edge, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 60,
+    "to": 60,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, bottom corner, left corner; water at: upper-right edge, lower-right edge, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 61,
+    "to": 61,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: bottom corner, left corner, top corner; water at: upper-right edge, right corner, lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 62,
+    "to": 62,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, bottom corner, left corner, top corner; water at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 63,
+    "to": 63,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-left edge, top corner; water at: upper-right edge, right corner, lower-right edge, upper-left edge"
+   },
+   {
+    "from": 64,
+    "to": 64,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, lower-left edge; water at: upper-right edge, lower-right edge, upper-left edge, top corner"
+   },
+   {
+    "from": 65,
+    "to": 65,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, lower-left edge, top corner; water at: upper-right edge, lower-right edge, upper-left edge"
+   },
+   {
+    "from": 66,
+    "to": 66,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, upper-left edge; water at: upper-right edge, lower-right edge, bottom corner, lower-left edge"
+   },
+   {
+    "from": 67,
+    "to": 67,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: bottom corner, upper-left edge; water at: upper-right edge, right corner, lower-right edge, lower-left edge"
+   },
+   {
+    "from": 68,
+    "to": 68,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, bottom corner, upper-left edge; water at: upper-right edge, lower-right edge, lower-left edge"
+   },
+   {
+    "from": 69,
+    "to": 69,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, bottom corner; water at: lower-right edge, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 70,
+    "to": 70,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, left corner; water at: lower-right edge, bottom corner, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 71,
+    "to": 71,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, bottom corner, left corner; water at: lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 72,
+    "to": 72,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, left corner; water at: upper-right edge, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 73,
+    "to": 73,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, top corner; water at: upper-right edge, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 74,
+    "to": 74,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, left corner, top corner; water at: upper-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 75,
+    "to": 75,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: right corner, lower-left edge, upper-left edge; water at: upper-right edge, lower-right edge"
+   },
+   {
+    "from": 76,
+    "to": 76,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, bottom corner, upper-left edge; water at: lower-right edge, lower-left edge"
+   },
+   {
+    "from": 77,
+    "to": 77,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge, left corner; water at: lower-left edge, upper-left edge"
+   },
+   {
+    "from": 78,
+    "to": 78,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: lower-right edge, lower-left edge, top corner; water at: upper-right edge, upper-left edge"
+   },
+   {
+    "from": 79,
+    "to": 79,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "water tile with shoreline; context: land (shore) at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1013 image_group(GROUP_TERRAIN_WATER) + img->group_offset + img->item_offset",
+   "src/map/image_context.c terrain_images_water[] max offset 79 (+item_offset, max_item_offset 6 for row with offset 0, 4 for 8..36, 2 for 40/42)",
+   "src/widget/city_without_overlay.c:90-91 & widget/map_editor.c:56-57 water animation range first..first+5"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. \"land (shore) at X\" means the neighbour in that direction is not water: paint sand/grass bank on that side, water elsewhere. Flat tiles (top 0)."
+ },
+ "GROUP_TERRAIN_WATER_SHORE": {
+  "id": 207,
+  "count": 20,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused by code; spare fortified (stone quay) shore tiles: water with stone embankment"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 20: land along lower-right edge"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 16: land along upper-right edge"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 8: land along lower-left edge"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 12: land along upper-left edge"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 50: land only at left corner"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 52: land only at right corner"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 51: land only at top corner"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 53: land only at bottom corner"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 28: land along upper-right and upper-left edges (land toward top)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 36: land along lower-right and lower-left edges (land toward bottom)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 24: land along lower-left and upper-left edges (land toward left)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "fortified shore (cut stone quay wall instead of natural bank) next to buildings; replaces water offset 32: land along upper-right and lower-right edges (land toward right)"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1014-1031 fortified shore: base+8..base+19 chosen from water group_offset 8,12,16,20,24,28,32,36,50..53"
+  ],
+  "notes": "Used when a building lies within radius 1 of the water tile. Offsets 0..7 never referenced."
+ },
+ "GROUP_TERRAIN_EARTHQUAKE": {
+  "id": 6,
+  "count": 30,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-left edge; no chasm at: lower-right edge, upper-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-left edge; no chasm at: lower-right edge, upper-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-left edge; no chasm at: lower-right edge, upper-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-left edge; no chasm at: lower-right edge, upper-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, upper-left edge; no chasm at: upper-right edge, lower-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, upper-left edge; no chasm at: upper-right edge, lower-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, upper-left edge; no chasm at: upper-right edge, lower-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, upper-left edge; no chasm at: upper-right edge, lower-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-right edge; no chasm at: lower-left edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-right edge; no chasm at: lower-left edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, lower-left edge; no chasm at: upper-right edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, lower-left edge; no chasm at: upper-right edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-left edge, upper-left edge; no chasm at: upper-right edge, lower-right edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-left edge, upper-left edge; no chasm at: upper-right edge, lower-right edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, upper-left edge; no chasm at: lower-right edge, lower-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, upper-left edge; no chasm at: lower-right edge, lower-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge; no chasm at: lower-right edge, lower-left edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge; no chasm at: lower-right edge, lower-left edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-left edge; no chasm at: upper-right edge, lower-right edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-left edge; no chasm at: upper-right edge, lower-right edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge; no chasm at: upper-right edge, lower-left edge, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge; no chasm at: upper-right edge, lower-left edge, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-left edge; no chasm at: upper-right edge, lower-right edge, lower-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-left edge; no chasm at: upper-right edge, lower-right edge, lower-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: no chasm at: upper-right edge, lower-right edge, lower-left edge, upper-left edge; also reused for 1 similar contexts"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-right edge, lower-left edge; no chasm at: upper-left edge"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: lower-right edge, lower-left edge, upper-left edge; no chasm at: upper-right edge"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-left edge, upper-left edge; no chasm at: lower-right edge"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-right edge, upper-left edge; no chasm at: lower-left edge"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "earthquake chasm/crack in the ground (dark rocky fissure on grass/dirt); context: chasm continues at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1096-1100 image_group(GROUP_TERRAIN_EARTHQUAKE) + group_offset + item_offset, fallback +0",
+   "src/map/image_context.c terrain_images_earthquake[] max 29"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. Offset 24 = isolated crack (also the fallback); 29 = crack connecting all four edges. Flat (top 0)."
+ },
+ "GROUP_TERRAIN_GRASS_1": {
+  "id": 10,
+  "count": 58,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) plain grass tile, 8 random 1x1 variants"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 2x2 grass patch variant 0, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 12,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 2x2 grass patch variant 1, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 16,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 2x2 grass patch variant 2, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 20,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 2x2 grass patch variant 3, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 24,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 3x3 grass patch variant 0, split into nine 1x1 tiles, index = dy*3+dx"
+   },
+   {
+    "from": 33,
+    "to": 41,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 3x3 grass patch variant 1, split into nine 1x1 tiles, index = dy*3+dx"
+   },
+   {
+    "from": 42,
+    "to": 57,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "green (normal climate) 4x4 grass patch, split into sixteen 1x1 tiles, index = dy*4+dx"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:925-951 set_empty_land_pass1/2: +(random&7), +8+4*(random&3) size2, +24+9*(random&1) size3, +42 size4",
+   "src/widget/city_with_overlay.c:404, city_overlay_other.c:506,718, city_overlay_risks.c:404, routing_terrain.c:120, tiles.c:1238,1265 +(random&7)",
+   "src/window/asset_previewer.c:58,350 offsets 0..57"
+  ],
+  "notes": "Every image is a single 58x30 flat tile; larger patches are drawn as several tiles (set_empty_land_image assigns image_id + index per tile). window/asset_previewer.c draws random offsets 0..57 (NUM_GRASS_TILES=58)."
+ },
+ "GROUP_TERRAIN_GRASS_2": {
+  "id": 7,
+  "count": 58,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) plain grass tile, 8 random 1x1 variants"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 2x2 grass patch variant 0, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 12,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 2x2 grass patch variant 1, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 16,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 2x2 grass patch variant 2, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 20,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 2x2 grass patch variant 3, SPLIT INTO FOUR 1x1 TILES: offset base+index where index = dy*2+dx (dx,dy in grid coords; 0=top tile, 1=right (x+1), 2=left (y+1), 3=bottom). Must tile seamlessly as one 2x2 picture"
+   },
+   {
+    "from": 24,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 3x3 grass patch variant 0, split into nine 1x1 tiles, index = dy*3+dx"
+   },
+   {
+    "from": 33,
+    "to": 41,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 3x3 grass patch variant 1, split into nine 1x1 tiles, index = dy*3+dx"
+   },
+   {
+    "from": 42,
+    "to": 57,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "alternate terrain (drier, yellower grass / scrub) 4x4 grass patch, split into sixteen 1x1 tiles, index = dy*4+dx"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:931,944 used when map_property_is_alternate_terrain",
+   "src/window/asset_previewer.c:351"
+  ],
+  "notes": "Every image is a single 58x30 flat tile; larger patches are drawn as several tiles (set_empty_land_image assigns image_id + index per tile). window/asset_previewer.c draws random offsets 0..57 (NUM_GRASS_TILES=58)."
+ },
+ "GROUP_TERRAIN_ELEVATION_ROCK": {
+  "id": 8,
+  "count": 14,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "rock near elevation/cliffs (rock tinted like the cliff stone), 1x1, 8 random variants"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "large rock outcrop 2x2 (near elevation), 4 random variants"
+   },
+   {
+    "from": 12,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 60,
+    "desc": "huge rock formation 3x3 (near elevation), 2 random variants"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:123-150 set_rock_image: 3x3 => 12+(random&1); 2x2 => 8+(random&3); 1x1 => random&7"
+  ],
+  "notes": "Chosen instead of GROUP_TERRAIN_ROCK when an elevation tile is within radius 4. 2x2/3x3 are placed as multi-tile images via map_building_tiles_add."
+ },
+ "GROUP_TERRAIN_ROCK": {
+  "id": 239,
+  "count": 14,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "impassable rock / boulders on grass, 1x1, 8 random variants (grey stone)"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "large rock outcrop 2x2, 4 random variants"
+   },
+   {
+    "from": 12,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 60,
+    "desc": "huge rock formation 3x3, 2 random variants"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:123-150 set_rock_image: 3x3 => 12+(random&1); 2x2 => 8+(random&3); 1x1 => random&7"
+  ],
+  "notes": "2x2/3x3 are placed as multi-tile images via map_building_tiles_add."
+ },
+ "GROUP_TERRAIN_ELEVATION": {
+  "id": 9,
+  "count": 36,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, upper-left edge, top corner; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, upper-left edge, top corner; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge, top corner; neighbour lower at: bottom corner; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge, top corner; neighbour lower at: bottom corner; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-right edge, bottom corner, lower-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; neighbour lower at: top corner; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; neighbour lower at: top corner; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-left edge, left corner, upper-left edge; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: lower-left edge, left corner, upper-left edge; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner; neighbour lower at: right corner; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner; neighbour lower at: right corner; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner; neighbour lower at: left corner; variant 1 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: neighbour at same/higher level at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner; neighbour lower at: left corner; variant 2 of 2 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: any neighbours (fallback); variant 1 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: any neighbours (fallback); variant 2 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: any neighbours (fallback); variant 3 of 4 (variants cycle so neighbouring tiles differ)"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "elevation cliff/slope tile (raised plateau edge: grassy top, brown-grey rock face dropping toward the lower neighbours); context: any neighbours (fallback); variant 4 of 4 (variants cycle so neighbouring tiles differ)"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1271 image_group(GROUP_TERRAIN_ELEVATION) + group_offset + item_offset",
+   "src/map/image_context.c terrain_images_elevation[]: offsets 0..35 (offset 44 = fully surrounded, never stored: tile becomes normal terrain)"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. Cliff face should be visible on the screen-lower sides that face lower neighbours. Offsets 32..35 = fallback (no full-match rule; e.g. isolated peak / narrow ridge), 4 variants."
+ },
+ "GROUP_BUILDING_WALL": {
+  "id": 24,
+  "count": 34,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: wall at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, lower-left edge; wall at: lower-right edge, upper-left edge; also reused for 4 similar contexts"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-left edge; wall at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge; wall at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: lower-right edge, upper-left edge; wall at: upper-right edge, lower-left edge; also reused for 4 similar contexts"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, lower-left edge, upper-left edge; wall at: lower-right edge; also reused for 2 similar contexts"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, upper-left edge; wall at: lower-right edge, bottom corner, lower-left edge"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, lower-right edge, upper-left edge; wall at: lower-left edge; also reused for 2 similar contexts"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: lower-right edge, lower-left edge; wall at: upper-right edge, upper-left edge, top corner; also reused for 1 similar contexts"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "unused by code; spare wall segment (paint as straight wall)"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, lower-right edge, lower-left edge; wall at: upper-left edge"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: lower-right edge, lower-left edge, upper-left edge; wall at: upper-right edge"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: right corner, left corner; wall at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: bottom corner, top corner; wall at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: left corner, top corner; wall at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge; also reused for 1 similar contexts"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: top corner; wall at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: right corner, top corner; wall at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; also reused for 1 similar contexts"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, bottom corner, upper-left edge; wall at: lower-right edge, lower-left edge; also reused for 11 similar contexts"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: right corner, left corner, top corner; wall at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: right corner, upper-left edge; wall at: upper-right edge, lower-right edge, bottom corner, lower-left edge"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, left corner; wall at: lower-right edge, bottom corner, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "city wall segment (grey cut stone, crenellated top); context: no wall at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall end abutting a gatehouse (gatehouse-context): wall/gatehouse on upper-right and lower-right edges"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall end abutting a gatehouse (gatehouse-context): wall/gatehouse on lower-left and upper-left edges"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall next to gatehouse, set manually (orientation-dependent): wall piece leading into the gatehouse along the upper-right direction"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall next to gatehouse, set manually: wall piece leading into the gatehouse along the upper-left direction"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall next to gatehouse (manual + gatehouse-context straight piece): wall piece joining gatehouse side, variant A"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall next to gatehouse (manual + gatehouse-context straight piece): wall piece joining gatehouse side, variant B"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 36,
+    "desc": "wall next to gatehouse, set manually: corner/thick wall junction beside gatehouse"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:640-652 set_wall_image: image_group(GROUP_BUILDING_WALL) + group_offset (+item_offset always 0)",
+   "src/map/image_context.c terrain_images_wall[] (max 26) and terrain_images_wall_gatehouse[] (5..32)",
+   "src/map/tiles.c:528-632 set_wall_gatehouse_image_manually offsets 29..33",
+   "src/building/properties.c:118 BUILDING_WALL ghost image {24, 26}"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. Offset 0 = wall with wall on all 8 neighbours (inside of a thick wall); 26 = isolated wall tile (no wall neighbours, also the build ghost). Walls are 1x1 tiles rising above the diamond."
+ },
+ "GROUP_TERRAIN_ROAD": {
+  "id": 112,
+  "count": 67,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-left edge; no road at: lower-right edge, upper-left edge"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, upper-left edge; no road at: upper-right edge, lower-left edge"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge; no road at: lower-left edge, upper-left edge"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, lower-left edge; no road at: upper-right edge, upper-left edge"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-left edge, upper-left edge; no road at: upper-right edge, lower-right edge"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, upper-left edge; no road at: lower-right edge, lower-left edge"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge; no road at: lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge; no road at: upper-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-left edge; no road at: upper-right edge, lower-right edge, upper-left edge"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-left edge; no road at: upper-right edge, lower-right edge, lower-left edge"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: no road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner; also reused for 1 similar contexts"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, lower-left edge; no road at: right corner, bottom corner, upper-left edge"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, lower-left edge, upper-left edge; no road at: upper-right edge, bottom corner, left corner"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-left edge, upper-left edge; no road at: lower-right edge, left corner, top corner"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, upper-left edge; no road at: right corner, lower-left edge, top corner"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, lower-left edge, upper-left edge; no road at: right corner, bottom corner, left corner, top corner"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge; no road at: upper-left edge"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; no road at: upper-right edge"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-left edge, left corner, upper-left edge, top corner; no road at: lower-right edge"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, upper-left edge, top corner; no road at: lower-left edge"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge; no road at: lower-left edge, left corner, upper-left edge"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, bottom corner, lower-left edge; no road at: upper-right edge, upper-left edge, top corner"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-left edge, left corner, upper-left edge; no road at: upper-right edge, right corner, lower-right edge"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, upper-left edge, top corner; no road at: lower-right edge, bottom corner, lower-left edge"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, bottom corner, lower-left edge; no road at: right corner, upper-left edge"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, bottom corner, lower-left edge, upper-left edge; no road at: upper-right edge, left corner"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-left edge, left corner, upper-left edge; no road at: lower-right edge, top corner"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, upper-left edge, top corner; no road at: right corner, lower-left edge"
+   },
+   {
+    "from": 30,
+    "to": 30,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, lower-left edge; no road at: bottom corner, upper-left edge"
+   },
+   {
+    "from": 31,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: lower-right edge, lower-left edge, left corner, upper-left edge; no road at: upper-right edge, bottom corner"
+   },
+   {
+    "from": 32,
+    "to": 32,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-left edge, upper-left edge, top corner; no road at: lower-right edge, left corner"
+   },
+   {
+    "from": 33,
+    "to": 33,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, upper-left edge; no road at: lower-left edge, top corner"
+   },
+   {
+    "from": 34,
+    "to": 34,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, lower-left edge, left corner, upper-left edge, top corner; no road at: right corner, bottom corner"
+   },
+   {
+    "from": 35,
+    "to": 35,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, lower-left edge, upper-left edge, top corner; no road at: bottom corner, left corner"
+   },
+   {
+    "from": 36,
+    "to": 36,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge; no road at: left corner, top corner"
+   },
+   {
+    "from": 37,
+    "to": 37,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; no road at: right corner, top corner"
+   },
+   {
+    "from": 38,
+    "to": 38,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, lower-left edge, upper-left edge, top corner; no road at: right corner, bottom corner, left corner"
+   },
+   {
+    "from": 39,
+    "to": 39,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, lower-left edge, upper-left edge; no road at: bottom corner, left corner, top corner"
+   },
+   {
+    "from": 40,
+    "to": 40,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge; no road at: right corner, left corner, top corner"
+   },
+   {
+    "from": 41,
+    "to": 41,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, lower-left edge, left corner, upper-left edge; no road at: right corner, bottom corner, top corner"
+   },
+   {
+    "from": 42,
+    "to": 42,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner; no road at: left corner"
+   },
+   {
+    "from": 43,
+    "to": 43,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge; no road at: top corner"
+   },
+   {
+    "from": 44,
+    "to": 44,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner; no road at: right corner"
+   },
+   {
+    "from": 45,
+    "to": 45,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge, top corner; no road at: bottom corner"
+   },
+   {
+    "from": 46,
+    "to": 46,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, lower-left edge, left corner, upper-left edge; no road at: bottom corner, top corner"
+   },
+   {
+    "from": 47,
+    "to": 47,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, lower-right edge, bottom corner, lower-left edge, upper-left edge, top corner; no road at: right corner, left corner"
+   },
+   {
+    "from": 48,
+    "to": 48,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "PAVED road (light grey stone slabs on grass); context: road at: upper-right edge, right corner, lower-right edge, bottom corner, lower-left edge, left corner, upper-left edge, top corner"
+   },
+   {
+    "from": 49,
+    "to": 49,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-left edge; no road at: lower-right edge, upper-left edge"
+   },
+   {
+    "from": 50,
+    "to": 50,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-right edge, upper-left edge; no road at: upper-right edge, lower-left edge"
+   },
+   {
+    "from": 51,
+    "to": 51,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused by code; spare dirt road piece"
+   },
+   {
+    "from": 52,
+    "to": 52,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "unused by code; spare dirt road piece"
+   },
+   {
+    "from": 53,
+    "to": 53,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-right edge; no road at: lower-left edge, upper-left edge"
+   },
+   {
+    "from": 54,
+    "to": 54,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-right edge, lower-left edge; no road at: upper-right edge, upper-left edge"
+   },
+   {
+    "from": 55,
+    "to": 55,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-left edge, upper-left edge; no road at: upper-right edge, lower-right edge"
+   },
+   {
+    "from": 56,
+    "to": 56,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, upper-left edge; no road at: lower-right edge, lower-left edge"
+   },
+   {
+    "from": 57,
+    "to": 57,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge; no road at: lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 58,
+    "to": 58,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-right edge; no road at: upper-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 59,
+    "to": 59,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-left edge; no road at: upper-right edge, lower-right edge, upper-left edge"
+   },
+   {
+    "from": 60,
+    "to": 60,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-left edge; no road at: upper-right edge, lower-right edge, lower-left edge"
+   },
+   {
+    "from": 61,
+    "to": 61,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: no road at: upper-right edge, lower-right edge, lower-left edge, upper-left edge; also reused for 1 similar contexts"
+   },
+   {
+    "from": 62,
+    "to": 62,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-right edge, lower-left edge; no road at: upper-left edge"
+   },
+   {
+    "from": 63,
+    "to": 63,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: lower-right edge, lower-left edge, upper-left edge; no road at: upper-right edge"
+   },
+   {
+    "from": 64,
+    "to": 64,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-left edge, upper-left edge; no road at: lower-right edge"
+   },
+   {
+    "from": 65,
+    "to": 65,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-right edge, upper-left edge; no road at: lower-left edge"
+   },
+   {
+    "from": 66,
+    "to": 66,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "DIRT road (brown packed earth on grass); context: road at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:769-776 paved: +group_offset; dirt: +group_offset+49",
+   "src/map/image_context.c terrain_images_paved_road[] max 48, terrain_images_dirt_road[] max 17 => 49+17=66",
+   "src/map/road_aqueduct.c:69-74 offsets 0,1,49,50 = straight roads",
+   "src/widget/city_building_ghost.c:1084 & map_editor_tool.c:90 ghost +0/+1",
+   "src/widget/city_with_overlay.c:393-400"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. Offsets 0/49 = straight road running between upper-right and lower-left edges, 1/50 = straight between upper-left and lower-right; 4-7 / 53-56 corners; 8-11 / 57-60 dead ends; 12 / 61 isolated; 13-16 / 62-65 T-junctions; 17 / 66 crossroads. Paved 18..48 add diagonal-neighbour info (wider paved areas where the corner tiles are road too); 48 = fully surrounded paved area. 2..3 and 51..52 are never produced. Flat tiles."
+ },
+ "GROUP_BUILDING_AQUEDUCT": {
+  "id": 19,
+  "count": 30,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct arch over PAVED road, aqueduct runs upper-right<->lower-left (road passes under the arch)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct arch over PAVED road, aqueduct runs upper-left<->lower-right"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct straight piece running upper-right<->lower-left (also used for end pieces and the default)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct straight piece running upper-left<->lower-right (also end pieces)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge; none at: lower-left edge, upper-left edge"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: lower-right edge, lower-left edge; none at: upper-right edge, upper-left edge"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: lower-left edge, upper-left edge; none at: upper-right edge, lower-right edge"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, upper-left edge; none at: lower-right edge, lower-left edge"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct arch over DIRT road, aqueduct runs upper-right<->lower-left"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct arch over DIRT road, aqueduct runs upper-left<->lower-right"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, lower-left edge; none at: upper-left edge"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: lower-right edge, lower-left edge, upper-left edge; none at: upper-right edge"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-left edge, upper-left edge; none at: lower-right edge"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, upper-left edge; none at: lower-left edge"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "WITH water (blue water in channel); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   },
+   {
+    "from": 15,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct arch over PAVED road, aqueduct runs upper-right<->lower-left (road passes under the arch)"
+   },
+   {
+    "from": 16,
+    "to": 16,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct arch over PAVED road, aqueduct runs upper-left<->lower-right"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct straight piece running upper-right<->lower-left (also used for end pieces and the default)"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct straight piece running upper-left<->lower-right (also end pieces)"
+   },
+   {
+    "from": 19,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge; none at: lower-left edge, upper-left edge"
+   },
+   {
+    "from": 20,
+    "to": 20,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: lower-right edge, lower-left edge; none at: upper-right edge, upper-left edge"
+   },
+   {
+    "from": 21,
+    "to": 21,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: lower-left edge, upper-left edge; none at: upper-right edge, lower-right edge"
+   },
+   {
+    "from": 22,
+    "to": 22,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, upper-left edge; none at: lower-right edge, lower-left edge"
+   },
+   {
+    "from": 23,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct arch over DIRT road, aqueduct runs upper-right<->lower-left"
+   },
+   {
+    "from": 24,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct arch over DIRT road, aqueduct runs upper-left<->lower-right"
+   },
+   {
+    "from": 25,
+    "to": 25,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, lower-left edge; none at: upper-left edge"
+   },
+   {
+    "from": 26,
+    "to": 26,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: lower-right edge, lower-left edge, upper-left edge; none at: upper-right edge"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-left edge, upper-left edge; none at: lower-right edge"
+   },
+   {
+    "from": 28,
+    "to": 28,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, upper-left edge; none at: lower-left edge"
+   },
+   {
+    "from": 29,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "EMPTY (dry channel, no water); aqueduct on grass; aqueduct/reservoir connection at: upper-right edge, lower-right edge, lower-left edge, upper-left edge"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:702-731 set_aqueduct_image: base + water_offset(0|15) + group_offset; road: 2/3 -> -2 (paved) or +6 (dirt)",
+   "src/map/image_context.c terrain_images_aqueduct[] group offsets 2..14",
+   "src/map/road_aqueduct.c:16-37,97-118 & routing_terrain.c:82-100 classify offsets 0..29",
+   "src/widget/city_building_ghost.c:664-681 +group_offset+13/+21/+15",
+   "src/map/water_supply.c:88-93,131 image_id +/- 15 when water toggles",
+   "/usr/share/augustus-game/assets/Graphics/logistics.xml:352-364 layers group 19 images 0,1,15,16 (58x58)"
+  ],
+  "notes": "Screen directions are for the default view (orientation 0): the tile diamond has a top corner, right corner, bottom corner, left corner, and four edges (upper-right = grid y-1, lower-right = grid x+1, lower-left = grid y+1, upper-left = grid x-1). The engine rotates by picking a different offset, so each offset always has the same on-screen shape. Offsets 0..14 = full, 15..29 = identical shapes without water (offset+15). Asset XML treats images 0/1/15/16 as 58x58 (top 28). Raised stone channel on small arches."
+ },
+ "GROUP_BUILDING_AQUEDUCT_NO_WATER": {
+  "id": 196,
+  "count": 15,
+  "entries": [
+   {
+    "from": 0,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "ALIAS of GROUP_BUILDING_AQUEDUCT offsets 15..29 (empty aqueduct pieces). Must be the very same images: image_group(196) == image_group(19) + 15"
+   }
+  ],
+  "evidence": [
+   "src/map/water_supply.c:90 if (image_id < image_group(GROUP_BUILDING_AQUEDUCT_NO_WATER)) image += 15",
+   "src/map/water_supply.c:131 else if (image_id >= image_group(GROUP_BUILDING_AQUEDUCT_NO_WATER)) image -= 15"
+  ],
+  "notes": "Never indexed directly; only used as a threshold. Layout requirement: start index of group 196 must be exactly start(19)+15 (overlapping group 19), i.e. do not allocate new images for it; give the group table entry the value start(19)+15."
+ },
+ "GROUP_TERRAIN_OVERLAY": {
+  "id": 20,
+  "count": 32,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, no water coverage (neutral grey-brown), NON-HOUSE: +0 top tile of footprint (outline on both upper edges; also the 1x1 piece and the construction-site tile), +1 tile on upper-left edge row, +2 tile on upper-right edge row, +3 interior/other tiles (plain)"
+   },
+   {
+    "from": 4,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, no water coverage (neutral grey-brown), HOUSE variant (slightly different colour, e.g. reddish/brown): +4 top, +5 upper-left edge, +6 upper-right edge, +7 interior"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in reservoir range (medium blue tint), NON-HOUSE: +0 top tile of footprint (outline on both upper edges; also the 1x1 piece and the construction-site tile), +1 tile on upper-left edge row, +2 tile on upper-right edge row, +3 interior/other tiles (plain)"
+   },
+   {
+    "from": 12,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in reservoir range (medium blue tint), HOUSE variant (slightly different colour, e.g. reddish/brown): +4 top, +5 upper-left edge, +6 upper-right edge, +7 interior"
+   },
+   {
+    "from": 16,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in fountain/well range (light blue tint), NON-HOUSE: +0 top tile of footprint (outline on both upper edges; also the 1x1 piece and the construction-site tile), +1 tile on upper-left edge row, +2 tile on upper-right edge row, +3 interior/other tiles (plain)"
+   },
+   {
+    "from": 20,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in fountain/well range (light blue tint), HOUSE variant (slightly different colour, e.g. reddish/brown): +4 top, +5 upper-left edge, +6 upper-right edge, +7 interior"
+   },
+   {
+    "from": 24,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in both reservoir and fountain range (strong blue tint), NON-HOUSE: +0 top tile of footprint (outline on both upper edges; also the 1x1 piece and the construction-site tile), +1 tile on upper-left edge row, +2 tile on upper-right edge row, +3 interior/other tiles (plain)"
+   },
+   {
+    "from": 28,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "flattened building footprint for overlays, in both reservoir and fountain range (strong blue tint), HOUSE variant (slightly different colour, e.g. reddish/brown): +4 top, +5 upper-left edge, +6 upper-right edge, +7 interior"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_with_overlay.c:214-327 draw_flattened_building_footprint base+image_offset(+4 house)+{0..3}",
+   "src/widget/city_overlay_other.c:513-546 image_offset 0/8/16/24; plain terrain +11/+19/+27",
+   "src/widget/city_without_overlay.c:182 constructing tiles drawn as +0",
+   "src/widget/map_editor_tool.c:65 +0"
+  ],
+  "notes": "All flat 58x30 tiles. Max offset 24+4+3 = 31."
+ },
+ "GROUP_TERRAIN_FLAT_TILE": {
+  "id": 21,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "plain flat diamond, pure WHITE (or very light grey), fully opaque inside the 58x30 diamond, transparent outside. Used as a colour-tint mask (green/red build footprints, roamer preview, sentiment blends, SDL colour-mod blend texture), so it must be white for tinting to work"
+   }
+  ],
+  "evidence": [
+   "src/platform/renderer.c:777-800 create_blend_texture uses it as 58x30 texture with SDL colour mod",
+   "src/widget/city_building_ghost.c:182,196,201,516,527,1051,1102,1159",
+   "src/widget/city_overlay_other.c:605-611",
+   "src/widget/city_with_overlay.c:367,373"
+  ],
+  "notes": ""
+ },
+ "GROUP_TERRAIN_PLAZA": {
+  "id": 58,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "single-tile plaza paving (decorative stone slabs, e.g. light/dark patterned tiles), 6 variants; 0,1,2 are composed into Augustus asset \"Plazas\" (aesthetics.xml), 3..5 not referenced by code but part of original set"
+   },
+   {
+    "from": 6,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 0,
+    "desc": "2x2 plaza paving (large decorative paved square, e.g. mosaic pattern), 2 random variants"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:343-348 +6/+7 2x2 via map_building_tiles_add",
+   "src/building/properties.c:150 plaza ghost {58, 0}",
+   "/usr/share/augustus-game/assets/Graphics/aesthetics.xml:477-487 layers group 58 images 0,1,2"
+  ],
+  "notes": "Single-tile plazas in game use asset \"Plazas\" (9 images, three of which are offsets 0,1,2). Offsets 3..5 are padding to keep 2x2 at 6..7."
+ },
+ "GROUP_TERRAIN_GARDEN": {
+  "id": 59,
+  "count": 7,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "1x1 garden tile variants (low hedges, flowers, green lawn); 1 and 2 used directly for gardens, 0 used as base layer of ornamental trees, 2 and 3 used as base layers of ornamental trees / garden paths (aesthetics.xml, drawn as 58x30-32 flat tiles)"
+   },
+   {
+    "from": 4,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 0,
+    "desc": "2x2 garden (larger formal garden with paths/flower beds), 3 random variants (6 most common)"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:248-300 garden_image_ids: garden+1, garden+2; 2x2 garden+4/+5/+6",
+   "src/building/properties.c:151 gardens ghost {59, 1}",
+   "/usr/share/augustus-game/assets/Graphics/aesthetics.xml lines 7-74,193-221,367,505 layers group 59 images 0,2,3"
+  ],
+  "notes": "Flat (top 0); XML assets stack tree tops on images 0/2/3 and expect them to be plain 58-wide flat tiles."
+ },
+ "GROUP_OVERLAY_COLUMN": {
+  "id": 103,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 48,
+    "h": 20,
+    "desc": "overlay column CAPITAL (top piece), green marble column capital; height is read at runtime (image height) and stacked on top of the shaft"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 26,
+    "h": 13,
+    "desc": "overlay column SHAFT segment, green; drawn repeatedly every 10 px vertically (overlapping 3 px), at x+17"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 42,
+    "h": 24,
+    "desc": "overlay column BASE (plinth), green; drawn at tile x+9, y-8"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 48,
+    "h": 20,
+    "desc": "overlay column CAPITAL (top piece), yellow-green marble column capital; height is read at runtime (image height) and stacked on top of the shaft"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 26,
+    "h": 13,
+    "desc": "overlay column SHAFT segment, yellow-green; drawn repeatedly every 10 px vertically (overlapping 3 px), at x+17"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 42,
+    "h": 24,
+    "desc": "overlay column BASE (plinth), yellow-green; drawn at tile x+9, y-8"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "sprite",
+    "w": 48,
+    "h": 20,
+    "desc": "overlay column CAPITAL (top piece), orange marble column capital; height is read at runtime (image height) and stacked on top of the shaft"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 26,
+    "h": 13,
+    "desc": "overlay column SHAFT segment, orange; drawn repeatedly every 10 px vertically (overlapping 3 px), at x+17"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "sprite",
+    "w": 42,
+    "h": 24,
+    "desc": "overlay column BASE (plinth), orange; drawn at tile x+9, y-8"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "sprite",
+    "w": 48,
+    "h": 20,
+    "desc": "overlay column CAPITAL (top piece), red marble column capital; height is read at runtime (image height) and stacked on top of the shaft"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "sprite",
+    "w": 26,
+    "h": 13,
+    "desc": "overlay column SHAFT segment, red; drawn repeatedly every 10 px vertically (overlapping 3 px), at x+17"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "sprite",
+    "w": 42,
+    "h": 24,
+    "desc": "overlay column BASE (plinth), red; drawn at tile x+9, y-8"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_with_overlay.c:426-451 draw_overlay_column: colour base 0/3/6/9 (red=9, gradient = height-(height%3) or 9-height+height%3); +2 base at (x+9,y-8); +1 shaft at (x+17, y-8-10*i+13) for i=1..h-1; +0 capital at (x+5, y-8-capital_height-10*(h-1)+13); h<=10"
+  ],
+  "notes": "Tile (x,y) is the top-left of the 58x30 tile bounding box. Colour sets: 0..2 green (COLUMN_COLOR_GREEN/low), 3..5, 6..8, 9..11 red. Gradient types pick 0,3,6,9 by height bands. Shaft centred under capital: base centre ~x+30, shaft centre ~x+30, capital centre ~x+29."
+ },
+ "GROUP_TERRAIN_RUBBLE": {
+  "id": 114,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 6,
+    "desc": "rubble / collapsed debris on ground (broken stones, bricks, grey-brown), 8 random variants, flat or very low"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1135 + (random & 7)",
+   "src/map/building_tiles.c:235 + (random & 7)"
+  ],
+  "notes": ""
+ },
+ "GROUP_TERRAIN_RUBBLE_TENT": {
+  "id": 119,
+  "count": 9,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "burning ruin base tile (former tent: burning cloth/wood): charred rubble/embers on ground, 1x1. ANIMATION base: num_sprites 8, frames at base+1..base+8",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 1
+    }
+   },
+   {
+    "from": 1,
+    "to": 8,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "fire/flames animation frames 1..8 for burning ruin (former tent: burning cloth/wood); orange-yellow flames with smoke, drawn at base sprite_offset"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:881-883 BUILDING_BURNING_RUIN was_tent => image_group(GROUP_TERRAIN_RUBBLE_TENT)",
+   "src/widget/city_without_overlay.c:619-650 draw_animation: base image animation, frames base+start_offset+1..num_sprites"
+  ],
+  "notes": "Frame count 8 is our choice (code reads num_sprites); animation needs sprite_offset_x/y placing flames over the tile (approx x 14, y -20)."
+ },
+ "GROUP_TERRAIN_RUBBLE_GENERAL": {
+  "id": 120,
+  "count": 36,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "burning ruin base tile (general building variant 0): charred rubble/embers on ground, 1x1. ANIMATION base: num_sprites 8, frames at base+1..base+8",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 1
+    }
+   },
+   {
+    "from": 1,
+    "to": 8,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "fire/flames animation frames 1..8 for burning ruin (general building variant 0); orange-yellow flames with smoke, drawn at base sprite_offset"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "burning ruin base tile (general building variant 1): charred rubble/embers on ground, 1x1. ANIMATION base: num_sprites 8, frames at base+1..base+8",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 1
+    }
+   },
+   {
+    "from": 10,
+    "to": 17,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "fire/flames animation frames 1..8 for burning ruin (general building variant 1); orange-yellow flames with smoke, drawn at base sprite_offset"
+   },
+   {
+    "from": 18,
+    "to": 18,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "burning ruin base tile (general building variant 2): charred rubble/embers on ground, 1x1. ANIMATION base: num_sprites 8, frames at base+1..base+8",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 1
+    }
+   },
+   {
+    "from": 19,
+    "to": 26,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "fire/flames animation frames 1..8 for burning ruin (general building variant 2); orange-yellow flames with smoke, drawn at base sprite_offset"
+   },
+   {
+    "from": 27,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "burning ruin base tile (general building variant 3): charred rubble/embers on ground, 1x1. ANIMATION base: num_sprites 8, frames at base+1..base+8",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 1
+    }
+   },
+   {
+    "from": 28,
+    "to": 35,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "fire/flames animation frames 1..8 for burning ruin (general building variant 3); orange-yellow flames with smoke, drawn at base sprite_offset"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:885 image_group(GROUP_TERRAIN_RUBBLE_GENERAL) + 9 * (random & 3)"
+  ],
+  "notes": "Stride of 9 per variant implies base + 8 animation frames. 4 variants at 0, 9, 18, 27."
+ },
+ "GROUP_TERRAIN_DESIRABILITY": {
+  "id": 135,
+  "count": 10,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: deep red (desirability < -10)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: red (-10..-6); also offset 1 = native land marker in the native overlay"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: orange-red (-5..-1)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: pale yellow-green (exactly 1)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: light green (2..4)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: green (5..9)"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: darker green (10..14)"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: teal (15..19)"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: blue-green (20..24)"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "desirability overlay flat tile: blue (>=25)"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_overlay_other.c:673-761 get_desirability_image_offset 0..9",
+   "src/widget/city_overlay_risks.c:410 +1 native land"
+  ],
+  "notes": "Flat 58x30 coloured tiles (pattern ok); drawn via footprint and top functions (no top needed)."
+ },
+ "GROUP_TERRAIN_MEADOW": {
+  "id": 138,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "meadow edge (fertile grassland with yellow/green flowers, near non-meadow), 4 random variants"
+   },
+   {
+    "from": 4,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "meadow (only meadow in ring 1), 4 random variants, lusher"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 0,
+    "desc": "deep meadow (only meadow up to ring 2), 4 random variants, lushest"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:974-990 set_meadow_image random&3 +0/+4/+8",
+   "src/map/tiles.c:1263 +(random&3)"
+  ],
+  "notes": ""
+ },
+ "GROUP_MINIMAP_EMPTY_LAND": {
+  "id": 141,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for empty land (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_WATER": {
+  "id": 142,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for water (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_TREE": {
+  "id": 143,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for tree (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_ROCK": {
+  "id": 145,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for rock (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_MEADOW": {
+  "id": 146,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for meadow (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_ROAD": {
+  "id": 147,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for road (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_HOUSE": {
+  "id": 148,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for house (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_BUILDING": {
+  "id": 149,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for building (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_WALL": {
+  "id": 150,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for wall (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_AQUEDUCT": {
+  "id": 151,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for aqueduct (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_MINIMAP_BLACK": {
+  "id": 152,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 2,
+    "h": 1,
+    "desc": "unused placeholder: minimap swatch for black (minimap draws solid colours directly)"
+   }
+  ],
+  "evidence": [
+   "src/widget/minimap.c draws colours into a custom image; no image_group(GROUP_MINIMAP_*) use anywhere"
+  ],
+  "notes": "Unused; count 1 placeholder. Note: id 144 has no GROUP_MINIMAP_* define."
+ },
+ "GROUP_BUILDING_BRIDGE": {
+  "id": 164,
+  "count": 14,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 60,
+    "h": 40,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge ramp/end, sprite_id 2 (drawn at x-1,y-8). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 54,
+    "h": 52,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge deck piece, sprite_id 6 (x+5,y-21). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 52,
+    "h": 50,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge ramp/end, sprite_id 4 (x+7,y-20). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 58,
+    "h": 40,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge ramp/end, sprite_id 3 (x,y-8). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 58,
+    "h": 52,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge deck piece, sprite_id 5 (x,y-21). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 58,
+    "h": 50,
+    "desc": "bridge piece over water (wooden/stone planks, brown): low bridge ramp/end, sprite_id 1 (x,y-20). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 6,
+    "to": 6,
+    "kind": "sprite",
+    "w": 60,
+    "h": 45,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship (high) bridge ramp, sprite_id 8 (x-1,y-12). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 7,
+    "to": 7,
+    "kind": "sprite",
+    "w": 52,
+    "h": 70,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge middle span, sprite_id 12 (x+7,y-38). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 8,
+    "to": 8,
+    "kind": "sprite",
+    "w": 82,
+    "h": 85,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge ramp, sprite_id 10 (x-23,y-53). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 9,
+    "to": 9,
+    "kind": "sprite",
+    "w": 90,
+    "h": 45,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge ramp, sprite_id 9 (x-30,y-12). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 10,
+    "to": 10,
+    "kind": "sprite",
+    "w": 58,
+    "h": 68,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge middle span, sprite_id 11 (x,y-37). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 11,
+    "to": 11,
+    "kind": "sprite",
+    "w": 62,
+    "h": 82,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge ramp, sprite_id 7 (x-3,y-50). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 12,
+    "to": 12,
+    "kind": "sprite",
+    "w": 52,
+    "h": 78,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge span with pillar, sprite_id 15 (x+7,y-38). Size approximate; (x,y) = tile bbox top-left"
+   },
+   {
+    "from": 13,
+    "to": 13,
+    "kind": "sprite",
+    "w": 58,
+    "h": 78,
+    "desc": "bridge piece over water (wooden/stone planks, brown): ship bridge span with pillar, sprite_id 14 (x,y-38). Size approximate; (x,y) = tile bbox top-left"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_bridge.c:24-71 city_draw_bridge_tile: sprite ids 1..15 -> image offsets 0..13 with explicit draw offsets",
+   "src/map/bridge.c:129-200 map_bridge_get_sprite_id (13 = platform after ramp, not drawn)"
+  ],
+  "notes": "Low bridge: ids 1..6 (images 0..5), ship bridge: ids 7..15 (images 6..13). Orientation of each piece: ramps 1-4/7-10 for the four directions, deck/span pieces for the two axes (11/14 = top-bottom axis, 12/15 = left-right axis)."
+ },
+ "GROUP_TERRAIN_ACCESS_RAMP": {
+  "id": 216,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "access ramp 2x2: stone/earth ramp rising toward the lower-left screen edge (higher ground beyond grid y+2)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "access ramp 2x2 rising toward the upper-left screen edge (higher ground at grid x-1)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "access ramp 2x2 rising toward the upper-right screen edge (higher ground at grid y-1)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "access ramp 2x2 rising toward the lower-right screen edge (higher ground at grid x+2)"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1145-1205 get_access_ramp_image_offset 0..3 (dir rotated by view)",
+   "src/map/tiles.c:1242 map_building_tiles_add size 2",
+   "src/editor/tool.c:396 & widget/map_editor_tool.c:121 + orientation"
+  ],
+  "notes": ""
+ },
+ "GROUP_TERRAIN_ENTRY_EXIT_FLAGS": {
+  "id": 240,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 40,
+    "desc": "ENTRY flag on a pole (e.g. green banner) standing on a tile; 4 screen orientations: offset = ((view_orientation + map_edge_direction) % 8) / 2"
+   },
+   {
+    "from": 4,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 40,
+    "desc": "EXIT flag on a pole (e.g. red banner); 4 screen orientations, same formula +4"
+   }
+  ],
+  "evidence": [
+   "src/map/tiles.c:1354 + orientation/2",
+   "src/map/tiles.c:1376 + 4 + orientation/2"
+  ],
+  "notes": "Static images (no animation metadata required)."
+ },
+ "GROUP_BUILDING_TOWER": {
+  "id": 17,
+  "count": 3,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 70,
+    "desc": "defensive stone TOWER, 2x2, tall square tower with crenellations (ballista figure drawn separately)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 60,
+    "desc": "GATEHOUSE, 2x2, two-tower gate with passage running upper-left<->lower-right on screen (road passes through)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 60,
+    "desc": "GATEHOUSE, 2x2, passage running upper-right<->lower-left on screen"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:408-425 tower +0; gatehouse +1/+2 by subtype.orientation and view",
+   "src/building/properties.c:170-171 gatehouse {17,1}, tower {17,0} size 2",
+   "src/widget/city_building_ghost.c:277-290 gatehouse ghost offset +0/+1 on top of props offset 1"
+  ],
+  "notes": ""
+ },
+ "GROUP_BUILDING_GATEHOUSE": {
+  "id": 248,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 100,
+    "h": 100,
+    "desc": "gatehouse front overlay (arch/top piece drawn over figures) for gatehouse image TOWER+1 orientation; drawn at (x-22, y-80) of the 2x2 building's front tile"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 100,
+    "h": 100,
+    "desc": "gatehouse front overlay for TOWER+2 orientation; drawn at (x-18, y-81)"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:686-705 image_group(GROUP_BUILDING_GATEHOUSE) +0 at (x-22,y-80), +1 at (x-18,y-81)"
+  ],
+  "notes": "Sizes approximate; should match the upper part of the corresponding gatehouse art so it can be redrawn on top of walkers passing through."
+ },
+ "_absolute_ids": [
+  "Absolute image ids 0..5: map/image.c map_image_init_edges() stores literal ids 1..5 in the map image grid for border tiles, and city/view.c (lines 155, 803) treats any tile with map_image_at() < 6 as invisible/off-map. Therefore every drawable terrain/building image must have absolute id >= 6; recommended: id 0 = dummy, GROUP_TERRAIN_BLACK starts at id 1 (count 5, ids 1..5).",
+  "Image id 0 is \"no image\": tiles.c (lines 99, 238, set_rock_image, set_garden_image, set_plaza_image) test map_image_at()==0 / !map_image_at() to decide whether a tile still needs an image. No group may start at id 0.",
+  "src/map/terrain.c determine_original_trees(): reads image ids stored in scenario/save files and checks them against image_group(GROUP_TERRAIN_TREE)+8..+31. Original Caesar III .map/.sav files contain absolute ids from the original layout, so ring detection on legacy files only works if GROUP_TERRAIN_TREE has the same absolute start as in the original c3.sg2 (non-fatal if different: only TERRAIN_ORIGINALLY_TREE ring marking is affected).",
+  "GROUP_BUILDING_AQUEDUCT_NO_WATER (196) must start exactly at image_group(GROUP_BUILDING_AQUEDUCT)+15: water_supply.c compares aqueduct tile image ids against image_group(196) to decide whether to add/subtract 15 (water <-> dry). Group 196 aliases group 19 offsets 15..29; it must not get separate images, and no image of group 19 offsets 0..14 may be >= start(196). Also asset-based highway aqueduct images (>= 10000 asset ids) fall in the \">=\" branch but are handled by the TERRAIN_HIGHWAY check."
+ ]
+}

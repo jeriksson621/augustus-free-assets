@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.so
+augustus-log*.txt
+c3data/*.svx
+c3data/*.sav
+c3data/augustus.ini
+c3data/hotkeys.ini
+c3data/c3.inf

@@ -1,0 +1,2858 @@
+{
+ "GROUP_BUILDING_MARKET": {
+  "id": 22,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 45,
+    "desc": "market 2x2: open square with colourful striped awning stalls (red/yellow), baskets of produce, low stone wall; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 50,
+    "h": 35,
+    "desc": "market activity frames: vendors/shoppers moving under the awnings, awning flapping (loop)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:300 image_group(GROUP_BUILDING_MARKET) (upgrade_level 0)",
+   "src/building/properties.c BUILDING_MARKET {2,0,22,0} size 2",
+   "src/widget/city_building_ghost.c:1123 ghost uses group 22 + 0",
+   "src/building/animation.c:48 market animates only with workers"
+  ],
+  "notes": "Frame count not dictated by code; 10 chosen. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_MARKET_FANCY": {
+  "id": 210,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "upgraded market 2x2: same layout as market but paved, marble columns supporting a tiled roof over stalls, statues/planters; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 50,
+    "h": 35,
+    "desc": "upgraded market activity frames (people moving between stalls)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:302 image_group(GROUP_BUILDING_MARKET_FANCY) when upgrade_level != 0"
+  ],
+  "notes": "Same animation structure as GROUP_BUILDING_MARKET. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_WELL": {
+  "id": 23,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "well 1x1: round stone well with wooden winch frame and bucket, on dirt"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:329",
+   "src/widget/city_building_ghost.c:722",
+   "properties.c BUILDING_WELL size 1"
+  ]
+ },
+ "GROUP_BUILDING_RESERVOIR": {
+  "id": 25,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "reservoir 3x3: large square raised stone basin with arched aqueduct inlets on its sides, basin EMPTY (dry stone floor); base carries animation metadata",
+    "anim": {
+     "num_sprites": 7,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 7,
+    "kind": "sprite",
+    "w": 120,
+    "h": 60,
+    "desc": "reservoir water surface frames (blue water filling the basin with gentle ripples); offset 1 is also drawn alone by the placement ghost when water is available"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:331",
+   "src/building/construction.c:1038/1045 map tiles size 3",
+   "src/widget/city_building_ghost.c:476-485 draws image_id+1 at animation sprite_offset when has_water",
+   "src/building/animation.c:31 no animation without water access"
+  ],
+  "notes": "Offset 1 is mandatory (ghost). Frame count not dictated; 7 chosen. Ghost positions frame 1 at (x - 60 + sprite_offset_x - 2, y + sprite_offset_y - top_height + 45). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_FOUNTAIN_1": {
+  "id": 54,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "fountain 1x1 (basic): small round stone basin with a short central spout, basin dry; base carries animation metadata",
+    "anim": {
+     "num_sprites": 7,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 7,
+    "kind": "sprite",
+    "w": 26,
+    "h": 30,
+    "desc": "water spray frames: jets of blue/white water arcing into the basin (loop)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:316-327 fountain upgrade levels 0..3 -> FOUNTAIN_1,2,3,4",
+   "properties.c BUILDING_FOUNTAIN {1,1,54,0} size 1",
+   "src/widget/city_building_ghost.c:696-706 draws image_id+1 using animation offsets"
+  ],
+  "notes": "7 frames chosen for consistency with FOUNTAIN_4 (XML proves 7 there). Fountain animates only when it has workers and water. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_FOUNTAIN_2": {
+  "id": 55,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "fountain 1x1 (level 2): larger basin with a carved pedestal spout, basin dry; base carries animation metadata",
+    "anim": {
+     "num_sprites": 7,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 7,
+    "kind": "sprite",
+    "w": 26,
+    "h": 30,
+    "desc": "water spray frames: jets of blue/white water arcing into the basin (loop)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:316-327 fountain upgrade levels 0..3 -> FOUNTAIN_1,2,3,4",
+   "properties.c BUILDING_FOUNTAIN {1,1,54,0} size 1",
+   "src/widget/city_building_ghost.c:696-706 draws image_id+1 using animation offsets"
+  ],
+  "notes": "7 frames chosen for consistency with FOUNTAIN_4 (XML proves 7 there). Fountain animates only when it has workers and water. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_FOUNTAIN_3": {
+  "id": 56,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "fountain 1x1 (level 3): two-tier marble basin, basin dry; base carries animation metadata",
+    "anim": {
+     "num_sprites": 7,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 7,
+    "kind": "sprite",
+    "w": 26,
+    "h": 30,
+    "desc": "water spray frames: jets of blue/white water arcing into the basin (loop)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:316-327 fountain upgrade levels 0..3 -> FOUNTAIN_1,2,3,4",
+   "properties.c BUILDING_FOUNTAIN {1,1,54,0} size 1",
+   "src/widget/city_building_ghost.c:696-706 draws image_id+1 using animation offsets"
+  ],
+  "notes": "7 frames chosen for consistency with FOUNTAIN_4 (XML proves 7 there). Fountain animates only when it has workers and water. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_FOUNTAIN_4": {
+  "id": 53,
+  "count": 8,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 28,
+    "desc": "fountain 1x1 (level 4): ornate marble fountain with a statue on top, basin dry; base carries animation metadata",
+    "anim": {
+     "num_sprites": 7,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 7,
+    "kind": "sprite",
+    "w": 26,
+    "h": 30,
+    "desc": "water spray frames: jets of blue/white water arcing into the basin (loop)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:316-327 fountain upgrade levels 0..3 -> FOUNTAIN_1,2,3,4",
+   "properties.c BUILDING_FOUNTAIN {1,1,54,0} size 1",
+   "src/widget/city_building_ghost.c:696-706 draws image_id+1 using animation offsets",
+   "assets logistics.xml:254-265 Fountain_Desert_Fix uses group 53 base and frames image 1..7"
+  ],
+  "notes": "Asset XML references frames 1..7 so exactly 7 frames. Fountain animates only when it has workers and water. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_HOUSE_TENT": {
+  "id": 26,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 12,
+    "desc": "small tent: beige canvas tent on dirt 1x1, two random variants (0,1)"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 16,
+    "desc": "large tent: bigger patched canvas tent with stakes 1x1, two random variants (2,3)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 22,
+    "desc": "small tent: beige canvas tent on dirt merged 2x2 block (four small homes combined into one 2x2 image)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 26,
+    "desc": "large tent: bigger patched canvas tent with stakes merged 2x2 block"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_SHACK": {
+  "id": 27,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 18,
+    "desc": "small shack: tiny wooden hut, thatch roof 1x1, two random variants (0,1)"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 22,
+    "desc": "large shack: wooden shack with thatch roof and lean-to 1x1, two random variants (2,3)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 28,
+    "desc": "small shack: tiny wooden hut, thatch roof merged 2x2 block (four small homes combined into one 2x2 image)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 32,
+    "desc": "large shack: wooden shack with thatch roof and lean-to merged 2x2 block"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_HOVEL": {
+  "id": 28,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 22,
+    "desc": "small hovel: mud-brick hut, straw roof 1x1, two random variants (0,1)"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 26,
+    "desc": "large hovel: mud-brick hovel with small yard 1x1, two random variants (2,3)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 32,
+    "desc": "small hovel: mud-brick hut, straw roof merged 2x2 block (four small homes combined into one 2x2 image)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 36,
+    "desc": "large hovel: mud-brick hovel with small yard merged 2x2 block"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_CASA": {
+  "id": 29,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 26,
+    "desc": "small casa: whitewashed plaster cottage, red clay tile roof 1x1, two random variants (0,1)"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 30,
+    "desc": "large casa: two-room plaster house, red tile roof 1x1, two random variants (2,3)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 36,
+    "desc": "small casa: whitewashed plaster cottage, red clay tile roof merged 2x2 block (four small homes combined into one 2x2 image)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "large casa: two-room plaster house, red tile roof merged 2x2 block"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_INSULA_1": {
+  "id": 30,
+  "count": 6,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 34,
+    "desc": "small insula: two-storey plaster apartment, red tile roof 1x1, two random variants (0,1)"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 40,
+    "desc": "medium insula: taller three-storey apartment block, red tile roof, balcony 1x1, two random variants (2,3)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 44,
+    "desc": "small insula: two-storey plaster apartment, red tile roof merged 2x2 block (four small homes combined into one 2x2 image)"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "medium insula: taller three-storey apartment block, red tile roof, balcony merged 2x2 block"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ],
+  "notes": "Medium insula devolved from large insula keeps house_is_merged=1 (house.c:437) -> uses offset 5."
+ },
+ "GROUP_BUILDING_HOUSE_INSULA_2": {
+  "id": 31,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "large insula 2x2: multi-storey apartment block around tiny courtyard, red tile roofs, two random variants"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 56,
+    "desc": "grand insula 2x2: tall ornate apartment block with balconies and shops at ground level, two variants"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_VILLA_1": {
+  "id": 32,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 45,
+    "desc": "small villa 2x2: single-storey villa with atrium, red tile roof, little garden, two variants"
+   },
+   {
+    "from": 2,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "medium villa 2x2: villa with columned porch, garden with trees, two variants"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_VILLA_2": {
+  "id": 33,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 60,
+    "desc": "large villa 3x3: spacious villa with peristyle garden, pool and red tile roofs"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 65,
+    "desc": "grand villa 3x3: grand villa with colonnades, fountain courtyard, cypress trees"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_PALACE_1": {
+  "id": 34,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 70,
+    "desc": "small palace 3x3: marble palace with columned facade, garden, statues"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 75,
+    "desc": "medium palace 3x3: larger marble palace with domed hall and gardens"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_PALACE_2": {
+  "id": 35,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 4,
+    "top": 85,
+    "desc": "large palace 4x4: sprawling marble palace with several wings, gardens, pools"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 4,
+    "top": 95,
+    "desc": "luxury palace 4x4: magnificent white marble palace with gilded roofs, colonnades, fountains, lush gardens"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:19-34 HOUSE_IMAGE table and :84-96 (merged: +4, +5 when level offset!=0; else offset + (random & (num_types-1)))",
+   "src/building/properties.c sizes: types 10-19 size 1, 20-23 size 2, 24-27 size 3, 28-29 size 4",
+   "src/building/house.c merge only for levels small tent..medium insula (house_evolution.c:214-339)"
+  ]
+ },
+ "GROUP_BUILDING_HOUSE_VACANT_LOT": {
+  "id": 36,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 8,
+    "desc": "vacant housing lot 1x1: cleared dirt plot with wooden stakes and a small 'for settlers' sign post"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:62",
+   "src/building/construction.c:246",
+   "src/widget/city_building_ghost.c:258"
+  ]
+ },
+ "GROUP_BUILDING_FARM_HOUSE": {
+  "id": 37,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 35,
+    "desc": "farmhouse 2x2: rustic farmstead, plaster walls, red/brown tile roof, small yard with fence; occupies 2x2 corner of a 3x3 farm (other 5 tiles are crop tiles)"
+   }
+  ],
+  "evidence": [
+   "src/map/building_tiles.c:110 map_image_set farmhouse size 2",
+   "properties.c farms size 3, group 37",
+   "src/widget/city_building_ghost.c:222-241 farm ghost"
+  ]
+ },
+ "GROUP_BUILDING_FARM_CROPS": {
+  "id": 100,
+  "count": 30,
+  "entries": [
+   {
+    "from": 0,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 6,
+    "desc": "wheat crop tile 1x1 (golden wheat field rows); growth stages 0..4 at offsets 0..4: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   },
+   {
+    "from": 5,
+    "to": 9,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 6,
+    "desc": "vegetables crop tile 1x1 (rows of green leafy vegetables / cabbages); growth stages 0..4 at offsets 5..9: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   },
+   {
+    "from": 10,
+    "to": 14,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "fruit crop tile 1x1 (small fruit trees with red/orange fruit); growth stages 0..4 at offsets 10..14: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   },
+   {
+    "from": 15,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 20,
+    "desc": "olives crop tile 1x1 (grey-green olive trees); growth stages 0..4 at offsets 15..19: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   },
+   {
+    "from": 20,
+    "to": 24,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 14,
+    "desc": "vines crop tile 1x1 (grape vines on wooden trellises with purple grapes); growth stages 0..4 at offsets 20..24: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   },
+   {
+    "from": 25,
+    "to": 29,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "pigs crop tile 1x1 (pig pen: muddy enclosure with pink pigs and fence); growth stages 0..4 at offsets 25..29: 0 = freshly planted/bare tilled soil, 4 = fully grown/ready to harvest (pigs: 0 few piglets .. 4 many fat pigs)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:36-55 base per farm type: wheat/native +0, veg +5, fruit +10, olive +15, vines +20, pig +25",
+   "src/map/building_tiles.c:72 crop image = base + min(growth,4)",
+   "src/building/figure.c:1770 native crops: base + progress (0..4)",
+   "src/map/natives.c:108 native crops: base + (random & 1)"
+  ],
+  "notes": "Native crops reuse the wheat stages 0..4."
+ },
+ "GROUP_BUILDING_MARBLE_QUARRY": {
+  "id": 38,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 30,
+    "desc": "marble quarry 2x2: white marble cliff cut into blocks, wooden crane/derrick, stacked white blocks; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 50,
+    "h": 40,
+    "desc": "quarry worker frames: workers chiselling/lifting marble blocks with the crane (frame 1 doubles as the idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:227",
+   "properties.c size 2 group 38",
+   "src/building/animation.c:57 no workers -> forced frame 1"
+  ],
+  "notes": "Frame 1 is shown statically when idle. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_IRON_MINE": {
+  "id": 39,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 35,
+    "desc": "iron mine 2x2: mine entrance in reddish-grey rock with timber supports, ore cart on rails, pile of dark ore; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 40,
+    "desc": "iron mine frames: miners pushing ore cart / swinging picks"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:281",
+   "properties.c size 2 group 39"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_CLAY_PIT": {
+  "id": 40,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "clay pit 2x2: excavated orange-brown clay pit, wooden ladder and drying racks, water puddles; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 35,
+    "desc": "clay pit frames: workers digging and carrying clay"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:285",
+   "properties.c size 2 group 40"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_TIMBER_YARD": {
+  "id": 65,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 30,
+    "desc": "timber yard 2x2: wooden shed, stacks of brown logs and planks, saw horse; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 35,
+    "desc": "timber yard frames: workers sawing / axe chopping logs"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:283",
+   "properties.c size 2 group 65"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_WINE_WORKSHOP": {
+  "id": 44,
+  "count": 13,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "wine workshop 2x2: plaster building with red tile roof, open shed with large vats and amphorae; base image carries animation metadata, frames at 1..12",
+    "anim": {
+     "num_sprites": 12,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 12,
+    "kind": "sprite",
+    "w": 40,
+    "h": 35,
+    "desc": "wine making frames: 1-3 = vat filling progress stages, 4-8 = treading/pressing loop, 9-12 = finishing (amphorae filled); frame 12 holds when done"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:287",
+   "src/building/animation.c:131-158 wine special case uses sprites 1..12"
+  ],
+  "notes": "Needs at least 12 frames (animation.c addresses sprites up to 12). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_OIL_WORKSHOP": {
+  "id": 122,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "oil workshop 2x2: building with olive press (large stone wheel) and oil jars; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 40,
+    "h": 35,
+    "desc": "olive press frames: worker turning press beam, wheel rotating"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c building_image_get -> image_group(GROUP_BUILDING_OIL_WORKSHOP)",
+   "properties.c size 2 group 122",
+   "src/building/animation.c:34 workshops animate only with workers and raw materials"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_WEAPONS_WORKSHOP": {
+  "id": 123,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "weapons workshop 2x2: smithy with glowing forge, anvil, racks of swords/shields; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 40,
+    "h": 35,
+    "desc": "smith frames: hammer striking anvil, sparks, forge glow"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c building_image_get -> image_group(GROUP_BUILDING_WEAPONS_WORKSHOP)",
+   "properties.c size 2 group 123",
+   "src/building/animation.c:34 workshops animate only with workers and raw materials"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_FURNITURE_WORKSHOP": {
+  "id": 124,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "furniture workshop 2x2: carpenter's shop, workbench, finished chairs/tables outside; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 40,
+    "h": 35,
+    "desc": "carpenter frames: worker sawing/planing wood"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c building_image_get -> image_group(GROUP_BUILDING_FURNITURE_WORKSHOP)",
+   "properties.c size 2 group 124",
+   "src/building/animation.c:34 workshops animate only with workers and raw materials"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_POTTERY_WORKSHOP": {
+  "id": 125,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "pottery workshop 2x2: potter's shed with kiln (smoke), shelves of red-brown pots; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 40,
+    "h": 35,
+    "desc": "potter frames: potter's wheel spinning, kiln smoke puffs"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c building_image_get -> image_group(GROUP_BUILDING_POTTERY_WORKSHOP)",
+   "properties.c size 2 group 125",
+   "src/building/animation.c:34 workshops animate only with workers and raw materials"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_WORKSHOP_RAW_MATERIAL": {
+  "id": 60,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 28,
+    "h": 20,
+    "desc": "raw material pile for WINE workshop: heap of purple grapes / vine baskets (drawn at x+45,y+23 of the 2x2 workshop)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 28,
+    "h": 20,
+    "desc": "raw material pile for OIL workshop: baskets of olives (x+35,y+15)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 30,
+    "h": 22,
+    "desc": "raw material pile for FURNITURE workshop: stack of timber logs (x+48,y+19)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 28,
+    "h": 20,
+    "desc": "raw material pile for WEAPONS workshop: pile of dark iron ore/ingots (x+46,y+24)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 28,
+    "h": 20,
+    "desc": "raw material pile for POTTERY workshop (and brickworks): lump pile of orange clay (x+47,y+24)"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:286-322 draw_workshop_raw_material_storage offsets 0..4"
+  ]
+ },
+ "GROUP_BUILDING_SCHOOL": {
+  "id": 41,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 32,
+    "desc": "school 2x2: modest plaster building with red tile roof and small courtyard with benches"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:208",
+   "assets health_education.xml:7 Upgraded_School layers group 41 at y=18 in a 118x110 image (=> ~92 px tall)"
+  ]
+ },
+ "GROUP_BUILDING_LIBRARY": {
+  "id": 42,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 59,
+    "desc": "library 2x2: tall columned building with pediment, marble steps, scroll racks visible"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:222 (upgraded library)",
+   "assets health_education.xml:12 Library Ref crop uses group 42 at y=-47 (=> ~119 px tall image)"
+  ]
+ },
+ "GROUP_BUILDING_ACADEMY": {
+  "id": 43,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 70,
+    "desc": "academy 3x3: large marble building with colonnaded courtyard, statues, red tile roofs"
+   }
+  ],
+  "evidence": [
+   "assets health_education.xml:22,27 Academy_Fix / Upgraded_Academy layer group 43 image 0",
+   "properties.c size 3 group 43"
+  ]
+ },
+ "GROUP_BUILDING_DOCTOR": {
+  "id": 68,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 30,
+    "desc": "doctor's clinic 1x1: small white plaster house, red roof, herb pots by the door"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:187",
+   "properties.c size 1"
+  ]
+ },
+ "GROUP_BUILDING_HOSPITAL": {
+  "id": 70,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 60,
+    "desc": "hospital 3x3: large building around a courtyard with beds under awnings, red tile roofs"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:189",
+   "properties.c size 3"
+  ]
+ },
+ "GROUP_BUILDING_BARBER": {
+  "id": 67,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 26,
+    "desc": "barber 1x1: tiny shop with striped awning, chair visible at open front"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:205",
+   "properties.c size 1"
+  ]
+ },
+ "GROUP_BUILDING_BATHHOUSE_WATER": {
+  "id": 69,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "bathhouse 2x2 WITH water: domed/tiled bath building with open pool filled with blue water"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:193"
+  ]
+ },
+ "GROUP_BUILDING_BATHHOUSE_NO_WATER": {
+  "id": 185,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "bathhouse 2x2 WITHOUT water: same building, pool empty (dry tiled basin)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:199",
+   "properties.c BUILDING_BATHHOUSE {2,0,185} -> ghost uses group 185",
+   "src/widget/city_building_ghost.c:766 ghost draws image_group(185) - 1 (= last image of group 184) as water overlay"
+  ],
+  "notes": "LAYOUT CONSTRAINT: the image immediately before this group's first image must be the bathhouse pool water overlay (see GROUP_BUILDING_MISSION_POST offset 1)."
+ },
+ "GROUP_BUILDING_BATHHOUSE_FANCY_WATER": {
+  "id": 211,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "upgraded bathhouse 2x2 with water: marble bath with columns, statues, full blue pool"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:195"
+  ]
+ },
+ "GROUP_BUILDING_BATHHOUSE_FANCY_NO_WATER": {
+  "id": 212,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "upgraded bathhouse 2x2 without water: marble bath, empty dry pool"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:201"
+  ]
+ },
+ "GROUP_BUILDING_MISSION_POST": {
+  "id": 184,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 35,
+    "desc": "mission post 2x2: small walled compound with tent/hut, Roman banner, palisade"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 60,
+    "h": 32,
+    "desc": "bathhouse pool WATER overlay (blue water surface that fits the empty pool of BATHHOUSE_NO_WATER), drawn by the bathhouse ghost at (x-7, y+6)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:311",
+   "properties.c BUILDING_MISSION_POST {2,1,184} size 2",
+   "src/widget/city_building_ghost.c:766 image_draw(image_group(GROUP_BUILDING_BATHHOUSE_NO_WATER) - 1, x - 7, y + 6)"
+  ],
+  "notes": "Offset 1 is NOT a mission post image: it is reached as image_group(185)-1. Group 185 must start directly after this group (count 2)."
+ },
+ "GROUP_BUILDING_AMPHITHEATER": {
+  "id": 45,
+  "count": 13,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 45,
+    "desc": "amphitheater 3x3: oval stone arena with tiered seating, sandy floor, banners; seats mostly empty; base image carries animation metadata, frames at 1..12",
+    "anim": {
+     "num_sprites": 12,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 12,
+    "kind": "sprite",
+    "w": 50,
+    "h": 40,
+    "desc": "amphitheater frames: gladiators fighting on the sand floor"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:98",
+   "properties.c size 3 group 45",
+   "animation.c:68 no workers -> no animation"
+  ],
+  "notes": "Frame count not dictated; 12 chosen. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_AMPHITHEATER_SHOW": {
+  "id": 192,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 110,
+    "h": 60,
+    "desc": "amphitheater crowd overlay: spectators filling the tiered seats, drawn at (x+36, y-47) over the 3x3 amphitheater when staffed"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:277"
+  ]
+ },
+ "GROUP_BUILDING_THEATER": {
+  "id": 46,
+  "count": 22,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 38,
+    "desc": "theater 2x2: semicircular stone theater with small stage and wooden backdrop; image ~118x98 (asset Theatre ON is 118x98 and layers group 46 at y=0)",
+    "anim": {
+     "num_sprites": 21,
+     "can_reverse": 0,
+     "speed_id": 5,
+     "sprite_offset_x": 60,
+     "sprite_offset_y": 32
+    }
+   },
+   {
+    "from": 1,
+    "to": 21,
+    "kind": "sprite",
+    "w": 30,
+    "h": 30,
+    "desc": "actor frames 1..21: costumed actors performing on stage (masks, gestures); in the Augustus asset each frame is composited at (26,1) on top of THEATER_SHOW (63x34)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:100-104 uses assets that layer group 46",
+   "assets entertainment.xml:344-446 Theatre_ON_01..21 use group 46 image 1..21 and group 191",
+   "assets entertainment.xml:451,479,569 layer group 46 base"
+  ],
+  "notes": "Exactly 21 frames are referenced by the asset XML."
+ },
+ "GROUP_BUILDING_THEATER_SHOW": {
+  "id": 191,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 63,
+    "h": 34,
+    "desc": "theater stage backdrop while a show runs: lit stage floor and scenery, 63x34 (asset Theatre_ON_xx images are 63x34 with group 191 at 0,0)"
+   }
+  ],
+  "evidence": [
+   "assets entertainment.xml:345 etc. layer group=191"
+  ]
+ },
+ "GROUP_BUILDING_COLOSSEUM": {
+  "id": 48,
+  "count": 15,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 63,
+    "desc": "colosseum 5x5: huge oval multi-arched stone arena (~298x213 px), tiered seating, empty sandy floor",
+    "anim": {
+     "num_sprites": 13,
+     "can_reverse": 0,
+     "speed_id": 5,
+     "sprite_offset_x": 122,
+     "sprite_offset_y": 57
+    }
+   },
+   {
+    "from": 1,
+    "to": 13,
+    "kind": "sprite",
+    "w": 60,
+    "h": 45,
+    "desc": "gladiator fight frames 1..13 on the arena floor (asset Col Glad Fight animation x=122 y=57)"
+   },
+   {
+    "from": 14,
+    "to": 14,
+    "kind": "sprite",
+    "w": 160,
+    "h": 110,
+    "desc": "colosseum ON overlay: crowd filling the seats / activity on the floor, drawn at (70,33) of the base"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:105-129 (assets)",
+   "assets entertainment.xml:13-46 group 48 image 0, 1..13 frames, 14 overlay; Coloseum ON is 298x213",
+   "properties.c size 5 group 48"
+  ],
+  "notes": "Offsets 0..14 all referenced by the asset XML. Offset 14 is NOT an animation frame."
+ },
+ "GROUP_BUILDING_COLOSSEUM_SHOW": {
+  "id": 193,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 160,
+    "h": 110,
+    "desc": "colosseum show overlay (crowd in the stands); defined but unused by Augustus code"
+   }
+  ],
+  "evidence": [
+   "no code reference found; defined in image_group.h"
+  ],
+  "notes": "Unused; count 1 placeholder."
+ },
+ "GROUP_BUILDING_GLADIATOR_SCHOOL": {
+  "id": 49,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "gladiator school 3x3: walled training compound with sand yard, wooden dummies, barracks building; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 50,
+    "h": 40,
+    "desc": "gladiators sparring frames in the yard (frame 1 doubles as idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:131",
+   "animation.c:63 no workers -> forced frame 1",
+   "properties.c size 3"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_LION_HOUSE": {
+  "id": 50,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 45,
+    "desc": "lion house 3x3: stone menagerie with iron-barred cages and sandy pen; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 35,
+    "desc": "lions pacing / tamer frames inside the pen"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:133",
+   "properties.c size 3"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_ACTOR_COLONY": {
+  "id": 51,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "actor colony 3x3: building with rehearsal courtyard, costume racks, masks on walls; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 35,
+    "desc": "actors rehearsing frames in the courtyard"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:135",
+   "properties.c size 3"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_CHARIOT_MAKER": {
+  "id": 52,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "chariot maker 3x3: workshop yard with chariot wheels, half-built chariots, stable; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 45,
+    "h": 35,
+    "desc": "workers building chariots / horse being harnessed frames"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:137",
+   "properties.c size 3"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_HIPPODROME_1": {
+  "id": 213,
+  "count": 9,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 85,
+    "desc": "hippodrome part A (end with starting gates / curved end) 5x5, track running NE-SW (orientation 2/6); base has animation metadata (num_sprites 1) whose sprite_offset positions ornament at offset 1",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "ornament for part A: tall decoration (turning post / gate towers) drawn at sprite_offset over part A"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 31,
+    "desc": "hippodrome part B (middle straight with spina) 5x5, track running NE-SW (orientation 2/6)",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 66,
+    "h": 90,
+    "desc": "ornament for part B: central OBELISK on the spina (also used by Augustus obelisk asset at 52,0 inside a 118x128 image)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 31,
+    "desc": "hippodrome part C (far end with curved turn) 5x5, track running NE-SW (orientation 2/6)",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "ornament for part C: turning post / statues at the far end"
+   },
+   {
+    "from": 6,
+    "to": 8,
+    "kind": "sprite",
+    "w": 150,
+    "h": 80,
+    "desc": "spectator crowd overlays (people in stands) for race days: 6 = end part crowd, 7 = middle part crowd, 8 = other end crowd"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:465-525 parts at +0,+2,+4",
+   "src/widget/city_without_overlay.c:205-270 spectators +6,+7,+8",
+   "src/widget/city_without_overlay.c:713-724 draw_hippodrome_ornaments image_id+1",
+   "src/widget/city_building_ghost.c:964-995 ghost parts",
+   "properties.c BUILDING_HIPPODROME {5,1,213}",
+   "assets entertainment.xml:173-260 group 213 image 0/2/4 (footprint offsets imply ~85/31/31 px tops)",
+   "assets aesthetics.xml:188 obelisk uses group 213 image 3"
+  ],
+  "notes": "Hippodrome animation frames are never drawn (draw_animation skips BUILDING_HIPPODROME) but img->animation must exist so draw_hippodrome_ornaments draws image_id+1 at (x+sox, y+soy-top+15). Parts drawn at offsets 0/2/4 depending on orientation."
+ },
+ "GROUP_BUILDING_HIPPODROME_2": {
+  "id": 214,
+  "count": 9,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 85,
+    "desc": "hippodrome part A (end with starting gates / curved end) 5x5, track running NW-SE (orientation 0/4); base has animation metadata (num_sprites 1) whose sprite_offset positions ornament at offset 1",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "ornament for part A: tall decoration (turning post / gate towers) drawn at sprite_offset over part A"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 31,
+    "desc": "hippodrome part B (middle straight with spina) 5x5, track running NW-SE (orientation 0/4)",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 66,
+    "h": 90,
+    "desc": "ornament for part B: central OBELISK on the spina (also used by Augustus obelisk asset at 52,0 inside a 118x128 image)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 31,
+    "desc": "hippodrome part C (far end with curved turn) 5x5, track running NW-SE (orientation 0/4)",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "ornament for part C: turning post / statues at the far end"
+   },
+   {
+    "from": 6,
+    "to": 8,
+    "kind": "sprite",
+    "w": 150,
+    "h": 80,
+    "desc": "spectator crowd overlays (people in stands) for race days: 6 = end part crowd, 7 = middle part crowd, 8 = other end crowd"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:465-525 parts at +0,+2,+4",
+   "src/widget/city_without_overlay.c:205-270 spectators +6,+7,+8",
+   "src/widget/city_without_overlay.c:713-724 draw_hippodrome_ornaments image_id+1",
+   "src/widget/city_building_ghost.c:964-995 ghost parts",
+   "properties.c BUILDING_HIPPODROME {5,1,213}",
+   "assets entertainment.xml group 214 image 0/2/4"
+  ],
+  "notes": "Hippodrome animation frames are never drawn (draw_animation skips BUILDING_HIPPODROME) but img->animation must exist so draw_hippodrome_ornaments draws image_id+1 at (x+sox, y+soy-top+15). Parts drawn at offsets 0/2/4 depending on orientation."
+ },
+ "GROUP_BUILDING_STATUE": {
+  "id": 61,
+  "count": 3,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 35,
+    "desc": "small statue 1x1: bronze/marble figure on a pedestal"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 60,
+    "desc": "medium statue 2x2: marble statue of a Roman on a tall plinth, small square"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 90,
+    "desc": "large statue 3x3: big statue on stepped base with basin/fountain around"
+   }
+  ],
+  "evidence": [
+   "properties.c small/medium/large statue group 61 offsets 0/1/2 sizes 1/2/3",
+   "src/building/image.c:151 medium +1",
+   "assets aesthetics.xml:356 (61:2), :453/:472 (61:0)"
+  ]
+ },
+ "GROUP_BUILDING_TRIUMPHAL_ARCH": {
+  "id": 205,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "triumphal arch 3x3, road passing in view-direction A: arch lower part over the road"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "triumphal arch upper part (attic with inscription and quadriga) for orientation A, drawn at (x+4, y-51)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "triumphal arch 3x3, rotated 90 degrees (orientation B)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 120,
+    "h": 90,
+    "desc": "triumphal arch upper part for orientation B, drawn at (x-33, y-56)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:428-445 offsets 0 / 2",
+   "src/widget/city_building_ghost.c:259-265 draws image_id+1",
+   "src/widget/city_building_ghost.c:292-306 offsets 0/2",
+   "properties.c size 3 group 205"
+  ]
+ },
+ "GROUP_BUILDING_SENATE": {
+  "id": 62,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 110,
+    "desc": "senate 5x5: monumental marble building with columned portico, pediment, dome, wide steps"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 12,
+    "h": 24,
+    "desc": "rating flag: CULTURE (blue pennant on short staff); moves vertically with the rating (x+138)"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 12,
+    "h": 24,
+    "desc": "rating flag: PROSPERITY (yellow/gold pennant) (x+168)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 12,
+    "h": 24,
+    "desc": "rating flag: PEACE (white/green pennant) (x+198)"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 12,
+    "h": 24,
+    "desc": "rating flag: FAVOR (red/purple pennant) (x+228)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:448",
+   "src/widget/city_without_overlay.c:338-345 draw_senate_rating_flags +1..+4",
+   "properties.c size 5 group 62"
+  ],
+  "notes": "Flags drawn at y + const - rating/2 (rise up to 50 px), so the senate art should have four flagpoles/columns at those x positions."
+ },
+ "GROUP_BUILDING_SENATE_FANCY": {
+  "id": 221,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 115,
+    "desc": "upgraded senate 5x5: senate with gilded dome, extra statues and plaza (rating flags still drawn from GROUP_BUILDING_SENATE)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:450"
+  ]
+ },
+ "GROUP_BUILDING_FORUM": {
+  "id": 63,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 50,
+    "desc": "forum 2x2: small columned administrative building with tiled roof and paved forecourt"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:315",
+   "assets administration.xml:7 Upgraded_Forum (118x114) layers group 63"
+  ]
+ },
+ "GROUP_BUILDING_GOVERNORS_HOUSE": {
+  "id": 85,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 55,
+    "desc": "governor's house 3x3: comfortable villa with garden, red tile roof"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:305",
+   "properties.c size 3"
+  ]
+ },
+ "GROUP_BUILDING_GOVERNORS_VILLA": {
+  "id": 86,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 4,
+    "top": 75,
+    "desc": "governor's villa 4x4: large villa with peristyle gardens, pool, statues"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:307",
+   "properties.c size 4"
+  ]
+ },
+ "GROUP_BUILDING_GOVERNORS_PALACE": {
+  "id": 87,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 5,
+    "top": 100,
+    "desc": "governor's palace 5x5: grand marble palace with several wings, gardens, fountains"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:309",
+   "properties.c size 5"
+  ]
+ },
+ "GROUP_BUILDING_PREFECTURE": {
+  "id": 64,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 35,
+    "desc": "prefecture 1x1: small guard post, red-tiled roof, small courtyard, fire buckets; base image carries animation metadata, frames at 1..10",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 25,
+    "h": 25,
+    "desc": "prefecture activity frames (flag waving / guard moving)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:225",
+   "animation.c:45 animates only with workers",
+   "properties.c size 1"
+  ],
+  "notes": "Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_ENGINEERS_POST": {
+  "id": 81,
+  "count": 11,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 35,
+    "desc": "engineer's post 1x1: small workshop hut with tools, crane arm, timber; base carries animation metadata (MANDATORY)",
+    "anim": {
+     "num_sprites": 10,
+     "can_reverse": 0,
+     "speed_id": 4
+    }
+   },
+   {
+    "from": 1,
+    "to": 10,
+    "kind": "sprite",
+    "w": 25,
+    "h": 25,
+    "desc": "engineer's post frames: crane/pulley turning, worker hammering"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:313",
+   "src/core/image.c:701 data.main[image_group(GROUP_BUILDING_ENGINEERS_POST)].animation->sprite_offset_y += 1 (dereferences animation -> crash if missing)"
+  ],
+  "notes": "The base image MUST have animation metadata (num_sprites > 0) or the game crashes at load. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_TEMPLE_CERES": {
+  "id": 71,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 55,
+    "desc": "small temple of Ceres 2x2: columned marble temple with pediment, golden wheat sheaves, green/yellow accents"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 80,
+    "desc": "large temple of Ceres 3x3: grand marble temple with double colonnade and steps, golden wheat sheaves, green/yellow accents"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c small/large temple -> group 71 +0/+1",
+   "properties.c small temples size 2 offset 0, large temples size 3 offset 1",
+   "assets religion.xml layer group 71 image 1"
+  ]
+ },
+ "GROUP_BUILDING_TEMPLE_NEPTUNE": {
+  "id": 72,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 55,
+    "desc": "small temple of Neptune 2x2: columned marble temple with pediment, blue accents, trident, water basin"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 80,
+    "desc": "large temple of Neptune 3x3: grand marble temple with double colonnade and steps, blue accents, trident, water basin"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c small/large temple -> group 72 +0/+1",
+   "properties.c small temples size 2 offset 0, large temples size 3 offset 1",
+   "assets religion.xml layer group 72 image 1"
+  ]
+ },
+ "GROUP_BUILDING_TEMPLE_MERCURY": {
+  "id": 73,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 55,
+    "desc": "small temple of Mercury 2x2: columned marble temple with pediment, winged motifs, bronze/yellow accents"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 80,
+    "desc": "large temple of Mercury 3x3: grand marble temple with double colonnade and steps, winged motifs, bronze/yellow accents"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c small/large temple -> group 73 +0/+1",
+   "properties.c small temples size 2 offset 0, large temples size 3 offset 1",
+   "assets religion.xml layer group 73 image 1"
+  ]
+ },
+ "GROUP_BUILDING_TEMPLE_MARS": {
+  "id": 74,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 55,
+    "desc": "small temple of Mars 2x2: columned marble temple with pediment, red accents, shields and spears"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 80,
+    "desc": "large temple of Mars 3x3: grand marble temple with double colonnade and steps, red accents, shields and spears"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c small/large temple -> group 74 +0/+1",
+   "properties.c small temples size 2 offset 0, large temples size 3 offset 1",
+   "assets religion.xml layer group 74 image 1"
+  ]
+ },
+ "GROUP_BUILDING_TEMPLE_VENUS": {
+  "id": 75,
+  "count": 2,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 55,
+    "desc": "small temple of Venus 2x2: columned marble temple with pediment, pink/rose accents, garden with flowers"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 80,
+    "desc": "large temple of Venus 3x3: grand marble temple with double colonnade and steps, pink/rose accents, garden with flowers"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c small/large temple -> group 75 +0/+1",
+   "properties.c small temples size 2 offset 0, large temples size 3 offset 1",
+   "assets religion.xml layer group 75 image 1"
+  ]
+ },
+ "GROUP_BUILDING_ORACLE": {
+  "id": 76,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 30,
+    "desc": "oracle 2x2: open-air sacred shrine with tripod, flame and columns"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:384",
+   "assets religion.xml:655 group 76 image 0 footprint (~87 px tall)",
+   "properties.c size 2"
+  ]
+ },
+ "GROUP_BUILDING_SHIPYARD": {
+  "id": 77,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 35,
+    "desc": "shipyard 2x2, one image per water-facing orientation (offset = (4 + orientation - view/2) % 4): slipway with half-built ship hull, wooden scaffolding, water at the facing edge"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:391-393",
+   "src/widget/city_building_ghost.c:1017 ghost + dir_relative (multiplier 1)",
+   "properties.c size 2"
+  ]
+ },
+ "GROUP_BUILDING_WHARF": {
+  "id": 79,
+  "count": 4,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 20,
+    "desc": "fishing wharf 2x2, one image per water-facing orientation: wooden pier with nets, small hut, water at the facing edge"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:394-396",
+   "src/widget/city_building_ghost.c:1017",
+   "properties.c size 2"
+  ]
+ },
+ "GROUP_BUILDING_DOCK_1": {
+  "id": 78,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 40,
+    "desc": "trade dock 3x3, water-facing orientation 0: wooden quay with crane, crates, mooring posts, water along one edge; base carries animation",
+    "anim": {
+     "num_sprites": 11,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 11,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "dock crane frames: crane swinging/lifting cargo (frame 1 = idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:397-407 orientation 0..3 -> DOCK_1..DOCK_4",
+   "src/widget/city_building_ghost.c:1016-1017 ghost: image_group(78) + dir_relative * 12",
+   "src/widget/city_without_overlay.c:483-490 compares map image with DOCK_1/2/3 group starts",
+   "src/building/animation.c:53 no ships -> forced frame 1",
+   "properties.c BUILDING_DOCK {3,0,78}"
+  ],
+  "notes": "LAYOUT CONSTRAINT: the ghost reaches DOCK_n via image_group(DOCK_1) + 12*(n-1), so DOCK_1..DOCK_4 must be laid out contiguously, 12 images each: image_group(168) = image_group(78)+12, image_group(169) = +24, image_group(170) = +36. Hence count 12 per group (frames <= 11). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_DOCK_2": {
+  "id": 168,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 40,
+    "desc": "trade dock 3x3, water-facing orientation 1: wooden quay with crane, crates, mooring posts, water along one edge; base carries animation",
+    "anim": {
+     "num_sprites": 11,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 11,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "dock crane frames: crane swinging/lifting cargo (frame 1 = idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:397-407 orientation 0..3 -> DOCK_1..DOCK_4",
+   "src/widget/city_building_ghost.c:1016-1017 ghost: image_group(78) + dir_relative * 12",
+   "src/widget/city_without_overlay.c:483-490 compares map image with DOCK_1/2/3 group starts",
+   "src/building/animation.c:53 no ships -> forced frame 1",
+   "properties.c BUILDING_DOCK {3,0,78}"
+  ],
+  "notes": "LAYOUT CONSTRAINT: the ghost reaches DOCK_n via image_group(DOCK_1) + 12*(n-1), so DOCK_1..DOCK_4 must be laid out contiguously, 12 images each: image_group(168) = image_group(78)+12, image_group(169) = +24, image_group(170) = +36. Hence count 12 per group (frames <= 11). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_DOCK_3": {
+  "id": 169,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 40,
+    "desc": "trade dock 3x3, water-facing orientation 2: wooden quay with crane, crates, mooring posts, water along one edge; base carries animation",
+    "anim": {
+     "num_sprites": 11,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 11,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "dock crane frames: crane swinging/lifting cargo (frame 1 = idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:397-407 orientation 0..3 -> DOCK_1..DOCK_4",
+   "src/widget/city_building_ghost.c:1016-1017 ghost: image_group(78) + dir_relative * 12",
+   "src/widget/city_without_overlay.c:483-490 compares map image with DOCK_1/2/3 group starts",
+   "src/building/animation.c:53 no ships -> forced frame 1",
+   "properties.c BUILDING_DOCK {3,0,78}"
+  ],
+  "notes": "LAYOUT CONSTRAINT: the ghost reaches DOCK_n via image_group(DOCK_1) + 12*(n-1), so DOCK_1..DOCK_4 must be laid out contiguously, 12 images each: image_group(168) = image_group(78)+12, image_group(169) = +24, image_group(170) = +36. Hence count 12 per group (frames <= 11). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_DOCK_4": {
+  "id": 170,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 40,
+    "desc": "trade dock 3x3, water-facing orientation 3: wooden quay with crane, crates, mooring posts, water along one edge; base carries animation",
+    "anim": {
+     "num_sprites": 11,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 11,
+    "kind": "sprite",
+    "w": 50,
+    "h": 50,
+    "desc": "dock crane frames: crane swinging/lifting cargo (frame 1 = idle still)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:397-407 orientation 0..3 -> DOCK_1..DOCK_4",
+   "src/widget/city_building_ghost.c:1016-1017 ghost: image_group(78) + dir_relative * 12",
+   "src/widget/city_without_overlay.c:483-490 compares map image with DOCK_1/2/3 group starts",
+   "src/building/animation.c:53 no ships -> forced frame 1",
+   "properties.c BUILDING_DOCK {3,0,78}"
+  ],
+  "notes": "LAYOUT CONSTRAINT: the ghost reaches DOCK_n via image_group(DOCK_1) + 12*(n-1), so DOCK_1..DOCK_4 must be laid out contiguously, 12 images each: image_group(168) = image_group(78)+12, image_group(169) = +24, image_group(170) = +36. Hence count 12 per group (frames <= 11). Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_DOCK_DOCKERS": {
+  "id": 171,
+  "count": 12,
+  "entries": [
+   {
+    "from": 0,
+    "to": 11,
+    "kind": "sprite",
+    "w": 50,
+    "h": 35,
+    "desc": "idle dock workers standing on the quay: offset = 3*dock_orientation(0..3, DOCK_1..DOCK_4) + (num_idle_dockers - 1)(0..2). EACH image must carry animation metadata (num_sprites 1) because the code only draws it when img->animation exists and uses its sprite_offset_x/y as position relative to the dock tile",
+    "anim": {
+     "num_sprites": 1,
+     "can_reverse": 0,
+     "speed_id": 0
+    }
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:478-505 draw_dock_workers"
+  ],
+  "notes": "num_sprites=1 here only to carry sprite offsets; no frames follow / are drawn."
+ },
+ "GROUP_BUILDING_WAREHOUSE": {
+  "id": 82,
+  "count": 18,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 60,
+    "desc": "warehouse main building 1x1 (occupies one corner tile of the 3x3 warehouse; other 8 tiles are storage spaces): tall wooden/plaster storehouse with red roof; base carries animation (MANDATORY: ornaments/flags only drawn when animation exists)",
+    "anim": {
+     "num_sprites": 16,
+     "can_reverse": 0,
+     "speed_id": 5
+    }
+   },
+   {
+    "from": 1,
+    "to": 16,
+    "kind": "sprite",
+    "w": 40,
+    "h": 40,
+    "desc": "warehouse activity frames (workers carrying crates / pulley)"
+   },
+   {
+    "from": 17,
+    "to": 17,
+    "kind": "sprite",
+    "w": 66,
+    "h": 50,
+    "desc": "warehouse roof ornament / crane superstructure drawn at (x-4, y-42) over the main tile (also in placement ghost)"
+   }
+  ],
+  "evidence": [
+   "src/building/construction_building.c:108 main tile size 1",
+   "src/widget/city_without_overlay.c:570-573,623-626 +17 drawn only when base has animation",
+   "src/widget/city_building_ghost.c:214 +17",
+   "animation.c:51 animates only when fully staffed"
+  ],
+  "notes": "Frame count not dictated; must be <= 16 so frames do not hit offset 17. Building animation: draw_animation (src/widget/city_without_overlay.c) draws base + animation_offset (1..num_sprites) at (x + sprite_offset_x, y + sprite_offset_y - (top_height - 15)). The generator chooses sprite_offset_x/y so the frame overlays the matching spot of its own artwork."
+ },
+ "GROUP_BUILDING_WAREHOUSE_STORAGE_EMPTY": {
+  "id": 83,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 10,
+    "desc": "empty warehouse storage space 1x1: wooden plank floor with low frame/posts (~58x41 px)"
+   }
+  ],
+  "evidence": [
+   "src/building/construction_building.c:95",
+   "src/building/warehouse.c:221",
+   "src/widget/city_building_ghost.c:206",
+   "assets Industry.xml:142 Warehouse_Bricks_01 (58x46) layers group 83 image 0 at y=5"
+  ]
+ },
+ "GROUP_BUILDING_WAREHOUSE_STORAGE_FILLED": {
+  "id": 84,
+  "count": 64,
+  "entries": [
+   {
+    "from": 0,
+    "to": 3,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with wheat (golden sacks); offset 0+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 4,
+    "to": 7,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with vegetables (crates of greens); offset 4+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 8,
+    "to": 11,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with fruit (baskets of red/orange fruit); offset 8+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 12,
+    "to": 15,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with olives (baskets of olives); offset 12+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 16,
+    "to": 19,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with vines/grapes (baskets of purple grapes); offset 16+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 20,
+    "to": 23,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with meat (hanging/boxed red meat); offset 20+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 24,
+    "to": 27,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with wine (amphorae, dark red); offset 24+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 28,
+    "to": 31,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with oil (amphorae, yellow); offset 28+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 32,
+    "to": 35,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with iron (dark grey ingots/ore); offset 32+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 36,
+    "to": 39,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with timber (stacked logs); offset 36+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 40,
+    "to": 43,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with clay (orange clay blocks); offset 40+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 44,
+    "to": 47,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with marble (white blocks); offset 44+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 48,
+    "to": 51,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with weapons (swords/shields racks); offset 48+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 52,
+    "to": 55,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with furniture (chairs/tables); offset 52+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 56,
+    "to": 59,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with pottery (red-brown pots); offset 56+n = 1..4 loads (n=0 one small pile .. n=3 full space, piles grow)"
+   },
+   {
+    "from": 60,
+    "to": 63,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "warehouse storage space 1x1 filled with fish (baskets of silver fish); 1..4 loads"
+   }
+  ],
+  "evidence": [
+   "src/game/resource.c:185 storage = group + 4*(i-1) for legacy resource order i=1..15 (resource_mappings[0])",
+   "src/game/resource.c:194 fish = group + 60",
+   "src/building/warehouse.c:223 + loads - 1 (1..4)"
+  ],
+  "notes": "Legacy order: wheat, vegetables, fruit, olives, vines, meat, wine, oil, iron, timber, clay, marble, weapons, furniture, pottery; then fish at 60. Each image should be the EMPTY space floor (group 83 look) plus goods."
+ },
+ "GROUP_BUILDING_GRANARY": {
+  "id": 99,
+  "count": 14,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 20,
+    "desc": "granary 3x3 base: paved courtyard footprint with grain heaps visible in four bins (the building superstructure is drawn separately as offset 1); carries animation",
+    "anim": {
+     "num_sprites": 8,
+     "can_reverse": 0,
+     "speed_id": 5,
+     "sprite_offset_x": -32,
+     "sprite_offset_y": -14
+    }
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "sprite",
+    "w": 180,
+    "h": 125,
+    "desc": "granary superstructure: walls and red tile roofs of the granary building, drawn at (x+sprite_offset_x, y+60+sprite_offset_y-base_height) in city and at (x-32, y-64) in the ghost"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 30,
+    "h": 25,
+    "desc": "granary bin 1 EMPTY cover (hides grain heap) drawn at (x+33, y-60) when not full"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 30,
+    "h": 25,
+    "desc": "granary bin 2 EMPTY cover drawn at (x+56, y-50) when < 3/4 full"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 30,
+    "h": 25,
+    "desc": "granary bin 3 EMPTY cover drawn at (x+91, y-50) when < 1/2 full"
+   },
+   {
+    "from": 5,
+    "to": 5,
+    "kind": "sprite",
+    "w": 30,
+    "h": 25,
+    "desc": "granary bin 4 EMPTY cover drawn at (x+117, y-62) when < 1/4 full"
+   },
+   {
+    "from": 6,
+    "to": 13,
+    "kind": "sprite",
+    "w": 30,
+    "h": 30,
+    "desc": "granary worker animation frames (animation_offset 1..8 drawn as base+5+offset at x+77, y-49): worker carrying grain sacks"
+   }
+  ],
+  "evidence": [
+   "src/widget/city_without_overlay.c:575-594 draw_granary_stores +1..+5",
+   "src/widget/city_without_overlay.c:645-647 frames at image_id + offset + 5",
+   "src/widget/city_building_ghost.c:253-255 ghost draws footprint + (image_id+1 at x-32,y-64)",
+   "properties.c size 3 group 99",
+   "src/widget/city_with_overlay.c:473-491 same in overlays"
+  ],
+  "notes": "Base MUST have animation metadata (offset 1 superstructure only drawn when it exists). Frames live at offsets 6..5+num_sprites (NOT 1..n). Suggested sprite_offset_x=-32 and sprite_offset_y = base_height-124 so city and ghost positions agree (with top 20, base height 110 -> -14)."
+ },
+ "GROUP_BUILDING_FORT": {
+  "id": 66,
+  "count": 5,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 50,
+    "desc": "fort 3x3: wooden/stone walled legion fort with towers and gate (Augustus Fort_Main_* assets layer this at 0,0)"
+   },
+   {
+    "from": 1,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 4,
+    "top": 0,
+    "desc": "fort parade ground 4x4: flat packed-earth drill ground with low border"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "sprite",
+    "w": 20,
+    "h": 40,
+    "desc": "fort flag: javelin cohort standard (drawn at x+81,y+5 of the fort)"
+   },
+   {
+    "from": 3,
+    "to": 3,
+    "kind": "sprite",
+    "w": 20,
+    "h": 40,
+    "desc": "fort flag: mounted auxiliaries standard"
+   },
+   {
+    "from": 4,
+    "to": 4,
+    "kind": "sprite",
+    "w": 20,
+    "h": 40,
+    "desc": "fort flag: legionary standard (eagle)"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:539 fort ground +1",
+   "src/building/construction_building.c:59 ground size 4",
+   "src/widget/city_building_ghost.c:902",
+   "assets military.xml:669 (66:0), :682-711 (66:2,3,4 flags)",
+   "properties.c forts {3,1,66,0}, fort ground {4,1,66,1}"
+  ]
+ },
+ "GROUP_BUILDING_BARRACKS": {
+  "id": 166,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 55,
+    "desc": "barracks 3x3: long military barracks with training yard, red roofs, weapon racks"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:453",
+   "properties.c size 3"
+  ]
+ },
+ "GROUP_BUILDING_MILITARY_ACADEMY": {
+  "id": 201,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "iso",
+    "tiles": 3,
+    "top": 60,
+    "desc": "military academy 3x3: walled complex with drill yard, columned main hall"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:333",
+   "properties.c size 3"
+  ]
+ },
+ "GROUP_BUILDING_FORT_JAVELIN": {
+  "id": 202,
+  "count": 152,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 30,
+    "h": 38,
+    "desc": "figure: javelin thrower (light auxiliary, tunic, small round shield). walk: offset = direction(0..7) + 8*frame(0..11)"
+   },
+   {
+    "from": 96,
+    "to": 143,
+    "kind": "sprite",
+    "w": 34,
+    "h": 38,
+    "desc": "figure: javelin attack / throw: offset = 96 + direction + 8*frame(0..5) (also used while firing at standard)"
+   },
+   {
+    "from": 144,
+    "to": 151,
+    "kind": "sprite",
+    "w": 40,
+    "h": 30,
+    "desc": "figure: javelin corpse/death: 144 + frame(0..7), collapsing to lying body"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/soldier.c:153-170 update_image_javelin"
+  ],
+  "notes": "Despite the GROUP_BUILDING_ name this is a figure sprite group."
+ },
+ "GROUP_BUILDING_FORT_LEGIONARY": {
+  "id": 204,
+  "count": 160,
+  "entries": [
+   {
+    "from": 0,
+    "to": 95,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "figure: Roman legionary (red tunic, segmented armour, rectangular red shield, helmet). walk: offset = direction(0..7) + 8*frame(0..11)"
+   },
+   {
+    "from": 96,
+    "to": 143,
+    "kind": "sprite",
+    "w": 36,
+    "h": 40,
+    "desc": "figure: legionary attack: 96 + direction + 8*frame(0..5), sword thrusts"
+   },
+   {
+    "from": 144,
+    "to": 151,
+    "kind": "sprite",
+    "w": 30,
+    "h": 40,
+    "desc": "figure: legionary in testudo / shield-raised stance at standard: 144 + direction"
+   },
+   {
+    "from": 152,
+    "to": 159,
+    "kind": "sprite",
+    "w": 40,
+    "h": 30,
+    "desc": "figure: legionary corpse/death: 152 + frame(0..7)"
+   }
+  ],
+  "evidence": [
+   "src/figuretype/soldier.c:188-207 update_image_legionary",
+   "src/figuretype/enemy.c:663-665 (+dir, +dir+144)"
+  ],
+  "notes": "Figure sprite group despite the GROUP_BUILDING_ name."
+ },
+ "GROUP_BUILDING_NATIVE": {
+  "id": 183,
+  "count": 3,
+  "entries": [
+   {
+    "from": 0,
+    "to": 1,
+    "kind": "iso",
+    "tiles": 1,
+    "top": 25,
+    "desc": "native hut 1x1: round mud-and-straw hut with conical thatch roof, two variants"
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "kind": "iso",
+    "tiles": 2,
+    "top": 40,
+    "desc": "native meeting hall 2x2: large round thatched lodge with totem poles"
+   }
+  ],
+  "evidence": [
+   "src/building/image.c:541-543",
+   "src/map/natives.c:83-104",
+   "src/building/figure.c:1404",
+   "properties.c hut {1,1,183,0}, meeting {2,1,183,2}"
+  ]
+ },
+ "GROUP_BUILDING_TRADE_CENTER_FLAG": {
+  "id": 238,
+  "count": 1,
+  "entries": [
+   {
+    "from": 0,
+    "to": 0,
+    "kind": "sprite",
+    "w": 20,
+    "h": 40,
+    "desc": "trade center flag on pole; defined but unused by Augustus code"
+   }
+  ],
+  "evidence": [
+   "no code reference found; defined in image_group.h"
+  ],
+  "notes": "Unused; count 1 placeholder."
+ },
+ "_absolute_ids": [
+  "BATHHOUSE ghost: src/widget/city_building_ghost.c:766 image_draw(image_group(GROUP_BUILDING_BATHHOUSE_NO_WATER) - 1, ...) reaches the LAST image of the preceding group. Layout: group 185 must start immediately after GROUP_BUILDING_MISSION_POST (184, count 2), whose offset 1 is the bathhouse pool-water overlay.",
+  "DOCK ghost: src/widget/city_building_ghost.c:1016-1017 image_group(GROUP_BUILDING_DOCK_1 via properties group 78) + dir_relative*12 must equal image_group(DOCK_2/3/4). Layout: image_group(168)=image_group(78)+12, image_group(169)=image_group(78)+24, image_group(170)=image_group(78)+36 (each dock group 12 images).",
+  "DOCK workers: src/widget/city_without_overlay.c:484-490 compares map image id with image_group(DOCK_1/2/3) to select dockers offset (so dock base images must be exactly the group starts).",
+  "TRIUMPHAL ARCH ghost: src/widget/city_building_ghost.c:261 compares image_id with image_group(GROUP_BUILDING_TRIUMPHAL_ARCH).",
+  "ENGINEERS POST: src/core/image.c:701 dereferences image_group(GROUP_BUILDING_ENGINEERS_POST).animation unconditionally -> must have num_sprites>0.",
+  "WAREHOUSE STORAGE: src/game/resource.c:185/194 storage image = image_group(84) + 4*(legacy_index-1) + loads-1; fish at +60.",
+  "properties.c stores raw numeric group ids (e.g. 22, 45, 61, 66, 183, 185, 205, 213) used via image_group(props->image_group)+image_offset in ghost/editor; these match the GROUP_* ids above.",
+  "Asset XMLs reference numeric groups in this scope: 43:0, 46:0..21, 48:0..14, 53:0..7, 61:0,2, 63:0, 66:0,2,3,4, 71..75:1, 76:0, 83:0, 191:0, 213:0,2,3,4, 214:0,2,4, 41:0, 42:0."
+ ]
+}
