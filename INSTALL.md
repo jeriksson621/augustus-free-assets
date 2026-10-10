@@ -53,11 +53,11 @@ Signing key fingerprint: `A1DE 3853 3E68 123D 2180  EE6D 0953 9F18 339E 103D`
 
 ### Ubuntu / Debian: single .deb file
 
-Download `augustus-free-assets_1.0.0_all.deb` from the
+Download `augustus-free-assets_1.0.1_all.deb` from the
 [latest release](https://github.com/jeriksson621/augustus-free-assets/releases/latest), then:
 
 ```bash
-sudo apt install ./augustus-free-assets_1.0.0_all.deb
+sudo apt install ./augustus-free-assets_1.0.1_all.deb
 ```
 
 ### Ubuntu / Debian: manual zip
@@ -106,8 +106,7 @@ printf '%s' "$HOME/Games/augustus-data" > ~/.local/share/augustus/augustus/data_
 
 - **Choose a scenario** in the main menu: Tiber Valley, Open Fields (sandbox, no goals),
   Northern Frontier and Desert Oasis.
-- **Start a new career** shows the first mission briefing, but it currently hangs after you click
-  Begin. Use the scenarios for now.
+- **Start a new career**: a 22-mission campaign. The first two missions are short tutorials.
 
 ## Troubleshooting
 

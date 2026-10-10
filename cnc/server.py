@@ -397,7 +397,7 @@ def snapshot():
     pls = []
     for p, pl in enumerate(S['players']):
         prod, use = power(p)
-        pls.append(dict(credits=int(pl['credits']), joined=pl['joined'], bq=pl['bq'], ready=pl['ready'], uq=pl['uq'], power=[prod, use]))
+        pls.append(dict(credits=int(pl['credits']), joined=conns[p] > 0, bq=pl['bq'], ready=pl['ready'], uq=pl['uq'], power=[prod, use]))
     return json.dumps(dict(
         players=pls, winner=S['winner'], mapv=S['mapv'], shots=S.get('shots', []),
         ents=[[e['id'], e['o'], e['k'], e['b'], round(e['x']), round(e['y']), int(e['hp']), e.get('cargo',0)] for e in S['ents'].values()],
@@ -412,6 +412,7 @@ def loop():
         time.sleep(max(0, TICK-(time.time()-t0)))
 
 cv = threading.Condition()
+conns = [0, 0]; seen = [0.0, 0.0]
 def cond_notify():
     with cv: cv.notify_all()
 
@@ -429,18 +430,28 @@ class H_(BaseHTTPRequestHandler):
         elif self.path == '/join':
             with lock:
                 for p in (0, 1):
-                    if not S['players'][p]['joined']:
-                        S['players'][p]['joined'] = True
+                    # a slot is free when nobody has been streaming it for a few seconds
+                    if conns[p] == 0 and time.time() - seen[p] > 4:
+                        seen[p] = time.time()
                         return self.send(200, json.dumps(dict(pid=p, W=W, H=H, B=B, U=U)))
             self.send(200, json.dumps(dict(pid=-1, W=W, H=H, B=B, U=U)))
-        elif self.path == '/stream':
-            self.send_response(200); self.send_header('Content-Type', 'text/event-stream'); self.send_header('Cache-Control', 'no-cache'); self.send_header('Connection', 'keep-alive'); self.end_headers()
-            try:
-                while True:
-                    with cv: cv.wait(1)
-                    self.wfile.write(('data: ' + SNAP + '\n\n').encode()); self.wfile.flush()
-            except Exception: pass
+        elif self.path.startswith('/stream'):
+            try: sp = int(self.path.split('pid=')[1])
+            except Exception: sp = -1
+            if sp in (0, 1):
+                with lock: conns[sp] += 1
+            try: self.stream()
+            finally:
+                if sp in (0, 1):
+                    with lock: conns[sp] -= 1; seen[sp] = time.time()
         else: self.send(404, '')
+    def stream(self):
+        self.send_response(200); self.send_header('Content-Type', 'text/event-stream'); self.send_header('Cache-Control', 'no-cache'); self.send_header('Connection', 'keep-alive'); self.end_headers()
+        try:
+            while True:
+                with cv: cv.wait(1)
+                self.wfile.write(('data: ' + SNAP + '\n\n').encode()); self.wfile.flush()
+        except Exception: pass
     def do_POST(self):
         c = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
         with lock:

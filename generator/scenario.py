@@ -98,18 +98,62 @@ def clear_area(m, x0, y0, x1, y1):
                 m.terrain[y][x] = 0
 
 
-def lay_road(m, pts):
+def lay_road(m, pts, resources=True):
+    path = []
     for (ax, ay), (bx, by) in zip(pts, pts[1:]):
         x, y = ax, ay
         while (x, y) != (bx, by):
             if m.get(x, y) == TERRAIN_WATER:
                 raise ValueError("road crosses water at %d,%d" % (x, y))
-            m.set(x, y, TERRAIN_ROAD)
+            path.append((x, y))
             if x != bx:
                 x += 1 if bx > x else -1
             elif y != by:
                 y += 1 if by > y else -1
-        m.set(bx, by, TERRAIN_ROAD)
+    path.append(pts[-1])
+    if resources:
+        add_resource_patches(m, path)
+    for x, y in path:
+        m.set(x, y, TERRAIN_ROAD)
+
+
+def _blob(m, cx, cy, r, flag, keep):
+    for y in range(cy - r - 1, cy + r + 2):
+        for x in range(cx - r - 1, cx + r + 2):
+            d = math.hypot(x - cx, y - cy) + (noise(x, y, 2, m.seed + 41) - 0.5) * 1.2
+            if d <= r and (x, y) not in keep and m.get(x, y) not in (-1, TERRAIN_ROAD):
+                m.set(x, y, flag)
+
+
+def add_resource_patches(m, path):
+    """Place meadow, rock, forest and pond patches near the road so every industry is buildable."""
+    keep = set()
+    for x, y in path:
+        for dy in range(-2, 3):
+            for dx in range(-2, 3):
+                keep.add((x + dx, y + dy))
+    kinds = ["meadow", "meadow", "rock", "trees", "pond", "meadow", "rock", "trees"]
+    step = max(6, len(path) // 9)
+    k = 0
+    for i in range(step // 2, len(path) - 2, step):
+        x, y = path[i]
+        nx, ny = path[min(i + 1, len(path) - 1)]
+        dx, dy = nx - x, ny - y
+        side = 1 if k % 2 == 0 else -1
+        px, py = -dy * side, dx * side  # perpendicular
+        dist = 8 if kinds[k % len(kinds)] != "pond" else 7
+        cx, cy = x + px * dist, y + py * dist
+        kind = kinds[k % len(kinds)]
+        if kind == "meadow":
+            _blob(m, cx, cy, 4, TERRAIN_MEADOW, keep)
+        elif kind == "rock":
+            _blob(m, cx, cy, 2, TERRAIN_ROCK, keep)
+        elif kind == "trees":
+            _blob(m, cx, cy, 3, TERRAIN_TREE, keep)
+        elif kind == "pond":
+            _blob(m, cx, cy, 4, TERRAIN_MEADOW, keep)
+            _blob(m, cx, cy, 2, TERRAIN_WATER, keep)
+        k += 1
 
 
 def encode_grids(m, starts):

@@ -64,6 +64,7 @@ static char pending_shot[64];
 static int mouse_x, mouse_y;
 
 static uint32_t (*real_GetTicks)(void);
+static int parse_line(char *line, uint32_t now);
 
 static void load_script(void)
 {
@@ -80,11 +81,24 @@ static void load_script(void)
     }
     char line[256];
     while (fgets(line, sizeof(line), fp) && num_evs < 4096) {
+        parse_line(line, 0);
+    }
+    fclose(fp);
+}
+
+static int parse_line(char *line, uint32_t now)
+{
+    {
         script_ev *e = &evs[num_evs];
         char cmd[32];
         memset(e, 0, sizeof(*e));
-        if (sscanf(line, "%u %31s", &e->ms, cmd) != 2) {
-            continue;
+        if (now) {
+            if (sscanf(line, "%31s", cmd) != 1) {
+                return 0;
+            }
+            e->ms = now;
+        } else if (sscanf(line, "%u %31s", &e->ms, cmd) != 2) {
+            return 0;
         }
         char *rest = strstr(line, cmd) + strlen(cmd);
         if (!strcmp(cmd, "move")) { e->kind = EV_MOVE; sscanf(rest, "%d %d", &e->a, &e->b); }
@@ -95,8 +109,33 @@ static void load_script(void)
         else if (!strcmp(cmd, "shot")) { e->kind = EV_SHOT; sscanf(rest, " %63s", e->str); }
         else if (!strcmp(cmd, "quit")) { e->kind = EV_QUIT; }
         else if (!strcmp(cmd, "drag")) { e->kind = EV_DRAG; sscanf(rest, "%d %d %d %d", &e->a, &e->b, &e->c, &e->d); }
-        else continue;
+        else return 0;
         num_evs++;
+    }
+    return 1;
+}
+
+/* live mode: lines appended to $AUG_CMDFILE are executed immediately */
+static long cmd_offset;
+static void poll_cmdfile(void)
+{
+    const char *path = getenv("AUG_CMDFILE");
+    if (!path || num_evs >= 4000) {
+        return;
+    }
+    FILE *fp = fopen(path, "r");
+    if (!fp) {
+        return;
+    }
+    fseek(fp, cmd_offset, SEEK_SET);
+    char line[256];
+    uint32_t now = real_GetTicks() - start_ms;
+    while (fgets(line, sizeof(line), fp)) {
+        if (!strchr(line, '\n')) {
+            break; /* incomplete line, read again later */
+        }
+        cmd_offset = ftell(fp);
+        parse_line(line, now ? now : 1);
     }
     fclose(fp);
 }
@@ -145,7 +184,12 @@ static void key(int scancode, int sym, int down)
 
 static void schedule(void)
 {
+    static uint32_t last_poll;
     uint32_t now = real_GetTicks() - start_ms;
+    if (now - last_poll > 100) {
+        last_poll = now;
+        poll_cmdfile();
+    }
     // only release one script event per poll cycle so the game sees discrete frames
     if (next_ev < num_evs && evs[next_ev].ms <= now && q_head == q_tail) {
         script_ev *s = &evs[next_ev++];

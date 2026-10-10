@@ -176,13 +176,13 @@ let pid=-1,W,H,B,U,st=null,cam={x:0,y:0},sel=new Set(),drag=null,mouse={x:0,y:0}
 const COL=['#e8c030','#d03030'],NAME=['GDI (gold)','NOD (red)'];
 function resize(){cv.width=innerWidth-270;cv.height=innerHeight}onresize=resize;resize();
 const post=c=>fetch('/cmd',{method:'POST',body:JSON.stringify({...c,pid})});
-fetch('/join').then(r=>r.json()).then(j=>{({pid,W,H,B,U}=j);
+fetch('/join').then(r=>r.json()).then(j=>{({pid,W,H,B,U}=j);if(pid<0)document.getElementById('msg').textContent='Game full — spectating. Reload when a slot frees up.';
  document.getElementById('who').innerHTML=pid<0?'Spectator':'You: <b style="color:'+COL[pid]+'">'+NAME[pid]+'</b>';
  if(pid==1)cam={x:W-cv.width,y:H-cv.height};
  const bb=document.getElementById('bb'),ub=document.getElementById('ub');
  for(const k in B)if(k!='cy'){const b=document.createElement('button');b.id='b_'+k;b.className='ic';b.append(icon(k,1),Object.assign(document.createElement('span'),{id:'bl_'+k}));b.onclick=()=>{const p=st.players[pid];if(p.ready==k){placing=true}else if(p.bq||p.ready)post({type:'cancel'});else post({type:'build',what:k})};bb.appendChild(b)}
  for(const k in U){const b=document.createElement('button');b.id='u_'+k;b.className='ic';b.append(icon(k,0),Object.assign(document.createElement('span'),{id:'ul_'+k}));b.onclick=()=>post({type:'train',what:k});ub.appendChild(b)}
- const es=new EventSource('/stream');es.onmessage=e=>{const ns=JSON.parse(e.data);if(ns.mapv!==mapv){mapv=ns.mapv;fetch('/map').then(r=>r.json()).then(m=>{obs=m.obs;buildGround()})}if(ground)onState(ns);else st=ns;ui()};requestAnimationFrame(draw)});
+ const es=new EventSource('/stream?pid='+pid);es.onmessage=e=>{const ns=JSON.parse(e.data);if(ns.mapv!==mapv){mapv=ns.mapv;fetch('/map').then(r=>r.json()).then(m=>{obs=m.obs;buildGround()})}if(ground)onState(ns);else st=ns;ui()};requestAnimationFrame(draw)});
 document.getElementById('sell').onclick=()=>{if(selB)post({type:'sell',id:selB})};
 document.getElementById('rst').onclick=()=>{if(confirm('Reset game for both players?'))fetch('/cmd',{method:'POST',body:JSON.stringify({type:'reset'})})};
 function icon(k,isB){const c=mkCanvas(60,60),g=c.getContext('2d'),o=Math.max(0,pid);g.fillStyle='#1a1a18';g.fillRect(0,0,60,60);

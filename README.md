@@ -36,10 +36,11 @@ Included:
 
 ## Status
 
-Works: main menu, custom scenarios, building, immigration and walkers, advisors, empire map,
-messages, overlays. Known issues: starting a new career currently hangs after the first
-briefing; the empire map art doesn't line up with city positions; vacant lots look like houses.
-The art is simple and procedural.
+Verified by playing: the campaign (mission 1 won, promotion, mission 2 briefing and tutorial
+steps), custom scenarios, building, farms/granary/market, temples, prefects and engineers,
+fires and collapses, immigration and walkers, random events, gods, advisors, empire map,
+messages and overlays. Known cosmetic issues: the empire map art doesn't line up with city
+positions, and vacant lots look like houses. The art is simple and procedural.
 
 ## Regenerate
 
