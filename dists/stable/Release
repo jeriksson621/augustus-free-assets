@@ -1,0 +1,41 @@
+Origin: augustus-free-assets
+Label: augustus-free-assets
+Suite: stable
+Codename: stable
+Architectures: all amd64 arm64 i386 armhf
+Components: main
+Description: Free generated game data for Augustus
+Date: Sat, 10 Oct 2026 21:27:37 UTC
+MD5Sum:
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-all/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-all/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-amd64/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-amd64/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-arm64/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-arm64/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-i386/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-i386/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-armhf/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-armhf/Packages.gz
+SHA1:
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-all/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-all/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-amd64/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-amd64/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-arm64/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-arm64/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-i386/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-i386/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-armhf/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-armhf/Packages.gz
+SHA256:
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-all/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-all/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-amd64/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-amd64/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-arm64/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-arm64/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-i386/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-i386/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-armhf/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-armhf/Packages.gz

@@ -1,0 +1,60 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: augustus-free-assets
+Label: augustus-free-assets
+Suite: stable
+Codename: stable
+Architectures: all amd64 arm64 i386 armhf
+Components: main
+Description: Free generated game data for Augustus
+Date: Sat, 10 Oct 2026 21:27:37 UTC
+MD5Sum:
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-all/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-all/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-amd64/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-amd64/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-arm64/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-arm64/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-i386/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-i386/Packages.gz
+ 5b878ca4f10714ed9854f2f0614cd52a 945 main/binary-armhf/Packages
+ f3d8d3f52bc5ccdbcf9faa0da16de995 576 main/binary-armhf/Packages.gz
+SHA1:
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-all/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-all/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-amd64/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-amd64/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-arm64/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-arm64/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-i386/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-i386/Packages.gz
+ 7fe70049fd0c1074a8a291081095aeeeac7db100 945 main/binary-armhf/Packages
+ 2254f6d80fc7c7e1f6fd42f319778b4d802b2d95 576 main/binary-armhf/Packages.gz
+SHA256:
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-all/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-all/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-amd64/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-amd64/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-arm64/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-arm64/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-i386/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-i386/Packages.gz
+ e542579e50a9c561c09594373602ee59f3db1ca77a807a7cf8876b38a4bdd9fa 945 main/binary-armhf/Packages
+ 989ac41df23452d0882140ebbd4966077f52d40444cb4605417dab37b48f4ceb 576 main/binary-armhf/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEod44Uz5oEj0hgO5tCVOfGDOeED0FAmrKrckACgkQCVOfGDOe
+ED0zTA//cmWPmQLAcwyixlbLV+C64x+RBEZYLit6/YlQpJZ+X0m4i3qhk380TKah
+uQCZS0SEpLaon3pzPMkLmf1rGew89Pv9cogXIsMAVruX27GWzF9NfQdcIAMx1H03
+MHxbWiXdRqBh7WYX0JVB/o7o5yUsNnhmoijX3yyvxtoYDPjlqvsm8T6hPeGvqtET
+YpsKoLqAQE4ytfkellrLeL6CQ5cOpBpxQ/7J7YK4KmgUNLUH8k4mCS2YOJET/cjo
+16bmE38Zvue0eWZMJsEekKU1LZaWh7N62wNEkbGUL0PYX9OPVQlZPw8uj29PyyN/
+KY/+gxCvc9bgyGwZP58SmkNhfrQ3FHC4mDuyzhrE+bh7Uytu5NV/5ZVNKwqj0Xm7
+G+g38UEakz9GEEKs3m7CK6u6ZA5mulqwMmH75GU9Z4Vl6jiweSsSTWoGDXPc3l0Y
+34rmivrCxu/zI6JDlwmd3c9pLL8VGDoXCo7yMz/CTmxzwFq7obJzbKxzWbNZX3yw
+fJyNXTLgVA3gnXhSjn/RV8Uu+scKb5bRwECl8lDbeIoNF4X3FFayVVfmy8QJa7vl
+LmnRrFZ4aNYBk3ZtfeDX95tfjVqCQGemAcQpI0hhetfjY3alReP1q9Zvp4ZvFt8U
+e2RvzKrbhLZlfuW7G1DHcXc2G5lf2aqOAgaCUpOfXCrSO/fI/PQ=
+=CTZ8
+-----END PGP SIGNATURE-----
