@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jeriksson621.github.io/augustus-free-assets/sitemap.xml
