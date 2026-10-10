@@ -1,0 +1,25 @@
+#!/bin/sh
+# Start Augustus with the free generated data set.
+# The packaged data is read-only, so a per-user folder of links is used as the
+# game directory (saved games and settings are written there).
+set -e
+DATA=/usr/share/augustus-free-assets/data
+USERDIR="${XDG_DATA_HOME:-$HOME/.local/share}/augustus-free-assets"
+mkdir -p "$USERDIR"
+for f in "$DATA"/* "$DATA"/.[!.]*; do
+    [ -e "$f" ] || continue
+    name=$(basename "$f")
+    if [ ! -e "$USERDIR/$name" ] || [ -L "$USERDIR/$name" ]; then
+        ln -sfn "$f" "$USERDIR/$name"
+    fi
+done
+for bin in augustus-game augustus; do
+    if command -v "$bin" >/dev/null 2>&1; then
+        exec "$bin" "$@" "$USERDIR"
+    fi
+    if [ -x "/usr/games/$bin" ]; then
+        exec "/usr/games/$bin" "$@" "$USERDIR"
+    fi
+done
+echo "augustus-free: Augustus is not installed (try: sudo apt install augustus-game)" >&2
+exit 1

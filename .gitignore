@@ -7,3 +7,4 @@ c3data/*.sav
 c3data/augustus.ini
 c3data/hotkeys.ini
 c3data/c3.inf
+dist/

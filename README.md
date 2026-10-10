@@ -20,6 +20,9 @@ Tested with Augustus 4.0.0 (Debian/Ubuntu package `augustus-game`).
 augustus-game /path/to/augustus-data
 ```
 
+On Ubuntu/Debian you can also install it with apt from this project's repository
+(`sudo apt install augustus-free-assets` after adding the repo, see INSTALL.md).
+
 Step-by-step instructions for Windows and Linux are in **[INSTALL.md](INSTALL.md)**.
 The same files are also unpacked in `c3data/` in this repository.
 
@@ -49,4 +52,10 @@ python3 generator/missions.py OUTPUT_DIR TOOL_BIN  # campaign; needs Augustus bu
 meanings) derived from the Augustus source code. `tools/harness/` runs the game headless with
 scripted input and screenshots, for testing.
 
-The glyph images are rendered from the DejaVu fonts (Bitstream Vera / DejaVu license).
+`packaging/` builds the `.deb` (`packaging/deb/build.sh VERSION`) and the signed apt repository
+published on the `gh-pages` branch (`packaging/apt/build-repo.py`).
+
+## License
+
+Generated data: CC0 1.0. Scripts and tools: MIT. The Augustus patch in `tools/missionbuilder/`:
+AGPL-3.0. Details in [LICENSE](LICENSE). The glyph images are rendered from the DejaVu fonts.

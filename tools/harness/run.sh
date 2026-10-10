@@ -2,6 +2,7 @@
 # Run Augustus headless (no window on the desktop) with scripted input.
 # usage: run.sh DATA_DIR SCRIPT_FILE SHOT_DIR [TIMEOUT_SECONDS] [BINARY]
 HERE="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$HERE/shim.so" ] || gcc -shared -fPIC -O2 -o "$HERE/shim.so" "$HERE/shim.c" -ldl
 DATA_DIR="$1"
 SCRIPT="$2"
 SHOTDIR="$3"

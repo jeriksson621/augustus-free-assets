@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Augustus (free assets)
+Comment=Caesar III re-implementation with free generated game data
+Exec=augustus-free
+Icon=com.github.keriew.augustus
+Terminal=false
+Categories=Game;StrategyGame;

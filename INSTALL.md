@@ -32,7 +32,35 @@ stores its settings and saved games in that folder.
 
 ## Linux
 
-### Ubuntu / Debian
+### Ubuntu / Debian: apt (recommended)
+
+Add the project's apt repository once. You then get the data and updates with `apt`:
+
+```bash
+sudo curl -fsSLo /usr/share/keyrings/augustus-free-assets.gpg \
+  https://jeriksson621.github.io/augustus-free-assets/augustus-free-assets.gpg
+echo "deb [signed-by=/usr/share/keyrings/augustus-free-assets.gpg] https://jeriksson621.github.io/augustus-free-assets stable main" \
+  | sudo tee /etc/apt/sources.list.d/augustus-free-assets.list
+sudo apt update
+sudo apt install augustus-free-assets
+```
+
+This also installs `augustus-game` from Ubuntu. Start **Augustus (free assets)** from the
+application menu, or run `augustus-free` in a terminal (`augustus-free --windowed` for a
+window). Saved games go to `~/.local/share/augustus-free-assets/`.
+
+Signing key fingerprint: `A1DE 3853 3E68 123D 2180  EE6D 0953 9F18 339E 103D`
+
+### Ubuntu / Debian: single .deb file
+
+Download `augustus-free-assets_1.0.0_all.deb` from the
+[latest release](https://github.com/jeriksson621/augustus-free-assets/releases/latest), then:
+
+```bash
+sudo apt install ./augustus-free-assets_1.0.0_all.deb
+```
+
+### Ubuntu / Debian: manual zip
 
 ```bash
 sudo apt install augustus-game
