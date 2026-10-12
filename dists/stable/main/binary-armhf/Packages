@@ -1,10 +1,10 @@
-Package: augustus-free-assets
-Version: 1.0.0
+Package: augustus-free-assets-steampunk
+Version: 1.1.0
 Section: games
 Priority: optional
 Architecture: all
 Depends: augustus-game (>= 4.0) | augustus (>= 4.0)
-Installed-Size: 108104
+Installed-Size: 109588
 Maintainer: jeriksson621 <jeriksson621@gmail.com>
 Homepage: https://github.com/jeriksson621/augustus-free-assets
 Description: free generated game data for Augustus (Caesar III engine)
@@ -13,16 +13,43 @@ Description: free generated game data for Augustus (Caesar III engine)
  proprietary Caesar III files. The assets are LLM-generated placeholders
  made for gameplay testing.
  .
- Start the game with the "Augustus (free assets)" menu entry or the
- augustus-free command.
-Filename: pool/main/a/augustus-free-assets/augustus-free-assets_1.0.0_all.deb
-Size: 4290416
-MD5sum: 885b296d2a2804b750936cfc6eee553e
-SHA1: 7fc96c2de348c376abc8c6b2fcd22239c16cb837
-SHA256: 66392d2de4a84280d7cfc51adcaea0b2343d457a8acc658a217fca292eccbf26
+ Start the game with the "Augustus: Steam Age (free assets)" menu entry or the
+ augustus-free-steampunk command.
+ .
+ Steampunk variant: brick factories, brass domes, smoke stacks and top hats.
+Filename: pool/main/a/augustus-free-assets/augustus-free-assets-steampunk_1.1.0_all.deb
+Size: 4367460
+MD5sum: fa8cd103dc775a6d4931549e97a46d2d
+SHA1: c5bf4e53077804ff753835657398e000a5a0325d
+SHA256: c3d409b5ea38b9ef24f568c207912c2fc94319bdb6b91b1640e4b6daa9b5d049
+
+Package: augustus-free-assets-stoneage
+Version: 1.1.0
+Section: games
+Priority: optional
+Architecture: all
+Depends: augustus-game (>= 4.0) | augustus (>= 4.0)
+Installed-Size: 105712
+Maintainer: jeriksson621 <jeriksson621@gmail.com>
+Homepage: https://github.com/jeriksson621/augustus-free-assets
+Description: free generated game data for Augustus (Caesar III engine)
+ Original, procedurally generated replacement data (graphics, text,
+ messages, scenarios and a campaign) that lets Augustus run without the
+ proprietary Caesar III files. The assets are LLM-generated placeholders
+ made for gameplay testing.
+ .
+ Start the game with the "Augustus: Stone Age (free assets)" menu entry or the
+ augustus-free-stoneage command.
+ .
+ Stone Age variant: thatched huts, stone circles and palisades.
+Filename: pool/main/a/augustus-free-assets/augustus-free-assets-stoneage_1.1.0_all.deb
+Size: 4428152
+MD5sum: f9762666ec7fdddf877d37c98869d899
+SHA1: a3f7f5106c148bb78ff75d7c69efa35361002db2
+SHA256: 50f05d81c3141c3dc9ddc74a4fd2f5eb3141d8a6e0dc4b85f745cda71cbb4ccc
 
 Package: augustus-free-assets
-Version: 1.0.1
+Version: 1.1.0
 Section: games
 Priority: optional
 Architecture: all
@@ -38,8 +65,8 @@ Description: free generated game data for Augustus (Caesar III engine)
  .
  Start the game with the "Augustus (free assets)" menu entry or the
  augustus-free command.
-Filename: pool/main/a/augustus-free-assets/augustus-free-assets_1.0.1_all.deb
-Size: 4297776
-MD5sum: 9cfee933671f0d41f9c3a6ebd6fd1eb9
-SHA1: cccb083ece0ecdd56ce4ef1bba1890098e5d5d5d
-SHA256: 559cd62d5ade9675b5e08ba1bd5e84f9dd8a42941d64933cd351984e4cdd7a43
+Filename: pool/main/a/augustus-free-assets/augustus-free-assets_1.1.0_all.deb
+Size: 4298984
+MD5sum: 3109a55914fcd6d2de28f0591b47a15d
+SHA1: 2430f207764c110d5fc8e7a1ccd39d5c8dcccd1b
+SHA256: e0ae4172042141145a5a834336749940c084ca2a47a54649a2bf45932b030845
