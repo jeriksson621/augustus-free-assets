@@ -10,8 +10,11 @@ from PIL import Image, ImageDraw
 
 from .core import rgb, shade, outline_alpha
 
-SKIN = (214, 160, 112)
-HAIR = (70, 44, 24)
+from . import theme
+
+SKIN = theme.T["skin"]
+HAIR = theme.T["hair"]
+THEME = theme.NAME
 
 # unit heading vectors on screen (x right, y down)
 HEAD = {
@@ -29,6 +32,22 @@ def person(d, frame, tunic=(180, 40, 30), legs=None, skin=SKIN, hair=HAIR, item=
            item_color=(120, 80, 40), helmet=None, cloak=None, scale=1.0, state="walk", frames=12,
            shield=None, skirt=True):
     """Draw a person. state: walk | death | fight | stand | work."""
+    if THEME == "steampunk":
+        # darker Victorian coats, keep the role colour as a sash/accent
+        tunic = tuple(int(c * 0.55 + 30) for c in tunic)
+        legs = legs or (48, 42, 40)
+        if item in ("sword", "spear"):
+            item = "staff" if item == "spear" else item
+        if shield:
+            shield = (150, 120, 60)
+    elif THEME == "stoneage":
+        # fur and hide clothing, clubs and stone spears
+        tunic = tuple(int(c * 0.25 + f * 0.75) for c, f in zip(tunic, (140, 100, 60)))
+        legs = legs or skin
+        if item == "sword":
+            item = "tool"
+        if shield:
+            shield = (120, 90, 60)
     W, H = int(30 * scale) + 4, int(40 * scale) + 6
     img, dr = _canvas(W, H)
     s = scale
@@ -123,6 +142,29 @@ def _draw_upright(dr, cx, feet, s, tunic, legs, skin, hair, swing, side, away, i
         else:
             dr.point((cx - 1.3 * s, head_y), fill=rgb((20, 20, 20)))
             dr.point((cx + 1.3 * s, head_y), fill=rgb((20, 20, 20)))
+    if THEME == "steampunk":
+        # top hat (or brass helmet for soldiers) and goggles
+        if helmet:
+            dr.chord([cx - head_r - 0.5, head_y - head_r - 1, cx + head_r + 0.5, head_y + head_r * 0.3], 180, 360,
+                     fill=rgb((196, 150, 58)))
+            dr.ellipse([cx - 1.5, head_y - head_r - 3 * s, cx + 1.5, head_y - head_r], fill=rgb((196, 150, 58)))
+        else:
+            dr.rectangle([cx - head_r - 1.5, head_y - head_r * 0.6, cx + head_r + 1.5, head_y - head_r * 0.6 + 1],
+                         fill=rgb((30, 26, 24)))
+            dr.rectangle([cx - head_r * 0.75, head_y - head_r * 0.6 - 6 * s, cx + head_r * 0.75,
+                          head_y - head_r * 0.6], fill=rgb((30, 26, 24)))
+            dr.line([(cx - head_r * 0.75, head_y - head_r * 0.6 - 1), (cx + head_r * 0.75, head_y - head_r * 0.6 - 1)],
+                    fill=rgb((150, 40, 30)))
+        if not away:
+            dr.point((cx - 1.3 * s, head_y), fill=rgb((196, 150, 58)))
+            dr.point((cx + 1.3 * s, head_y), fill=rgb((196, 150, 58)))
+        helmet = None
+    elif THEME == "stoneage":
+        # wild hair, bone necklace, no metal helmets
+        dr.chord([cx - head_r - 1, head_y - head_r - 1.5, cx + head_r + 1, head_y + head_r * 0.2], 180, 360,
+                 fill=rgb(HAIR))
+        dr.line([(cx - 3 * s, shoulder_y + 2), (cx + 3 * s, shoulder_y + 2)], fill=rgb((235, 228, 210)))
+        helmet = None
     if helmet:
         dr.chord([cx - head_r - 0.5, head_y - head_r - 1, cx + head_r + 0.5, head_y + head_r * 0.3], 180, 360,
                  fill=rgb(helmet))

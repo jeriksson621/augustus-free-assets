@@ -3,8 +3,13 @@
 You need two things:
 
 1. **Augustus** itself (the game engine), version 4.0 or newer.
-2. **This data pack**: [augustus-free-assets.zip](https://github.com/jeriksson621/augustus-free-assets/raw/main/augustus-free-assets.zip)
-   (about 7 MB). It replaces the original Caesar III files.
+2. **One data pack**, about 7 MB each. It replaces the original Caesar III files. Pick a look:
+   - Classic (Roman): [augustus-free-assets.zip](https://github.com/jeriksson621/augustus-free-assets/raw/main/augustus-free-assets.zip)
+   - Steampunk: [augustus-free-assets-steampunk.zip](https://github.com/jeriksson621/augustus-free-assets/raw/main/augustus-free-assets-steampunk.zip)
+   - Stone Age: [augustus-free-assets-stoneage.zip](https://github.com/jeriksson621/augustus-free-assets/raw/main/augustus-free-assets-stoneage.zip)
+
+   The steps below use the classic zip; for a variant, use its zip and its folder name
+   (`augustus-data-steampunk` or `augustus-data-stoneage`).
 
 The zip contains one folder, `augustus-data`. Extract it somewhere you can write to: the game
 stores its settings and saved games in that folder.
@@ -42,8 +47,13 @@ sudo curl -fsSLo /usr/share/keyrings/augustus-free-assets.gpg \
 echo "deb [signed-by=/usr/share/keyrings/augustus-free-assets.gpg] https://jeriksson621.github.io/augustus-free-assets stable main" \
   | sudo tee /etc/apt/sources.list.d/augustus-free-assets.list
 sudo apt update
-sudo apt install augustus-free-assets
+sudo apt install augustus-free-assets            # classic
+sudo apt install augustus-free-assets-steampunk  # steampunk variant
+sudo apt install augustus-free-assets-stoneage   # stone age variant
 ```
+
+Variants can be installed side by side; each has its own menu entry
+(`augustus-free-steampunk`, `augustus-free-stoneage`) and its own saved games.
 
 This also installs `augustus-game` from Ubuntu. Start **Augustus (free assets)** from the
 application menu, or run `augustus-free` in a terminal (`augustus-free --windowed` for a
@@ -53,11 +63,11 @@ Signing key fingerprint: `A1DE 3853 3E68 123D 2180  EE6D 0953 9F18 339E 103D`
 
 ### Ubuntu / Debian: single .deb file
 
-Download `augustus-free-assets_1.0.1_all.deb` from the
+Download `augustus-free-assets_1.1.0_all.deb` from the
 [latest release](https://github.com/jeriksson621/augustus-free-assets/releases/latest), then:
 
 ```bash
-sudo apt install ./augustus-free-assets_1.0.1_all.deb
+sudo apt install ./augustus-free-assets_1.1.0_all.deb
 ```
 
 ### Ubuntu / Debian: manual zip

@@ -10,11 +10,13 @@ from . import fonts, terrain
 
 BITMAPS = ["placeholder.bmp"]
 
-PARCHMENT = (222, 200, 150)
-STONE_UI = (146, 132, 108)
-BRONZE = (176, 128, 64)
+from . import theme as _theme
+
+PARCHMENT = _theme.T["ui_parchment"]
+STONE_UI = _theme.T["ui_stone"]
+BRONZE = _theme.T["ui_bronze"]
 DARK = (48, 36, 24)
-GOLD = (214, 172, 66)
+GOLD = _theme.T["ui_gold"]
 RED = (170, 40, 30)
 SEA = (52, 98, 150)
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
@@ -423,7 +425,7 @@ def panel_tiles(grid, inner=False, seed=0):
     """Render a grid x grid tiles (16px) panel, return list of tile images row-major."""
     size = grid * 16
     period = (grid - 2) * 16
-    base = (64, 52, 40) if inner else PARCHMENT
+    base = _theme.T["ui_inner"] if inner else PARCHMENT
     img = Image.new("RGBA", (size, size))
     fill = seamless_texture(period, period, base, period, seed, strength=0.18 if not inner else 0.25)
     for y in range(0, size, period):
@@ -443,7 +445,7 @@ def panel_tiles(grid, inner=False, seed=0):
             d.line([(i, size - 1 - i), (size - 1 - i, size - 1 - i)], fill=rgb(shade(base, 1.5 - i * 0.1)))
             d.line([(size - 1 - i, i), (size - 1 - i, size - 1 - i)], fill=rgb(shade(base, 1.5 - i * 0.1)))
     else:
-        border = (120, 84, 46)
+        border = _theme.T["ui_border"]
         for i in range(0, 7):
             f = 1.25 - i * 0.07 if i < 3 else 0.75 + (i - 3) * 0.08
             col = shade(border, f)
@@ -553,12 +555,64 @@ def temple_silhouette(d, x, y, w, h, color, cols=6):
               fill=rgb(shade(color, 1.1)))
 
 
+def _steam_skyline(d, w, h, base_y, rnd):
+    """Factories with smoke stacks, a brass dome and an airship."""
+    for k in range(rnd.randint(4, 7)):
+        x = rnd.uniform(0.05, 0.9) * w
+        cw = w * 0.015
+        ch = h * rnd.uniform(0.12, 0.25)
+        d.rectangle([x, base_y - ch, x + cw, base_y], fill=rgb((70, 60, 60)))
+        d.rectangle([x - 2, base_y - ch, x + cw + 2, base_y - ch + h * 0.01], fill=rgb((196, 150, 58)))
+        for j in range(5):
+            r = h * (0.02 + j * 0.008)
+            cy = base_y - ch - j * h * 0.03
+            cx = x + cw / 2 + j * w * 0.012
+            d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=rgb((150 - j * 8, 145 - j * 8, 140 - j * 8)))
+    cx = w * rnd.uniform(0.35, 0.55)
+    dw = w * 0.09
+    d.rectangle([cx - dw, base_y - h * 0.1, cx + dw, base_y], fill=rgb((150, 76, 56)))
+    d.pieslice([cx - dw * 0.8, base_y - h * 0.1 - dw * 0.8, cx + dw * 0.8, base_y - h * 0.1 + dw * 0.8], 180, 360,
+               fill=rgb((196, 150, 58)))
+    ax, ay = w * rnd.uniform(0.15, 0.7), h * rnd.uniform(0.12, 0.25)
+    d.ellipse([ax - w * 0.1, ay - h * 0.035, ax + w * 0.1, ay + h * 0.035], fill=rgb((150, 120, 90)),
+              outline=rgb((60, 45, 35)))
+    d.rectangle([ax - w * 0.03, ay + h * 0.035, ax + w * 0.03, ay + h * 0.055], fill=rgb((90, 60, 40)))
+    d.polygon([(ax + w * 0.1, ay), (ax + w * 0.125, ay - h * 0.03), (ax + w * 0.125, ay + h * 0.03)],
+              fill=rgb((120, 95, 70)))
+
+
+def _stone_age_scene(d, w, h, base_y, rnd):
+    """Huts, a stone circle, a camp fire and a mammoth."""
+    for k in range(rnd.randint(5, 9)):
+        x = rnd.uniform(0.05, 0.9) * w
+        r = w * rnd.uniform(0.025, 0.04)
+        d.rectangle([x - r, base_y - r * 0.8, x + r, base_y + h * 0.02], fill=rgb((150, 116, 80)))
+        d.polygon([(x - r * 1.3, base_y - r * 0.8), (x, base_y - r * 2.4), (x + r * 1.3, base_y - r * 0.8)],
+                  fill=rgb((190, 160, 96)))
+    cx = w * rnd.uniform(0.3, 0.6)
+    for k in range(7):
+        x = cx + (k - 3) * w * 0.025
+        sh = h * (0.09 + 0.02 * (k % 2))
+        d.rectangle([x - w * 0.007, base_y - sh, x + w * 0.007, base_y], fill=rgb((140, 134, 124)))
+    d.rectangle([cx - w * 0.04, base_y - h * 0.11 - 6, cx + w * 0.04, base_y - h * 0.11], fill=rgb((150, 144, 134)))
+    fx = w * rnd.uniform(0.6, 0.85)
+    d.polygon([(fx - 10, base_y + 8), (fx, base_y - 18), (fx + 10, base_y + 8)], fill=rgb((240, 140, 40)))
+    mx, my = w * rnd.uniform(0.1, 0.25), base_y + h * 0.06
+    d.ellipse([mx - w * 0.05, my - h * 0.07, mx + w * 0.04, my], fill=rgb((110, 80, 60)))
+    d.ellipse([mx + w * 0.02, my - h * 0.075, mx + w * 0.065, my - h * 0.02], fill=rgb((100, 72, 54)))
+    d.arc([mx + w * 0.04, my - h * 0.05, mx + w * 0.09, my + h * 0.01], 90, 200, fill=rgb((240, 236, 220)), width=3)
+    for lx in (-0.035, -0.015, 0.005, 0.025):
+        d.rectangle([mx + w * lx, my - h * 0.01, mx + w * lx + w * 0.01, my + h * 0.03], fill=rgb((100, 72, 54)))
+
+
 def city_scene(w, h, seed, theme="city"):
     """Painterly Roman landscape used for backgrounds and vignettes."""
     rnd = seeded("scene", seed, theme)
     sunset = theme in ("evening", "war")
     top = (90, 130, 200) if not sunset else (110, 70, 90)
     bottom = (240, 220, 180) if not sunset else (240, 160, 90)
+    if _theme.is_("steampunk"):
+        top, bottom = ((96, 92, 100), (214, 180, 130)) if not sunset else ((80, 50, 60), (220, 130, 70))
     img = sky_gradient(w, h, top, bottom)
     d = ImageDraw.Draw(img)
     # sun / clouds
@@ -592,7 +646,12 @@ def city_scene(w, h, seed, theme="city"):
         for wx in range(3):
             d.rectangle([bx + bw * (0.15 + wx * 0.28), base_y - bh * 0.6, bx + bw * (0.27 + wx * 0.28),
                          base_y - bh * 0.35], fill=rgb((90, 60, 40)))
-    temple_silhouette(d, w * rnd.uniform(0.3, 0.55), base_y - h * 0.02, w * 0.18, h * 0.22, (245, 240, 230))
+    if _theme.is_("roman"):
+        temple_silhouette(d, w * rnd.uniform(0.3, 0.55), base_y - h * 0.02, w * 0.18, h * 0.22, (245, 240, 230))
+    elif _theme.is_("steampunk"):
+        _steam_skyline(d, w, h, base_y, rnd)
+    else:
+        _stone_age_scene(d, w, h, base_y, rnd)
     if theme == "war":
         for k in range(30):
             x = rnd.uniform(0, w)
@@ -815,7 +874,7 @@ def _ui_image(gname, spec, off, e):
             im = seamless_texture(w, h, (30, 24, 20), 40, 9, strength=0.2)
             bevel(im, light=0.6, dark=1.4, width=2)
             return formats.Image("opaque", im)
-        im = cached("topbar", lambda: seamless_texture(192, 24, (150, 120, 80), 192, 4, strength=0.2))
+        im = cached("topbar", lambda: seamless_texture(192, 24, _theme.T["ui_topbar"], 192, 4, strength=0.2))
         tile = im.crop(((off % 8) * 24, 0, (off % 8) * 24 + 24, 24))
         dd = ImageDraw.Draw(tile)
         dd.line([(0, 0), (23, 0)], fill=rgb((210, 180, 120)))
@@ -823,7 +882,7 @@ def _ui_image(gname, spec, off, e):
         dd.line([(0, 22), (23, 22)], fill=rgb((90, 66, 40)))
         return formats.Image("opaque", tile)
     if gname == "GROUP_SIDE_PANEL":
-        im = seamless_texture(w, h, (124, 108, 86), 64, off, strength=0.25)
+        im = seamless_texture(w, h, _theme.T["ui_sidebar"], 64, off, strength=0.25)
         dd = ImageDraw.Draw(im)
         dd.rectangle([0, 0, w - 1, h - 1], outline=rgb((40, 30, 20)))
         dd.line([(1, 0), (1, h)], fill=rgb((170, 150, 120)))
@@ -948,8 +1007,10 @@ def _ui_image(gname, spec, off, e):
             if gname == "GROUP_LOGO":
                 dd = ImageDraw.Draw(im)
                 f = _font(64)
-                dd.text((w / 2 + 3, h * 0.2 + 3), "AUGUSTUS", font=f, fill=rgb((40, 20, 10)), anchor="mm")
-                dd.text((w / 2, h * 0.2), "AUGUSTUS", font=f, fill=rgb(GOLD), anchor="mm")
+                label = _theme.T["title"].upper()
+                f = _font(64 if len(label) < 12 else 44)
+                dd.text((w / 2 + 3, h * 0.2 + 3), label, font=f, fill=rgb((40, 20, 10)), anchor="mm")
+                dd.text((w / 2, h * 0.2), label, font=f, fill=rgb(GOLD), anchor="mm")
             return formats.Image("opaque", im, external=True, bitmap_id=bitmap_id(gname.lower() + ".bmp"))
         return cached(key, make)
     if gname in ("GROUP_RATINGS_BACKGROUND", "GROUP_SCENARIO_IMAGE", "GROUP_MESSAGE_IMAGES", "GROUP_WIN_GAME_BACKGROUND",

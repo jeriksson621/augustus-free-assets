@@ -10,7 +10,7 @@ SPECS = os.path.join(HERE, "specs")
 # strings that the engine compares or requires verbatim
 FORCED = {
     (1, 1): "New Game",  # core/locale.c language detection
-    (9, 0): "Augustus",  # window title
+    (9, 0): __import__("art.theme", fromlist=["T"]).T["title"],  # window title
 }
 
 

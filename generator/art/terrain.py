@@ -24,6 +24,15 @@ CLIMATES = {
 }
 
 
+from . import theme as _theme
+
+if _theme.T.get("climate_tint"):
+    for _c in CLIMATES.values():
+        for _k, _f in _theme.T["climate_tint"].items():
+            if _k in _c:
+                _c[_k] = tuple(max(0, min(255, int(v * f))) for v, f in zip(_c[_k], _f))
+
+
 def parse_context(desc):
     """Return (positive set, negative set) of directions from 'X at: a, b; no X at: c'."""
     pos, neg = set(), set()

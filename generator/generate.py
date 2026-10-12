@@ -11,6 +11,10 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+if "--theme" in sys.argv:
+    _i = sys.argv.index("--theme")
+    os.environ["AUG_THEME"] = sys.argv[_i + 1]
+    del sys.argv[_i:_i + 2]
 
 import formats  # noqa: E402
 import layout  # noqa: E402

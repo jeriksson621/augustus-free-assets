@@ -6,13 +6,15 @@ from PIL import Image, ImageDraw
 from .core import Iso, rgb, shade, mix, jitter, seeded, outline_alpha
 from . import terrain
 
-TERRACOTTA = (178, 82, 50)
-PLASTER = (226, 210, 176)
-OCHRE = (204, 160, 96)
-MARBLE = (232, 228, 218)
-STONE = (168, 160, 146)
-WOOD = (130, 90, 50)
-CANVAS = (222, 206, 166)
+from . import theme
+
+TERRACOTTA = theme.T["roof"]
+PLASTER = theme.T["plaster"]
+OCHRE = theme.T["ochre"]
+MARBLE = theme.T["marble"]
+STONE = theme.T["stone"]
+WOOD = theme.T["wood"]
+CANVAS = theme.T["canvas"]
 
 COLOR_WORDS = {
     "red": (176, 56, 40), "blue": (60, 90, 170), "green": (60, 130, 60), "yellow": (220, 190, 70),
@@ -65,6 +67,16 @@ def building(desc, tiles, top, seed, clim="central", group=""):
         wall = MARBLE
     roof = TERRACOTTA if not re.search(r"\b(blue|green|purple|gold) roof", d) else _word_color(
         re.search(r"\b(\w+) roof", d).group(1), TERRACOTTA)
+    if not theme.is_("roman"):
+        wall = MARBLE if style in ("temple", "palace") else PLASTER
+        roof = TERRACOTTA
+
+    if theme.is_("stoneage") and style not in ("field", "ruin", "tent"):
+        _stoneage(iso, n, d, rise, style, rnd)
+        return iso
+    if theme.is_("steampunk") and style == "temple":
+        _steam_dome(iso, n, rise)
+        return iso
 
     if style == "tent":
         _tent(iso, n, d, rnd)
@@ -121,7 +133,160 @@ def building(desc, tiles, top, seed, clim="central", group=""):
             iso.box(a, b, a + 0.2, b + 0.2, 0, rnd.randint(2, 8), (60, 50, 40))
     else:
         _house_like(iso, n, d, rise, wall, roof, rnd, style)
+    if theme.is_("steampunk") and style not in ("field", "ruin", "well", "statue", "fountain", "tent"):
+        _steam_deco(iso, n, rise, rnd)
     return iso
+
+
+# ------------------------------------------------------------------ steampunk
+
+BRASS = (196, 150, 58)
+IRON = (70, 68, 72)
+
+
+def _gear(d, cx, cy, r, color):
+    teeth = 8
+    import math
+    pts = []
+    for k in range(teeth * 2):
+        a = k * math.pi / teeth
+        rr = r if k % 2 == 0 else r * 0.72
+        pts.append((cx + math.cos(a) * rr, cy + math.sin(a) * rr * 0.6))
+    d.polygon(pts, fill=rgb(color), outline=rgb(shade(color, 0.5)))
+    d.ellipse([cx - r * 0.3, cy - r * 0.18, cx + r * 0.3, cy + r * 0.18], fill=rgb(shade(color, 0.45)))
+
+
+def _steam_deco(iso, n, rise, rnd):
+    """Smoke stacks, pipes and a gear on top of an already painted building."""
+    if rise < 10:
+        return
+    m = 0.18 if n > 1 else 0.14
+    # smoke stack at the back corner
+    top = min(iso.base_y + 15 * n - 4, rise + 15 * n - 2)
+    u, v = m + 0.12, m + 0.12
+    x, y = iso.pt(u, v, 0)
+    h = min(top, 16 + 10 * n)
+    iso.cylinder(u, v, 0.07 + 0.02 * n, 0, h, IRON)
+    cx, cy = iso.pt(u, v, h)
+    iso.d.rectangle([cx - 2 - n, cy - 2, cx + 2 + n, cy + 1], fill=rgb(BRASS))
+    # copper pipe along the front wall
+    a = iso.pt(m, n - m, 6)
+    b = iso.pt(n - m, n - m, 6)
+    iso.d.line([a, b], fill=rgb((184, 110, 60)), width=2)
+    # brass gear on the front-left wall
+    gx, gy = iso.pt(n * 0.5, n - m, min(rise * 0.4, 14))
+    _gear(iso.d, gx, gy, 4 + 2 * n, BRASS)
+
+
+def _steam_dome(iso, n, rise):
+    """Temples become domed brass-and-brick halls."""
+    m = 0.15
+    h = min(max(12, rise * 0.4), 34)
+    iso.box(m, m, n - m, n - m, 0, 4, STONE)
+    iso.box(m + 0.1, m + 0.1, n - m - 0.1, n - m - 0.1, 4, h, PLASTER, outline=shade(PLASTER, 0.5))
+    iso.windows(m + 0.1, n - m - 0.1, n - m - 0.1, 6, h - 2, 1, 2 * n, (250, 210, 110), face="left")
+    iso.dome(n / 2, n / 2, 0.42 * n, h, BRASS)
+    x, y = iso.pt(n / 2, n / 2, h + 0.42 * n * 30)
+    iso.d.line([(x, y), (x, y - 10)], fill=rgb(IRON), width=2)
+    _gear(iso.d, x, y - 12, 4, BRASS)
+
+
+# ------------------------------------------------------------------ stone age
+
+THATCH = (186, 156, 92)
+DAUB = (156, 120, 84)
+GRANITE = (138, 132, 122)
+
+
+def _hut(iso, u, v, r, h, roof_h, wall=DAUB, roof=THATCH):
+    iso.cylinder(u, v, r, 0, h, wall)
+    x, y = iso.pt(u, v, h)
+    rx, ry = r * 30 * 1.25, r * 15 * 1.25
+    iso.d.polygon([(x - rx, y), (x, y - roof_h), (x + rx, y)], fill=rgb(roof))
+    iso.d.polygon([(x, y - roof_h), (x + rx, y), (x + rx * 0.2, y + ry)], fill=rgb(shade(roof, 0.72)))
+    iso.d.chord([x - rx, y - ry, x + rx, y + ry], 0, 180, fill=rgb(shade(roof, 0.85)))
+    for k in range(5):
+        t = (k + 1) / 6
+        iso.d.line([(x, y - roof_h), (x - rx + 2 * rx * t, y + ry * 0.5 * (1 - abs(2 * t - 1)))],
+                   fill=rgb(shade(roof, 0.6)))
+    dx, dy = iso.pt(u + r * 0.2, v + r, h * 0.05)
+    iso.d.rectangle([dx - 2, dy - h * 0.7, dx + 2, dy], fill=rgb((40, 28, 18)))
+
+
+def _menhir(iso, u, v, h, w=0.08, color=GRANITE):
+    x, y = iso.pt(u, v)
+    rx = w * 30
+    iso.d.polygon([(x - rx, y), (x - rx * 0.7, y - h), (x + rx * 0.5, y - h - 2), (x + rx, y)], fill=rgb(color))
+    iso.d.polygon([(x, y - h), (x + rx * 0.5, y - h - 2), (x + rx, y), (x + rx * 0.2, y + 1)],
+                  fill=rgb(shade(color, 0.7)))
+
+
+def _palisade(iso, n, h):
+    m = 0.08
+    for k in range(int(8 * n)):
+        t = (k + 0.5) / (8 * n)
+        for (u, v) in ((m + (n - 2 * m) * t, m), (m, m + (n - 2 * m) * t)):
+            _menhir(iso, u, v, h, 0.05, WOOD)
+    for k in range(int(8 * n)):
+        t = (k + 0.5) / (8 * n)
+        for (u, v) in ((m + (n - 2 * m) * t, n - m), (n - m, m + (n - 2 * m) * t)):
+            _menhir(iso, u, v, h, 0.05, shade(WOOD, 1.1))
+
+
+def _stoneage(iso, n, d, rise, style, rnd):
+    h_room = rise + 15 * n
+    if style == "temple" or "oracle" in d:
+        # stone circle with a dolmen in the middle
+        r = n * 0.38
+        import math
+        stones = 6 + 2 * n
+        order = sorted(range(stones), key=lambda k: math.sin(k / stones * 2 * math.pi) + math.cos(k / stones * 2 * math.pi))
+        for k in order:
+            a = k / stones * 2 * math.pi
+            _menhir(iso, n / 2 + math.cos(a) * r, n / 2 + math.sin(a) * r, min(h_room - 6, 14 + 4 * n), 0.07)
+        iso.box(n / 2 - 0.25, n / 2 - 0.1, n / 2 - 0.15, n / 2 + 0.1, 0, 10, GRANITE)
+        iso.box(n / 2 + 0.15, n / 2 - 0.1, n / 2 + 0.25, n / 2 + 0.1, 0, 10, GRANITE)
+        iso.box(n / 2 - 0.32, n / 2 - 0.16, n / 2 + 0.32, n / 2 + 0.16, 10, 13, shade(GRANITE, 1.1))
+    elif style in ("fort", "tower"):
+        _palisade(iso, n, min(h_room - 4, 14 + 6 * n if style == "tower" else 12))
+        if style == "tower" or n >= 3:
+            _hut(iso, n / 2, n / 2, 0.22 * n, 8, min(h_room - 10, 10 + 4 * n))
+    elif style == "statue":
+        _menhir(iso, n / 2, n / 2, min(h_room - 4, 14 + 12 * n), 0.08 * n + 0.05)
+    elif style == "fountain" or style == "well":
+        iso.cylinder(n / 2, n / 2, 0.3, 0, 5, GRANITE)
+        x, y = iso.pt(n / 2, n / 2, 5)
+        iso.d.ellipse([x - 7 * n, y - 3 * n, x + 7 * n, y + 3 * n], fill=rgb((60, 110, 170)))
+    elif style == "arena":
+        import math
+        for k in range(10 + 4 * n):
+            a = k / (10 + 4 * n) * 2 * math.pi
+            iso.box(n / 2 + math.cos(a) * n * 0.4 - 0.08, n / 2 + math.sin(a) * n * 0.4 - 0.08,
+                    n / 2 + math.cos(a) * n * 0.4 + 0.08, n / 2 + math.sin(a) * n * 0.4 + 0.08, 0, 6, GRANITE)
+        x, y = iso.pt(n / 2, n / 2)
+        iso.d.ellipse([x - 6, y - 3, x + 6, y + 3], fill=rgb((230, 120, 30)))
+    elif style in ("warehouse", "dock", "palace") or n >= 3:
+        # longhouse with a big thatched roof
+        m = 0.2
+        h = min(max(6, rise * 0.3), 12)
+        iso.box(m, m + 0.2, n - m, n - m - 0.2, 0, h, DAUB, outline=shade(DAUB, 0.5))
+        iso.gable_roof(m, m + 0.2, n - m, n - m - 0.2, h, min(h_room - h - 2, 10 + 5 * n), THATCH,
+                       along="u", overhang=0.08)
+        if n >= 3:
+            _hut(iso, n * 0.8, n * 0.25, 0.25, 7, 12)
+    elif style == "workshop":
+        _hut(iso, n * 0.4, n * 0.45, 0.22 * n + 0.1, 8, min(h_room - 10, 10 + 4 * n))
+        x, y = iso.pt(n * 0.8, n * 0.8)
+        iso.d.ellipse([x - 5, y - 2, x + 5, y + 2], fill=rgb((70, 60, 50)))
+        iso.d.polygon([(x - 3, y), (x, y - 7), (x + 3, y)], fill=rgb((240, 140, 40)))
+    else:
+        # houses: one round hut per tile, bigger huts for bigger houses
+        if n == 1:
+            _hut(iso, 0.5, 0.5, 0.3, 7, min(h_room - 8, 12 + (4 if "large" in d else 0)))
+        else:
+            for i in range(n):
+                for j in range(n):
+                    _hut(iso, i + 0.5, j + 0.5, 0.3, 7, min(h_room - 8, 13))
 
 
 def _style(d):
